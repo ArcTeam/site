@@ -1,0 +1,14 @@
+@import url("reset.css");
+@import url("ol/style.mobile.css");
+.headline a{color:#093 !important;text-decoration:none;font-size:1.5rem;text-shadow: 0px 0px 0px rgba(0,0,0,0);}
+.headline a:hover{text-shadow: 0px 0px 2px rgba(0,0,0,0.5);}
+.feedburnerFeedBlock ul li{ background: #fff;padding: 30px;margin-bottom: 10px; box-shadow: 0px 1px 1px rgba(0,0,0,0.3);}
+.feedburnerFeedBlock ul li div{font-size:.8rem;margin-top:10px;}
+.feedburnerFeedBlock p{font-size:.7rem;}
+.fbsubscribelink,#creditfooter{display:none;}
+
+#mappa{position:relative;width:100%;background:#fff;margin-bottom:20px !important;box-shadow: 0px 0px 2px rgba(0,0,0,0.5); z-index:1 !important;}
+#mappaTool{ position: absolute; top: 15px; right: 0px; z-index: 2000; background: rgba(0,0,0,0.7); padding: 5px 20px; border-radius:5px 0px 0px 0px;}
+#mappa header{font-size: 1.3rem; cursor:pointer; color: #fbbc05;}
+#mappa article{display:none;height:400px;}
+.olControlAttribution{bottom:1px !important;left:2px;font-size:.7rem !important;}
