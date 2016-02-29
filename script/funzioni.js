@@ -14,3 +14,6 @@
 
 function rotate(el,deg){ var rot = deg; el.animate({rotation: rot},{duration: 300, step: function(now, fx) {$(this).css({"transform": "rotate("+now+"deg)"});}});}
 window.onresize = function(){ map.updateSize();}
+var w=$("#mainWrap").width();
+var w2=$("section#main").width();
+$("aside#mainAside").css("width",w-w2-20);

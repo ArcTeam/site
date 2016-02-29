@@ -9,10 +9,3 @@ blockquote, q {quotes: "" "";}
 a img {border: none;}
 :focus {outline: 0;}
 input, textarea, select{box-sizing:content-box;ms-box-sizing:content-box;-moz-box-sizing:content-box;-webkit-box-sizing:content-box; }
-/* SCROLLBAR */
-::-webkit-scrollbar{width:5px;}
-::-webkit-scrollbar-track{/*border-radius:10px;*/ background:#eee; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,0.1);}
-::-webkit-scrollbar-thumb{/*border-radius:10px;*/ background:#bbb;}
-/* HORIZONTAL BAR*/
-::-webkit-scrollbar:horizontal{height:10px;}
-::-webkit-scrollbar-track:horizontal{background:#ddd; box-shadow:none;}
