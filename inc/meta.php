@@ -14,5 +14,4 @@
 <!--<meta property="og:url" content="http://184.106.205.13/eburum/" />-->
 <meta property="og:site_name" content="Arc-Team" />
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" media="all" >
-<link href="css/style.css" rel="stylesheet" media="screen" />
 <title>Arc-Team Open Research</title>

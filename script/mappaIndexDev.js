@@ -7,6 +7,7 @@ var units = 'm';
 var mapOpt = {projection:prj3857,displayProjection:prj4326,resolutions:res,units:units,controls:[]};
 var format = 'image/png';
 var wmsHost = "http://localhost:8080/geoserver/arcteam/wms";
+var wfsHost = "http://localhost:8080/geoserver/arcteam/wfs";
 var jsonFormat ='application/json';
 var styleMap = new OpenLayers.StyleMap({
         "default": new OpenLayers.Style({fillOpacity:0,strokeOpacity:0}),
@@ -16,8 +17,78 @@ var styleMap = new OpenLayers.StyleMap({
 var osmAttr = "Data, imagery and map information provided by <a href='http://www.mapquest.com/'  target='_blank'>MapQuest</a>, <a href='http://www.openstreetmap.org/' target='_blank'>Open Street Map</a> and contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/' target='_blank'>CC-BY-SA</a> <img src='http://developer.mapquest.com/content/osm/mq_logo.png' border='0'>";
 var extent = document.getElementById('extent').value;
 var coo = extent.split(",");
+var CLUSTER_SCALE_THRESHOLD = 100000;
 
-$("input[name=layer]").on("change", function(){
+// Define three colors that will be used to style the cluster features
+// depending on the number of features they contain.
+var colors = {low: "rgb(181, 226, 140)", middle: "rgb(241, 211, 87)", high: "rgb(253, 156, 115)"};
+
+// Define three rules to style the cluster features.
+var lowRule = new OpenLayers.Rule({
+ filter: new OpenLayers.Filter.Comparison({
+  type: OpenLayers.Filter.Comparison.LESS_THAN,
+  property: "count",
+  value: 15
+ }),
+ symbolizer: {
+  fillColor: colors.low,
+  fillOpacity: 0.9,
+  strokeColor: colors.low,
+  strokeOpacity: 0.5,
+  strokeWidth: 12,
+  pointRadius: 10,
+  label: "${count}",
+  labelOutlineWidth: 1,
+  fontColor: "#000",
+  fontOpacity: 0.8,
+  fontSize: "12px"
+ }
+});
+var middleRule = new OpenLayers.Rule({
+ filter: new OpenLayers.Filter.Comparison({
+  type: OpenLayers.Filter.Comparison.BETWEEN,
+  property: "count",
+  lowerBoundary: 15,
+  upperBoundary: 50
+ }),
+ symbolizer: {
+  fillColor: colors.middle,
+  fillOpacity: 0.9,
+  strokeColor: colors.middle,
+  strokeOpacity: 0.5,
+  strokeWidth: 12,
+  pointRadius: 15,
+  label: "${count}",
+  labelOutlineWidth: 1,
+  fontColor: "#000",
+  fontOpacity: 0.8,
+  fontSize: "12px"
+ }
+});
+var highRule = new OpenLayers.Rule({
+ filter: new OpenLayers.Filter.Comparison({
+  type: OpenLayers.Filter.Comparison.GREATER_THAN,
+  property: "count",
+  value: 50
+ }),
+ symbolizer: {
+  fillColor: colors.high,
+  fillOpacity: 0.9,
+  strokeColor: colors.high,
+  strokeOpacity: 0.5,
+  strokeWidth: 12,
+  pointRadius: 20,
+  label: "${count}",
+  labelOutlineWidth: 1,
+  fontColor: "#000",
+  fontOpacity: 0.8,
+  fontSize: "12px"
+ }
+});
+
+// Create a Style that uses the three previous rules
+var style = new OpenLayers.Style(null, {rules: [lowRule, middleRule, highRule]});
+/*$("input[name=layer]").on("change", function(){
   $(this).closest('label').toggleClass('layerAct');
   $(this).next('i').toggleClass('fa-check-square-o fa-square-o');
   lavori.setVisibility(false);
@@ -46,11 +117,11 @@ $("input[name=layer]").on("change", function(){
     lavori.redraw();
     return;
   }
-});
+});*/
 
 
 function init() {
-    OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
+    OpenLayers.ProxyHost = "../proxy.cgi?url=";
     map = new OpenLayers.Map('mappa', mapOpt);
     map.addControl(new OpenLayers.Control.Navigation());
     map.addControl(new OpenLayers.Control.MousePosition());
@@ -61,7 +132,26 @@ function init() {
     arrayOSM = ["http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg", "http://otile2.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg","http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg", "http://otile4.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg"];
     osm = new OpenLayers.Layer.OSM("MapQuest-OSM Tiles", arrayOSM, { attribution: osmAttr, transitionEffect: "resize"});
     map.addLayer(osm);
-    lavori = new OpenLayers.Layer.WMS("progetti", wmsHost,{
+    lavori = new OpenLayers.Layer.Vector("lavori", {
+     //styleMap: sitiStyles,
+     strategies: [
+            new OpenLayers.Strategy.Fixed(),
+            //new OpenLayers.Strategy.Cluster({ distance: 45 /*,animationMethod: OpenLayers.Easing.Expo.easeOut ,animationDuration: 10*/ })
+        ],
+     renderers: ['Canvas','SVG'],
+     protocol: new OpenLayers.Protocol.WFS({
+      version:       "1.0.0",
+      url:           wfsHost,
+      featureType:   "arcteam:lavori",
+      srsName:       "EPSG:4326",
+      featureNS:     "http://www.geoserver.org/arcteam",
+      geometryName:  "geom",
+      schema:        "http://www.geoserver.org/arcteam?service=WFS&version=1.0.0&request=DescribeFeatureType&TypeName=arcteam:lavori"
+     }),
+     styleMap:  new OpenLayers.StyleMap(style)
+    });
+
+    /*lavori = new OpenLayers.Layer.WMS("progetti", wmsHost,{
       LAYERS: 'arcteam:lavori'
       ,format: format
       ,tiled: true
@@ -101,7 +191,7 @@ function init() {
     });
     map.addControl(info);
     info.activate();
-
+    */
     extent = new OpenLayers.Bounds(coo[0], coo[1], coo[2], coo[3]);
     map.zoomToExtent(extent);
 

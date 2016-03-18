@@ -80,7 +80,7 @@ $extent = str_replace(" ", ",", substr($ext['ext'],4,-1));
     <script src="lib/jquery-1.12.0.min.js"></script>
     <script src="http://openlayers.org/api/OpenLayers.js"></script>
     <script src="script/funzioni.js"></script>
-    <script src="script/mappaIndex.js"></script>
+    <script src="script/mappaIndexDev.js"></script>
     <script src="script/servizi.js"></script>
     <script>
     $(document).ready(function(){

@@ -1,16 +1,48 @@
-@import url("reset.css");
+@import url("style.css");
 @import url("ol/style.mobile.css");
-.headline a{color:#093 !important;text-decoration:none;font-size:1.2rem;text-shadow: 0px 0px 0px rgba(0,0,0,0);}
-.headline a:hover{text-shadow: 0px 0px 2px rgba(0,0,0,0.5);}
 .feedburnerFeedBlock ul li{ background: #fff;padding: 30px;margin-bottom: 10px; box-shadow: 0px 1px 1px rgba(0,0,0,0.3);}
 .feedburnerFeedBlock ul li div{font-size:.8rem;margin-top:10px;}
 .feedburnerFeedBlock p{font-size:.7rem;}
 .fbsubscribelink,#creditfooter{display:none;}
+.headline a{color:#093 !important;}
 
-section#main article{width:49%;}
 section#main article:nth-child(1){margin-right:1%;}
+section#main article{width:49%;}
+section#main article a{text-decoration:none;font-size:1.2rem;text-shadow: 0px 0px 0px rgba(0,0,0,0);}
+section#main article a:hover{text-shadow: 0px 0px 2px rgba(0,0,0,0.5);}
+#post a{color:#1da1f2;}
 #mappa{position:relative;width:100%;background:#fff;margin-bottom:20px !important;box-shadow: 0px 0px 2px rgba(0,0,0,0.5); z-index:1 !important;}
-#mappaTool{ position: absolute; top: 15px; right: 0px; z-index: 2000; background: rgba(0,0,0,0.7); padding: 5px 20px; border-radius:5px 0px 0px 0px;}
-#mappa header{font-size: 1.3rem; cursor:pointer; color: #fbbc05;}
-#mappa article{display:none;height:400px;}
+#mappaTool{ position: absolute; top: 15px; right: 0px; width:25%;z-index: 2000; background: rgba(0,0,0,0.7); padding: 5px 20px; border-radius:5px 0px 0px 5px;}
+#mappaTool header{color: #fbbc05;}
+#mappaTool header.main{font-size: 1.3rem; cursor:pointer;}
+#mappaTool header.sub{font-size: 1rem;padding-top: 10px; border-top: 1px solid #fbbc05;}
+#mappaTool article{width: 90%; margin: 10px auto; font-size: .8rem; }
+#mappaTool article#infoJob{display: block;}
+#mappaTool article#infoJob div.infoJobContent{color:#fff;}
+#mappaTool article#infoJob div.infoJobContent span{display:block; color:#82C914;}
+#mappaTool article#switchLayer{display: none;}
+#mappaTool article#switchLayer li{padding:5px 0px;}
+#mappaTool article#switchLayer li label{cursor:pointer;color:#909090;font-weight:bold;}
+#mappaTool article#switchLayer li label:hover{color:#fff;}
+#mappaTool article#switchLayer li i{margin-right:5px;}
+#mappaTool article#switchLayer input[type=checkbox]{max-height: 0; max-width: 0; opacity: 0;}
+.olControlZoom{top: 50px !important; left: 0px !important; background: none !important; border-radius: 0px !important; padding: 0px !important;}
+.olControlZoom a{margin: 0px !important; width:40px !important;height:40px !important;font-size:1.3rem !important;line-height: 40px !important;color:#fff !important;background:rgba(0, 0, 0, 0.7) !important;}
+.olControlZoom a:first-child{border-radius: 0px 5px 0px 0px;}
+.olControlZoom a:last-child {border-radius: 0px 0px 5px 0px;}
+.olControlZoom a:nth-child(2) {border-radius: 0px 0px 0px 0px !important;}
+.olControlZoom a:hover{background:rgba(0, 0, 0, 0.9) !important;}
+section#servizi{position:relative;width:100%;height:500px;background: #FBBC05;margin-bottom:20px;-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;}
+section#servizi article{position:relative;height:460px;margin: 20px 1%;}
+section#servizi article:nth-child(1){width:27%;}
+section#servizi article:nth-child(2){width:68%;}
+section#servizi article header{font-size:1.5vw;display:block;width:100%;border-bottom:1px dotted #000;}
+section#servizi nav{margin-left:20px; text-align:right;}
+section#servizi nav a{display:block;font-size:.9rem;color:#000;text-decoration: none;padding-right:20px;}
+section#servizi nav a:hover, .serviziAct{padding-right:0px !important;color:#fff !important;font-weight:bold;}
+#textInfoWrap{position: absolute; top: 0px; left: 0px; bottom: 0px; width: 50%; padding: 20px; margin: 0px; background: rgba(0,0,0,0.8); color: #fff; font-size:.8rem;}
+#textInfoWrap span{display:block;width:100%;}
+#textInfoWrap span:first-child{margin-bottom:20px;}
 .olControlAttribution{bottom:1px !important;left:2px;font-size:.7rem !important;}
+.layerAct{color:#fff !important;}
+.fa-check-square-o {color:#82C914 !important;}

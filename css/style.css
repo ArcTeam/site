@@ -1,35 +1,78 @@
 @import url("reset.css");
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300);
+@import url("font/css/font-awesome.min.css");
 html{background:#EEE;font-family: 'Open Sans', sans-serif !important;font-size:100% !important;color:#363A3F;}
 select, input, textarea,button{padding:5px;vertical-align:middle;}
 select, input, textarea{border:1px solid #999;font-size:.8rem;}
 select{background:#fff;}
 textarea{height:20px;}
 input:focus, textarea:focus, select:focus {outline: none !important;border:1px solid orange !important;box-shadow: 0 0 10px #719ECE !important;}
-header#main{position: fixed;top: 0; width: auto; left: 0px; z-index: 3; right: 0; opacity: 0.99; background: #34383d; height: 60px;box-shadow: 0px 3px 5px #000;}
-header#main .wrap{width:90%;margin:0px auto;}
-header#main h1{font-size:1.8rem;color:#fff;vertical-align:middle}
-header#main h1, header#main nav{width:49%;vertical-align:middle !important;}
-header#main nav{text-align:right;}
-header#main nav li{display:inline-block;}
-header#main nav li a{text-decoration: none;display: block; height: 37px;font-size: 1.2rem; color: #909090; padding: 10px; line-height: 2rem;border-bottom:5px solid transparent;}
-header#main nav li a#home:hover, .actHome{border-bottom:5px solid #ff0000 !important; color:#ff0000 !important;}
-header#main nav li a#hack:hover, .actHack{border-bottom:5px solid #82C914 !important; color:#82C914 !important;}
-header#main nav li a#project:hover, .actProject{border-bottom:5px solid #1da1f2 !important; color:#1da1f2 !important;}
-header#main nav li a#team:hover, .actTeam{border-bottom:5px solid #FBBC05 !important; color:#FBBC05 !important;}
-#mainWrap{position:relative;z-index:1;width:98%;margin:80px auto;}
+header#main{position: fixed;top: 0; right: 0px; bottom:0px; width: 5%; z-index: 3; background: rgba(52,56,61,0.9); box-shadow: -2px 0px 3px #000;}
+header#main h1{font-size:1vw;font-weight:bold;color:#fff;text-align: center;}
+header#main h1 span{color:red}
+header#main nav{margin:30px 0px;}
+header#main nav li{text-align:center;}
+header#main nav li a{text-decoration: none;display: block;font-size: 1.2vw; color: #909090; padding:10px 0px; border-left:5px solid transparent;text-shadow:0px 0px 3px #000;}
+header#main nav li a i{display:block;}
+header#main nav li a#home:hover, .actHome{border-left:5px solid #ff0000 !important; color:#ff0000 !important;}
+header#main nav li a#hack:hover, .actHack{border-left:5px solid #82C914 !important; color:#82C914 !important;}
+header#main nav li a#project:hover, .actProject{border-left:5px solid #1da1f2 !important; color:#1da1f2 !important;}
+header#main nav li a#team:hover, .actTeam{border-left:5px solid #FBBC05 !important; color:#FBBC05 !important;}
+header#main nav#login{ position: absolute;left: 0px; bottom: 0px; margin: 0px;}
+header#main nav#login li a{padding:10px;}
+header#main nav#login li a:hover{color:#fff;}
+#mainWrap{position:relative;z-index:1;margin-right:5%;}
 section#main{position:relative;width:70%;margin-right:1%;}
-aside#mainAside{width:27%;height: 300px;background:#fff;vertical-align:top;}
+aside#mainAside{width:28% !important;height: 300px;background:#fff;vertical-align:top;}
+footer{position: relative; font-size: 0.8em;margin-right:5%;text-align: center; background: #d2d2d2;}
+footer, footer a{color: #6E6C6C;}
+footer #wrapFooter {margin:0px auto; padding: 20px 0px;}
+/*#wrapFooter .sx{text-align:right;padding-right:10px;}
+#wrapFooter .dx{text-align:left;padding-left:10px;border-left:1px dotted #6e6c6c;}*/
+footer #wrapFooter #infoContent {display:block;width:90%;margin:0px auto;overflow:auto;}
+footer #wrapFooter #infoContent div{float:left; width:22%;height:200px;padding:0px 10px;}
+footer #wrapFooter #infoContent div:nth-child(-n+3){border-right:1px dotted #6e6c6c;}
+footer #wrapFooter header{font-size:1rem;color:#82C914;font-weight:bold;text-shadow: 1px 1px 1px #000, -1px -1px 1px #909090;}
+footer #navFooter { text-align: center; border-top: 1px dotted #6e6c6c; padding-top: 10px;}
+footer #navFooter li { display: inline-block; text-align: center;width: 50px;}
+
+section.formContent{ position: relative; background: #fff; margin:30px auto; padding: 30px; border: 1px solid #ccc; border-radius: 5px;}
+section.formContent header{display:block;width:100%;border-bottom:1px solid #ccc;}
+section.formContent .rowButton{margin-top:20px;}
+section.formContent i{ border: 1px solid #999; border-right: none; border-radius: 5px 0px 0px 5px;font-size: 1.7rem; padding: 6px;background:#EEE;}
+section.formContent input, section.formContent select,section.formContent textarea,section.formContent button{font-size: 1rem !important; vertical-align: top !important; padding: 6px; border-radius: 5px;}
+section.formContent input[type=submit]{background:#EEE;cursor:pointer;}
+section.formContent input[type=submit]:hover{background:#999;}
+section.formContent span{font-size: 1rem; text-align: center; display: block; margin-top: 20px; color: red;}
+
 
 .mobile, .hide{display:none};
-.cursor{cursor:pointer;}
+.cursor{cursor:pointer !important;}
 .inline{display:inline-block;vertical-align:top;}
 .alert{padding: 15px; border: 1px solid transparent; border-radius: 4px; margin: 0px auto; text-align: center;}
 .success{border-color: #00c5ca; background-color: #c6f3f5; color: #006366;}
 .warning{border-color: #e5ce23; background-color: #ffef9f; color: #685815;}
 .error{border-color: #00c5ca; background-color: #c6f3f5; color: #006366;}
-.transition{-webkit-transition: all .30s ease-in-out; -moz-transition: all .30s ease-in-out; -ms-transition: all .30s ease-in-out; -o-transition: all .30s ease-in-out; transition: all .30s ease-in-out;}
+.transition, a{-webkit-transition: all .30s linear; -moz-transition: all .30s linear; -ms-transition: all .30s linear; -o-transition: all .30s linear; transition: all .30s linear;}
 .fixed{position:fixed;top:80px;right:1%;}
+
+.panel {width: 100%; height: 10%; margin: 5px 0px; position: relative; -webkit-perspective: 600px; perspective: 600px;}
+.panel .front {position: absolute;top: 0;left: 0; z-index: 900; width: inherit; height: 100%; background-image:url('../img/layout/moneta1.png');
+background-repeat:no-repeat; background-size:100% 100%; -webkit-transform:rotateX(0) rotateY(0); transform: rotateX(0) rotateY(0); -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-backface-visibility: hidden; backface-visibility: hidden;   -webkit-transition: all .4s ease-in-out; transition: all .4s ease-in-out; }
+.panel.flip .front { z-index: 900; -webkit-transform: rotateY(179deg); transform: rotateY(179deg);}
+.panel .back {position: absolute;top: 0;left: 0; z-index: 800; width: inherit; height: 100%; background-image:url('../img/layout/moneta2.png'); background-repeat:no-repeat; background-size:100% 100%;
+-webkit-transform: rotateY(-179deg); transform: rotateY(-179deg); -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-backface-visibility: hidden; backface-visibility: hidden; -webkit-transition: all .4s ease-in-out; transition: all .4s ease-in-out;}
+.panel.flip .back { z-index: 1000; -webkit-transform: rotateX(0) rotateY(0); transform: rotateX(0) rotateY(0);}
+
+.subMenu {position: absolute; right:104%; display: block; width: 150px; padding:10px 0px;border-radius:5px 0px 0px 5px; background: rgb(69,73,78); color:#909090 !important;}
+.subMenu li{border-top:1px solid #909090;border-bottom:1px solid transparent;text-align:left !important;}
+.subMenu li:last-child{border-bottom:1px solid #909090;}
+.subMenu li:hover{border-top:1px solid #fff;border-bottom:1px solid #fff;}
+.subMenu li a, .subMenu li i{display: inline-block !important; font-size: .9rem !important; line-height: 1.3em;}
+.subMenu li a{width:130px;padding:5px;}
+.subMenu li a:hover{color:#fff;}
+#settingUl {bottom:0px;display:none;}
+
 /* Tablets */
 @media only screen and (min-width:481px) and (max-width:1024px) {
 

@@ -24,7 +24,7 @@ if($tipo > 1){
 }
 $query = "BEGIN; insert into main.rubrica(tipo, utente, email, indirizzo, codfisc, telefono, cell, fax, url, note) values ($tipo, '$utente', '$email', '$indirizzo', '$codfisc', '$telefono', '$cellulare', '$fax','$link','$note'); $p COMMIT; ";
 $e = pg_query($connection, $query);
-if(!$e){ $msg = "<div class='alert error'>Errore nella query</div>"; }else{ $msg = "<div class='alert success'>ok utente creato!</div>"; }
+if(!$e){ $msg = "<div class='alert error'>Errore nella query".pg_last_error($connection)."</div>"; }else{ $msg = "<div class='alert success'>ok utente creato!</div>"; }
 ?>
 <!DOCTYPE html>
 <html>
