@@ -25,7 +25,7 @@
             <li><a href="#"><i class="fa fa-eur"></i> fatture</a></li>
             <li><a href="#"><i class="fa fa-wrench"></i> lavori</a></li>
             <li><a href="#"><i class="fa fa-calendar"></i> attività</a></li>
-            <li><a href="#"><i class="fa fa-comments-o"></i> post</a></li>
+            <li><a href="post_new.php"><i class="fa fa-comments-o"></i> post</a></li>
             <li><a href="#"><i class="fa fa-users"></i> utenti</a></li>
             <li><a href="usrMod.php" title="modifica i tuoi dati personali"><i class="fa fa-user"></i> dati personali</a></li>
             <li><a href="login.php?action=logout" title="termina sessione di lavoro"><i class="fa fa-sign-out"></i> logout</a></li>
