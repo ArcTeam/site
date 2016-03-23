@@ -49,7 +49,7 @@ if($_GET['action']){
       <link href="css/style.css" rel="stylesheet" media="screen" />
       <style>
         section.formContent{ width: 40%;}
-        section.formContent input{border-radius:0px 5px 5px 0px !important; width:85%;font-size:1.25rem !important;}
+        section.formContent input{border-radius:0px 3px 3px 0px !important; width:85%;font-size:1.25rem !important;}
       </style>
   </head>
   <body>
