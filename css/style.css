@@ -2,10 +2,13 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300);
 @import url("font/css/font-awesome.min.css");
 html{background:#EEE;font-family: 'Open Sans', sans-serif !important;font-size:100% !important;color:#363A3F;}
-select, input, textarea,button{padding:5px;vertical-align:middle;}
-select, input, textarea{border:1px solid #999;font-size:.8rem;}
+select, input, textarea,button{border:1px solid #999; font-size:.8rem; padding:6px; vertical-align:top; border-radius: 3px;}
 select{background:#fff;}
 textarea{height:20px;}
+a.button{background: #dff0d8; border:1px solid #d6e9c6; font-size:.8rem; padding:6px; border-radius: 3px;text-decoration: none; color:#3c763d;}
+a.button:hover{background: #d6e9c6;}
+input[type=submit]{background:#EEE;cursor:pointer;}
+input[type=submit]:hover{background:#999;}
 input:focus, textarea:focus, select:focus {outline: none !important;border:1px solid orange !important;box-shadow: 0 0 10px #719ECE !important;}
 header#main{position: fixed;top: 0; right: 0px; bottom:0px; width: 5%; z-index: 3; background: rgba(52,56,61,0.9); box-shadow: -2px 0px 3px #000;}
 header#main h1{font-size:1vw;font-weight:bold;color:#fff;text-align: center;}
@@ -32,17 +35,14 @@ footer #wrapFooter {margin:0px auto; padding: 20px 0px;}
 footer #wrapFooter #infoContent {display:block;width:90%;margin:0px auto;overflow:auto;}
 footer #wrapFooter #infoContent div{float:left; width:22%;height:200px;padding:0px 10px;}
 footer #wrapFooter #infoContent div:nth-child(-n+3){border-right:1px dotted #6e6c6c;}
-footer #wrapFooter header{font-size:1rem;color:#82C914;font-weight:bold;text-shadow: 1px 1px 1px #000, -1px -1px 1px #909090;}
+footer #wrapFooter header{font-size:1rem;color:#82C914;font-weight:bold;}
 footer #navFooter { text-align: center; border-top: 1px dotted #6e6c6c; padding-top: 10px;}
 footer #navFooter li { display: inline-block; text-align: center;width: 50px;}
 
-section.formContent{ position: relative; background: #fff; margin:30px auto; padding: 30px; border: 1px solid #ccc; border-radius: 5px;}
-section.formContent header{display:block;width:100%;border-bottom:1px solid #ccc;}
-section.formContent .rowButton{margin-top:20px;}
-section.formContent i{ border: 1px solid #999; border-right: none; border-radius: 5px 0px 0px 5px;font-size: 1.7rem; padding: 6px;background:#EEE;}
-section.formContent input, section.formContent select,section.formContent textarea,section.formContent button{font-size: 1rem !important; vertical-align: top !important; padding: 6px; border-radius: 5px;}
-section.formContent input[type=submit]{background:#EEE;cursor:pointer;}
-section.formContent input[type=submit]:hover{background:#999;}
+section.formContent,section.form{ position: relative; background: #fff; margin:30px auto; padding: 30px; border: 1px solid #ccc; border-radius: 5px;}
+section.formContent header, section.form header{display:block;width:100%;border-bottom:1px solid #ccc;}
+.rowButton{margin-top:20px;}
+section.formContent i{ border: 1px solid #999; border-right: none; border-radius: 3px 0px 0px 3px;font-size: 1.7rem; padding: 6px;background:#EEE;}
 section.formContent span{font-size: 1rem; text-align: center; display: block; margin-top: 20px; color: red;}
 
 

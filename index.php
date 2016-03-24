@@ -1,11 +1,29 @@
 <?php
 session_start();
 require("inc/db.php");
+include("inc/cut.php");
 $extq="select st_extent(st_transform(geom, 3857)) as ext from main.lavoro_metadati;";
 $extres = pg_query($connection, $extq);
 $ext = pg_fetch_array($extres);
 $coo = explode(",",str_replace(" ", ",", substr($ext['ext'],4,-1)));
 $extent = str_replace(" ", ",", substr($ext['ext'],4,-1));
+
+//post
+$postq = "select * from main.post order by data desc limit 5;";
+$postr = pg_query($connection,$postq);
+while($post = pg_fetch_array($postr)){
+    $data = explode(" ",$post["data"]);
+    $p = strip_tags($post['testo']);
+    $p = cutHtmlText($p, 600, "...", false, false, false);
+    $postList = "<li>";
+    $postList .= "<span class='headline'>";
+    $postList .= "<a href='post.php?p=".$post['id']."' title='Visualizza post completo'>".$post['titolo']."</a>";
+    $postList .= "</span>";
+    $postList .= "<p class='date'>".$data[0]."</p>";
+    $postList .= "<div>".$p."</div>";
+    $postList .= "</li>";
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -58,9 +76,7 @@ $extent = str_replace(" ", ",", substr($ext['ext'],4,-1));
         <article id="ator" class="inline">
           <script src="http://feeds.feedburner.com/blogspot/YduRN?format=sigpro" type="text/javascript" ></script><noscript><p>Subscribe to RSS headline updates from: <a href="http://feeds.feedburner.com/blogspot/YduRN"></a><br/>Powered by FeedBurner</p> </noscript>
         </article>
-        <article id="post" class="inline">
-          <script src="http://feeds.feedburner.com/blogspot/YduRN?format=sigpro" type="text/javascript" ></script><noscript><p>Subscribe to RSS headline updates from: <a href="http://feeds.feedburner.com/blogspot/YduRN"></a><br/>Powered by FeedBurner</p> </noscript>
-        </article>
+        <article id="post" class="inline"><ul><?php echo $postList; ?></ul></article>
       </section>
       <aside id="mainAside" class="inline">
         <article id="tweetBeppe">
@@ -107,14 +123,14 @@ $extent = str_replace(" ", ",", substr($ext['ext'],4,-1));
           l= ++l % tot;
           $(".serviziList:last-child").removeClass('serviziAct');
           $(".serviziList").eq(l).addClass('serviziAct').prev().removeClass('serviziAct');
-          $("#serviziInfo").css({'background': "url('"+backgrounds[l].img+"')", "background-repeat":"no-repeat","background-position":"center center", "background-attachment": "fixed","-webkit-background-size":"cover","-moz-background-size":"cover", "-o-background-size":"cover", "background-size":"cover"});
+          $("#serviziInfo").css({'background': "url('"+backgrounds[l].img+"')", "background-repeat":"no-repeat","background-position":"center center", "-webkit-background-size":"cover","-moz-background-size":"cover", "-o-background-size":"cover", "background-size":"cover"});
           $("#text").html(backgrounds[l].txt);
           $("#txtAttribution").html(backgrounds[l].txtAttribution);
           $("#imgAttribution").html(backgrounds[l].imgAttribution);
           timer = setTimeout(nextBackground, 5000);//parte il loop
       }
       $(".serviziList:first-child").addClass('serviziAct');
-      $("#serviziInfo").css({'background': "url('"+backgrounds[0].img+"')", "background-repeat":"no-repeat","background-position":"center center", "background-attachment": "fixed","-webkit-background-size":"cover","-moz-background-size":"cover", "-o-background-size":"cover", "background-size":"cover"});
+      $("#serviziInfo").css({'background': "url('"+backgrounds[0].img+"')", "background-repeat":"no-repeat","background-position":"center center", "-webkit-background-size":"cover","-moz-background-size":"cover", "-o-background-size":"cover", "background-size":"cover"});
       $("#text").html(backgrounds[0].txt);
       $("#txtAttribution").html(backgrounds[0].txtAttribution);
       $("#imgAttribution").html(backgrounds[0].imgAttribution);
@@ -129,7 +145,7 @@ $extent = str_replace(" ", ",", substr($ext['ext'],4,-1));
         $(".serviziList").removeClass('serviziAct');
         $(this).addClass('serviziAct stopTimeout');
         var i = $(this).index('.serviziList');
-        $("#serviziInfo").css({'background': "url('"+backgrounds[i].img+"')", "background-repeat":"no-repeat","background-position":"center center", "background-attachment": "fixed","-webkit-background-size":"cover","-moz-background-size":"cover", "-o-background-size":"cover", "background-size":"cover"});
+        $("#serviziInfo").css({'background': "url('"+backgrounds[i].img+"')", "background-repeat":"no-repeat","background-position":"center center", "-webkit-background-size":"cover","-moz-background-size":"cover", "-o-background-size":"cover", "background-size":"cover"});
         $("#text").html(backgrounds[i].txt);
         $("#txtAttribution").html(backgrounds[i].txtAttribution);
         $("#imgAttribution").html(backgrounds[i].imgAttribution);
