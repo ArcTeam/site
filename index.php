@@ -11,11 +11,12 @@ $extent = str_replace(" ", ",", substr($ext['ext'],4,-1));
 //post
 $postq = "select * from main.post order by data desc limit 5;";
 $postr = pg_query($connection,$postq);
+$r = pg_num_rows($postr);
 while($post = pg_fetch_array($postr)){
     $data = explode(" ",$post["data"]);
     $p = strip_tags($post['testo']);
     $p = cutHtmlText($p, 600, "...", false, false, false);
-    $postList = "<li>";
+    $postList .= "<li>";
     $postList .= "<span class='headline'>";
     $postList .= "<a href='post.php?p=".$post['id']."' title='Visualizza post completo'>".$post['titolo']."</a>";
     $postList .= "</span>";
@@ -74,12 +75,16 @@ while($post = pg_fetch_array($postr)){
       </section>
       <section id="main" class="inline">
         <article id="ator" class="inline">
+            <header class="sectionMain"><a href="http://arc-team-open-research.blogspot.it/" title="[link esterno] Vai alla pagina iniziale di ATOR" target="_blank"> Arc-Team Open Research <i class="fa fa-link"></i></a></header>
           <script src="http://feeds.feedburner.com/blogspot/YduRN?format=sigpro" type="text/javascript" ></script><noscript><p>Subscribe to RSS headline updates from: <a href="http://feeds.feedburner.com/blogspot/YduRN"></a><br/>Powered by FeedBurner</p> </noscript>
         </article>
-        <article id="post" class="inline"><ul><?php echo $postList; ?></ul></article>
+        <article id="post" class="inline">
+            <header class="sectionMain"><a href="post.php" title="archivio post">News from Arc-Team World <i class="fa fa-th-list"></i></a></header>
+            <ul><?php echo $postList; ?></ul></article>
       </section>
       <aside id="mainAside" class="inline">
-        <article id="tweetBeppe">
+          <header class="sectionMain">Twitter</header>
+          <article id="tweetBeppe">
           <a class="twitter-timeline" href="https://twitter.com/beppenapo" data-widget-id="301622279031365632">Tweet di @beppenapo</a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
         </article>

@@ -48,19 +48,25 @@ if($_GET['action']){
       <?php require("inc/meta.php"); ?>
       <link href="css/style.css" rel="stylesheet" media="screen" />
       <style>
-        section.formContent{ width: 40%;}
-        section.formContent input{border-radius:0px 3px 3px 0px !important; width:85%;font-size:1.25rem !important;}
+        section.form{ width: 40%;}
+        section.form input{border-radius:0px 3px 3px 0px !important; width:85%;font-size:1.25rem !important;line-height:1.35em;}
       </style>
   </head>
   <body>
     <header id="main"><?php require("inc/header.php"); ?></header>
     <div id="mainWrap">
-      <section class="formContent">
+      <section class="content form">
         <header>Bentornato utente!</header>
         <form name="loginForm" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
-          <div class="rowButton"><i class="fa fa-envelope fa-fw"></i><input type="email" name="email" required ></div>
-          <div class="rowButton"><i class="fa fa-key fa-fw"></i><input type="password" name="password" required ></div>
-          <div class="rowButton"><i class="fa fa-unlock-alt fa-fw"></i><input type="submit" name="submit" value="login"></div>
+          <div class="rowButton">
+              <i class="fa fa-envelope fa-fw iForm"></i>
+              <input type="email" name="email" class="bForm" required >
+          </div>
+          <div class="rowButton">
+              <i class="fa fa-key fa-fw iForm"></i>
+              <input type="password" name="password" class="bForm" required >
+          </div>
+          <div class="rowButton"><button type="submit" name="submit" value="login"><i class="fa fa-unlock-alt fa-fwi"></i> Login</button></div>
           <span id="msgLogin"><?php echo $msgLogin; ?></span>
         </form>
       </section>

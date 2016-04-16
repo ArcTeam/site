@@ -1,7 +1,10 @@
 <?php
 session_start();
 require("inc/db.php");
-
+$a = "select p.id,p.titolo,p.testo,p.data,r.utente from main.post p, main.usr u, main.rubrica r where p.utente = u.id and u.rubrica = r.id and p.id =".$_GET['p'];
+$b = pg_query($connection,$a);
+$p = pg_fetch_array($b);
+$data = explode(" ",$p['data']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,28 +12,16 @@ require("inc/db.php");
       <?php require("inc/meta.php"); ?>
       <link href="css/style.css" rel="stylesheet" media="screen" />
       <style>
-        .form {width:80%;}
-        input[type=text]{width:99%;border-radius:3px;}
+        #meta{display:block;text-align:right;font-style:italic;font-size:.8rem;}
       </style>
   </head>
   <body>
     <header id="main"><?php require("inc/header.php"); ?></header>
     <div id="mainWrap">
       <section class="form ckform">
-        <header>Inserisci un nuovo post</header>
-        <form name="postForm" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
-          <div class="rowButton"><input type="text" name="titolo" placeholder="Inserisci il titolo del post" ></div>
-          <div class="rowButton"><textarea name="testo" id="testo"></textarea></div>
-          <div class="rowButton"><input type="submit" name="submit" value="salva post"></div>
-          <div class="rowButton" id="msg">
-              <span></span>
-              <div class="hide">
-                  <a href="index.php" class="button" title="torna alla home page">torna alla home</a>
-                  <a href="post.php" class="button" title="elenco post">elenco post</a>
-                  <a href="" class="button" id="linkPost" title="visualizza post creato">visualizza post creato</a>
-              </div>
-          </div>
-        </form>
+        <header><?php echo $p['titolo']; ?></header>
+        <span id="meta">Scritto da <strong><?php echo $p['utente']; ?></strong> il <strong><?php echo $data[0]; ?></strong></span>
+        <article><?php echo $p['testo']; ?></article>
       </section>
     </div>
     <footer><?php require("inc/footer.php"); ?></footer>
