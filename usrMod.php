@@ -48,8 +48,8 @@ $tipoexec = pg_query($connection,$tipoq);
       <?php require("inc/meta.php"); ?>
       <link href="css/style.css" rel="stylesheet" media="screen" />
       <style>
-        .formContent{width:80%;}
-        .formContent header{width:80% !important;margin:0px auto 20px;}
+        .form{width:80%;}
+        .form header{width:80% !important;margin:0px auto 20px;}
         form{width:80%;margin:0px auto;}
         form div.row{margin-bottom:15px;}
         form label{display:block;}
@@ -59,7 +59,7 @@ $tipoexec = pg_query($connection,$tipoq);
   <body>
     <header id="main"><?php require("inc/header.php"); ?></header>
     <div id="mainWrap">
-      <section class="formContent">
+      <section class="form content">
         <header>Dati generali</header>
         <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post" name="usrModForm">
           <div class="row">

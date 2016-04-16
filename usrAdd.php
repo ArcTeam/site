@@ -11,8 +11,8 @@ $tipoexec = pg_query($connection,$tipoq);
       <?php require("inc/meta.php"); ?>
       <link href="css/style.css" rel="stylesheet" media="screen" />
       <style>
-        .formContent{width:80%;}
-        .formContent header{width:80% !important;margin:0px auto 20px;}
+        .form{width:80%;}
+        .form header{width:80% !important;margin:0px auto 20px;}
         form{width:80%;margin:0px auto;}
         form div.row{margin-bottom:15px;}
         form label{display:block;}
@@ -22,7 +22,7 @@ $tipoexec = pg_query($connection,$tipoq);
   <body>
     <header id="main"><?php require("inc/header.php"); ?></header>
     <div id="mainWrap">
-      <section class="formContent">
+      <section class="form content">
         <header>Inserisci un nuovo utente</header>
         <form action="usrAddEsito.php" method="post" name="addUsr">
           <div class="row">
@@ -51,7 +51,11 @@ $tipoexec = pg_query($connection,$tipoq);
             <div class="inline" style="width:100%"><label>Sito web: </label><input type="link" name="link"></div>
           </div>
           <div class="row"><div class="inline" style="width:100%"><label>Note: </label><textarea name="note" style="height:100px;"></textarea></div></div>
-          <div class="row"><div class="inline" style="width:100%"><input type="submit" name="addUsr" value="crea utente" class="cursor"></div></div>
+          <div class="row">
+            <div class="inline" style="width:100%">
+                <button type="submit" name="addUsr"><i class="fa fa-save"></i> Crea utente</button>
+            </div>
+          </div>
         </form>
       </section>
     </div>

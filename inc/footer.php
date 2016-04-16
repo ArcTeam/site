@@ -6,7 +6,8 @@
         <li>Sede legale: <b>Piazza Navarrino 13, 38023, Cles (TN)</b></li>
         <li>P.IVA / Cod.Fisc.: <b>IT-01941600221</b></li>
         <li>PEC: <b>arc-team[~at~]pec.it</b></li>
-        <li>N° CCIAA di trento: <b>01941600221</b></li>
+        <li>EMAIL: <b>info[~at~]arc-team.com</b></li>
+        <li>N° REA: <b>TN - 189273</b></li>
         <li>CAPITALE SOCIALE: <b>2.000,00 €</b></li>
       </ul>
     </div>
