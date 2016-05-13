@@ -1,0 +1,4 @@
+@import url("style.css");
+
+section.form{ width: 40%;}
+section.form input{border-radius:0px 3px 3px 0px !important; width:85%;font-size:1.25rem !important;line-height:1.35em;}

@@ -1,7 +1,8 @@
 <?php
 session_start();
 require("inc/db.php");
-$a ="select p.id, p.titolo, p.data,r.utente from main.post p,main.usr u, main.rubrica r where p.utente = u.id and u.rubrica = r.id order by data desc;";
+if(isset($_GET['x'])){$x=0;}else{$x=1;}
+$a ="SELECT p.id, p.data, p.titolo, r.utente FROM main.post p, main.usr u, main.rubrica r WHERE p.usr = u.id AND u.rubrica = r.id AND p.pubblica = 1 order by data desc;";
 $b = pg_query($connection, $a);
 while($c = pg_fetch_array($b)){
     $data = split(" ",$c['data']);
@@ -18,13 +19,8 @@ while($c = pg_fetch_array($b)){
 <html>
   <head>
       <?php require("inc/meta.php"); ?>
-      <link href="css/style.css" rel="stylesheet" media="screen" />
-      <link href="lib/FooTable/css/footable.core.min.css" rel="stylesheet" media="screen" />
-      <style>
-        .footable th:nth-child(1){width:5%;}
-        .footable th:nth-child(3){width:30%;}
-        .footable th:nth-child(4){width:10%;}
-      </style>
+      <link href="css/post.css" rel="stylesheet" media="screen" >
+      <link href="lib/FooTable/css/footable.core.min.css" rel="stylesheet" media="screen" >
   </head>
   <body>
     <header id="main"><?php require("inc/header.php"); ?></header>
@@ -33,9 +29,7 @@ while($c = pg_fetch_array($b)){
         <header>Archivio post</header>
         <section class="toolbar">
             <div class="listTool">
-                <?php if(isset($_SESSION["id"])){ ?>
-                <a href="post_new.php" title="inserisci un nuovo post"><i class="fa fa-plus"></i>nuovo post</a>
-                <?php } ?>
+                <?php if(isset($_SESSION["id"])){ ?><a href="post_new.php" title="inserisci un nuovo post"><i class="fa fa-plus"></i>nuovo post</a><?php } ?>
             </div>
             <div class="tableTool">
                 <select id="change-page-size">
@@ -45,6 +39,7 @@ while($c = pg_fetch_array($b)){
                     <option value="50">50</option>
                     <option value="60">60</option>
                 </select>
+                <?php if(isset($_SESSION['id'])){?><label id="statoLabel">bozze</label><?php } ?>
                 <input type="search" placeholder="...cerca" id="filtro">
                 <i class="fa fa-undo clear-filter" title="Pulisci filtro"></i>
             </div>
@@ -90,32 +85,26 @@ while($c = pg_fetch_array($b)){
 				$('.footable').data('page-size', pageSize);
 				$('.footable').trigger('footable_initialized');
 			});
-            var form = $("form[name=postForm]");
-            form.submit(function(e){
-                e.preventDefault();
-                var titolo = $("input[name=titolo]").val();
-                var post = $("textarea[name=testo]").val();
-                post = post.replace(/(\r\n|\n|\r)/gm,"");
-                if(!titolo && !post){$("#msg span").text("Devi inserire un titolo e un testo per il post!");}
-                else if(!titolo){$("#msg span").text("Devi inserire un titolo per il post!");}
-                else if(!post){$("#msg span").text("Devi inserire un testo per il post!");}
-                else{
-                    $.ajax({
-                        url: 'inc/post_add.php',
-                        type: 'POST',
-                        data: {titolo:titolo,post:post},
-                        success: function(data){
-                            if(data.indexOf("errore") !== -1){
-                                $("#msg span").text(data);
-                            }else{
-                                $("#msg span").text("");
-                                $("input[type=submit]").hide();
-                                $("#msg div").fadeIn('fast');
-                                $("#linkPost").attr("href", "post.php?p="+data);
-                            }
-                        }
-                    });
-                }
+            var vis;
+            $("#statoLabel").on("click", function(){
+                $(this).toggleClass('checkedLabel');
+                if($(this).hasClass('checkedLabel')){vis = 0;}else{vis = 1; }
+                $.ajax({
+                    url: 'inc/post_list.php',
+                    type: 'POST',
+                    data: {vis:vis},
+                    dataType : 'json',
+                    success: function(data){
+                        $.each(data, function(index, item){
+                            var id = item.id;
+                            var data = item.data;
+                            data = data.split(" ");
+                            var titolo = item.titolo;
+                            var utente = item.utente;
+                            $(".tableList tbody").html("<tr><td><a href='post_view.php?p="+id+"'><i class='fa fa-arrow-right'></i></a></td><td>"+titolo+"</td><td>"+utente+"</td><td>"+data[0]+"</td></tr>");
+                        });
+                    }
+                });
             });
         });
     </script>

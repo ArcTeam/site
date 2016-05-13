@@ -1,0 +1,6 @@
+@import url("style.css");
+.footable th:nth-child(1){width:5%;}
+.footable th:nth-child(3){width:30%;}
+.footable th:nth-child(4){width:10%;}
+#statoLabel{ padding: 7px 10px; border: 1px solid #999; display: inline-block; font-size: .8rem; border-radius: 3px; cursor: pointer;}
+.checkedLabel{background: #ccc;}

@@ -59,7 +59,7 @@ function init() {
     //OpenLayers.ProxyHost = "proxy.cgi?url=";
     map = new OpenLayers.Map('mappa', mapOpt);
     map.addControl(new OpenLayers.Control.Navigation());
-    map.addControl(new OpenLayers.Control.MousePosition());
+    map.addControl(new OpenLayers.Control.MousePosition({div: document.getElementById('coo')}));
     map.addControl(new OpenLayers.Control.Attribution());
     map.addControl(new OpenLayers.Control.Zoom());
     map.addControl(new OpenLayers.Control.TouchNavigation({dragPanOptions: {enableKinetic: true}}));
@@ -74,7 +74,7 @@ function init() {
        "active": new OpenLayers.Style({fillColor: "#7578F5", fillOpacity:0.6, graphicZIndex: 2})
     });
 
-    var colors = {low: "rgb(181, 226, 140)", middle: "rgb(241, 211, 87)", high: "rgb(253, 156, 115)"};
+    var colors = {low: "rgb(0, 125, 0)", middle: "rgb(255, 190, 0)", high: "rgb(255, 255, 0)"};
     // Define three rules to style the cluster features.
     var lowRule = new OpenLayers.Rule({
      filter: new OpenLayers.Filter.Comparison({
@@ -88,11 +88,11 @@ function init() {
       strokeColor: colors.low,
       strokeOpacity: 0.5,
       strokeWidth: 12,
-      pointRadius: 10,
+      pointRadius: 12,
       label: "${count}",
       labelOutlineWidth: 1,
-      fontColor: "#000",
-      fontOpacity: 0.8,
+      fontColor: "#eee",
+      //fontOpacity: 0.8,
       fontSize: "12px"
      }
     });
@@ -112,8 +112,8 @@ function init() {
       pointRadius: 15,
       label: "${count}",
       labelOutlineWidth: 1,
-      fontColor: "#000",
-      fontOpacity: 0.8,
+      fontColor: "#eee",
+      //fontOpacity: 0.8,
       fontSize: "12px"
      }
     });
@@ -131,8 +131,8 @@ function init() {
       strokeWidth: 12,
       pointRadius: 20,
       label: "${count}",
-      labelOutlineWidth: 1,
-      fontColor: "#000",
+      //labelOutlineWidth: 1,
+      fontColor: "#eee",
       fontOpacity: 0.8,
       fontSize: "12px"
      }
@@ -145,24 +145,20 @@ function init() {
     renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
 
     cluster = new OpenLayers.Layer.Vector("punti", {
-     strategies: [
+        strategies: [
             new OpenLayers.Strategy.Fixed()
             ,new OpenLayers.Strategy.Cluster({distance: 45,animationMethod: OpenLayers.Easing.Expo.easeOut,animationDuration: 10})
-            //new OpenLayers.Strategy.BBOX()
         ],
-     projection: new OpenLayers.Projection("EPSG:4326"),
-     renderers: ['Canvas','SVG'],
-     //renderers:renderer,
-     protocol: new OpenLayers.Protocol.WFS({
-      version:       "1.0.0",
-      url:           "http://localhost:8080/geoserver/wfs",
-      featureType:   "lavori",
-      //srsName:       "EPSG:4326",
-      featureNS:     "http://www.geoserver.org/arcteam",
-      geometryName:  "geom",
-      //schema:        "http://www.geoserver.org/arcteam?service=WFS&version=1.0.0&request=DescribeFeatureType&TypeName=arcteam:lavori"
-    }),
-     styleMap:  new OpenLayers.StyleMap(style)
+        projection: new OpenLayers.Projection("EPSG:4326"),
+        renderers: ['Canvas','SVG'],
+        protocol: new OpenLayers.Protocol.WFS({
+            version:       "1.0.0",
+            url:           "http://localhost:8080/geoserver/wfs",
+            featureType:   "lavori",
+            featureNS:     "http://www.geoserver.org/arcteam",
+            geometryName:  "geom",
+        }),
+        styleMap:  new OpenLayers.StyleMap(style)
     });
     map.addLayer(cluster);
 
@@ -213,13 +209,13 @@ function init() {
          cluster.strategies[1].deactivate();
          cluster.refresh({force: true});
          lavori.setVisibility(true);
-         //$('#preistorici, #protostorici, #romani, #medievali, #moderni, #contemporanei, #pluristratificati').attr('disabled', false).attr('checked', true);
+         $("#legend").fadeIn('fast');
       }
       if ((previousMapScale < CLUSTER_SCALE_THRESHOLD) && (this.getScale() > CLUSTER_SCALE_THRESHOLD)) {
          cluster.strategies[1].activate();
          cluster.refresh({force: true});
          lavori.setVisibility(false);
-         //$('#preistorici, #protostorici, #romani, #medievali, #moderni, #contemporanei, #pluristratificati').attr('disabled', true).attr('checked', false);
+         $("#legend").fadeOut('fast');
       }
       previousMapScale = this.getScale();
     });
@@ -227,7 +223,6 @@ function init() {
 
     extent = new OpenLayers.Bounds(coo[0], coo[1], coo[2], coo[3]);
     map.zoomToExtent(extent);
-
     $('.olControlZoom').append('<a href="#" id="max" title="torna allo zoom iniziale"><i class="fa fa-globe"></i></a>');
     $('.olControlZoomIn').attr("title","Ingrandisci la mappa");
     $('.olControlZoomOut').attr("title","Diminuisci la mappa");

@@ -46,11 +46,7 @@ if($_GET['action']){
 <html>
   <head>
       <?php require("inc/meta.php"); ?>
-      <link href="css/style.css" rel="stylesheet" media="screen" />
-      <style>
-        section.form{ width: 40%;}
-        section.form input{border-radius:0px 3px 3px 0px !important; width:85%;font-size:1.25rem !important;line-height:1.35em;}
-      </style>
+      <link href="css/login.css" rel="stylesheet" media="screen" />
   </head>
   <body>
     <header id="main"><?php require("inc/header.php"); ?></header>

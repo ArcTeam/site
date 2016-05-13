@@ -2,14 +2,6 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300);
 @import url("font/css/font-awesome.min.css");
 html{background:#EEE;font-family: 'Open Sans', sans-serif !important;font-size:100% !important;color:#363A3F;}
-select, input, textarea,button{border:1px solid #999; font-size:.8rem; padding:6px; vertical-align:top; border-radius: 3px;}
-select{background:#fff;}
-textarea{height:20px;}
-a.button{background: #dff0d8; border:1px solid #d6e9c6; font-size:.8rem; padding:6px; border-radius: 3px;text-decoration: none; color:#3c763d;}
-a.button:hover{background: #d6e9c6;}
-button[type=submit]{background:#0088cc;cursor:pointer;width:97%;font-size:1.25rem;color:#fff;border:1px solid #0D6FA0;}
-button[type=submit]:hover{background:#0D6FA0;}
-
 header#main{position: fixed;top: 0; right: 0px; z-index: 3; background: rgba(52,56,61,0.9);}
 .actHome{color:#ff0000 !important;}
 .actHack{border-left:5px solid #82C914 !important; color:#82C914 !important;}
@@ -23,7 +15,7 @@ header#main{position: fixed;top: 0; right: 0px; z-index: 3; background: rgba(52,
 .warning{border-color: #e5ce23; background-color: #ffef9f; color: #685815;}
 .error{border-color: #00c5ca; background-color: #c6f3f5; color: #006366;}
 .transition, a{-webkit-transition: all .30s linear; -moz-transition: all .30s linear; -ms-transition: all .30s linear; -o-transition: all .30s linear; transition: all .30s linear;}
-.olControlAttribution{bottom:0px !important;font-size: .6rem !important;}
+
 p.fbsubscribelink{text-align: right; padding: 3px 5px; background: #fff;}
 p.fbsubscribelink a{font-size: .8rem !important;}
 
@@ -67,37 +59,6 @@ section#main article p { font-size: .7rem;}
 footer, footer a { color: #6E6C6C;}
 footer { position: relative;font-size: 0.8em;text-align: center;background: #d2d2d2;}
 footer #wrapFooter header { font-size: 1rem; color: #82C914;font-weight: bold;}
-
-
-section.content, section.ckform {position: relative; background: #fff; margin: 30px auto; padding: 30px; border: 1px solid #ccc; border-radius: 5px; width: 90%;}
-section.content header, section.ckform header { display: block; width: 100%; border-bottom: 1px solid #999; font-size: 1.5rem; color: #999;}
-.rowButton {margin-top: 20px;}
-.iForm {border: 1px solid #999 !important; border-right: none !important; border-radius: 3px 0px 0px 3px; font-size: 1.7rem; padding: 6px; display: inline-block; margin-right: -5px;}
-.bForm { border-left: 1px transparent !important;}
-
-section.toolbar{margin: 10px 0px;font-size:.9rem;}
-section.toolbar div{display:inline-block;width:49.5%;margin:0px;padding:0px;}
-section.toolbar a{display:inline-block;background:#82C914;border:1px solid #64A106;color:#fff;padding:5px;text-decoration:none;}
-section.toolbar a:hover{background:#64A106;}
-section.toolbar i{margin-right:10px;}
-section.toolbar .tableTool{text-align:right;}
-section.content:not(".footable  ") span{font-size: 1rem; text-align: center; display: block; margin-top: 20px; color: red;}
-
-/* tabelle footable lista record */
-.footable{border:1px solid #0088cc;}
-.footable th{font-weight:bold;background:#0088cc;color:#fff}
-.footable th, .footable td{padding:5px 0px;}
-.footable td:nth-child(1){text-align:center;}
-.footable a{color:#ff0000;}
-.pagination-centered { text-align: center;margin-top: 20px !important;}
-.pagination ul {display: inline-block; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);}
-.pagination ul > li{display:inline;line-height: 20px;}
-.pagination ul > li > a, .pagination ul > li > span {float: left;color: #0088cc; padding: 4px 12px;font-size:.8rem; line-height: 20px; text-decoration: none; background-color: #ffffff; border: 1px solid #dddddd; border-left-width: 0;}
-.pagination ul > li > a:hover{background:}
-.pagination ul > .disabled > span, .pagination ul > .disabled > a, .pagination ul > .disabled > a:hover, .pagination ul > .disabled > a:focus { color: #999999 !important; cursor: default; background-color: transparent;}
-.pagination ul > li:first-child > a, .pagination ul > li:first-child > span { border-left-width: 1px; -webkit-border-bottom-left-radius: 4px; border-bottom-left-radius: 4px; -webkit-border-top-left-radius: 4px; border-top-left-radius: 4px; -moz-border-radius-bottomleft: 4px; -moz-border-radius-topleft: 4px;}
-.pagination ul > li > a:hover, .pagination ul > li > a:focus, .pagination ul > .active > a, .pagination ul > .active > span { background-color: #f5f5f5;}
-.pagination ul > .active > a,.pagination ul > .active > span {color: #999999; cursor: default;}
 
 /* mobile */
 @media only screen and (min-width:319px) and (max-width:480px) {
@@ -162,29 +123,17 @@ section.content:not(".footable  ") span{font-size: 1rem; text-align: center; dis
     header#main nav li a#team:hover{border-left:5px solid #FBBC05 !important; color:#FBBC05 !important;}
     header#main nav li a#login:hover{border-left:5px solid #FFF !important; color:#FFF !important;}
     header#main nav li a i { display: block;font-size:2rem; }
-    #settingUl {bottom:0px;display:none;}
-    .subMenu {position: absolute; right:102%; display: block; width: 150px; padding:10px 0px;border-radius:5px 0px 0px 5px; background: rgb(69,73,78); color:#909090 !important;}
-    .subMenu li{border-top:1px solid #909090;border-bottom:1px solid transparent;text-align:left !important;}
-    .subMenu li:last-child{border-bottom:1px solid #909090;}
-    .subMenu li:hover{border-top:1px solid #fff;border-bottom:1px solid #fff;}
-    .subMenu li a, .subMenu li i{display: inline-block !important; font-size: .9rem !important; line-height: 1.3em;margin:1px 0px !important;}
-    .subMenu li a{width:130px;padding:5px;}
-    .subMenu li a:hover{color:#fff;}
     #mappaTool{width:25%;padding: 5px 20px; border-radius:5px 0px 0px 5px;}
     #mappaTool header.main{font-size: 1.3rem;}
     #mappaTool header.sub{font-size: 1rem;padding-top: 10px; border-top: 1px solid #fbbc05;}
-    #mappaTool article{width: 90%; margin-bottom: 10px; font-size: .8rem; }
-    #mappaTool #legend {display:none;padding-top:10px; border-top:1px solid #fbbc05;}
-    #mappaTool #legend ul{color:#fff;}
-    #mappaTool #legend ul li span{font-size:.9rem; margin-bottom: 5px; display: block;}
-    #mappaTool #legend ul li {font-size:.85rem;}
+    #mappaTool article{width: 90%; margin: 10px auto; font-size: .8rem; }
     .olControlZoom a{width:40px !important;height:40px !important;font-size:1.3rem !important;line-height: 40px !important;}
     section#servizi .container {top: 3%;}
     section#servizi .container h1 {font-size: 1.5rem;}
     section#servizi .container p {font-size: 1rem; width: 80%; line-height: 1.3em;}
     .flex-viewport { max-height: 580px !important;}
     header.sectionMain, header.sectionMain a {font-size: 1.5rem !important;}
-    .feedburnerFeedBlock div, #post ul li div{font-size:.8rem;}
+    .feedburnerFeedBlock div{font-size:.8rem;}
     .panel {width: 100%; margin: 5px 0px; position: relative; -webkit-perspective: 600px; perspective: 600px;}
     .panel .front {position: absolute;top: 0;left: 0; z-index: 900; width: inherit; height: 100%; background-image:url('../img/layout/moneta1.png'); background-repeat:no-repeat; background-size:100% 100%; -webkit-transform:rotateX(0) rotateY(0); transform: rotateX(0) rotateY(0); -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-backface-visibility: hidden; backface-visibility: hidden;   -webkit-transition: all .4s ease-in-out; transition: all .4s ease-in-out; }
     .panel.flip .front { z-index: 900; -webkit-transform: rotateY(179deg); transform: rotateY(179deg);}

@@ -1,4 +1,5 @@
 var backgrounds = new Array();
+
 var geologiaText = "La geoarcheologia è un metodo di indagine archeologico che si serve dell'ausilio di metodi geologici come la stratigrafia o la geomorfologia. L'approccio &#34;geoarcheologico&#34; è un approccio di tipo ambientale, ossia cerca di situare il sito archeologico in un contesto più ampio che è quello del territorio in cui il sito è inserito. Si cerca in questo modo di ricostruire non solo la storia materiale e culturale del sito, ma anche quella delle risorse (per esempio idriche) che il territorio offriva. A differenza di altri &#34;approcci&#34; nello studio di un sito archeologico, qui il terreno che costituisce la zona delimitata e definita come situ viene scavata orizzonte per orizzonte, livello per livello. I reperti vengono raccolti e catalogati per procedere poi in altra sede ad una loro identificazione e ricostruzione.";
 var geologiaImg = "img/servizi/geoarcheologia.png";
 /*var geologiaImg = "https://upload.wikimedia.org/wikipedia/commons/9/9b/Gypsum_cones.jpg";
