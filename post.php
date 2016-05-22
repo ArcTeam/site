@@ -8,7 +8,7 @@ while($c = pg_fetch_array($b)){
     $data = split(" ",$c['data']);
     $data = $data[0];
     $post .= "<tr>";
-    $post .= "<td><a href='post_view.php?p=".$c['id']."'><i class='fa fa-arrow-right'></i></a></td>";
+    $post .= "<td><a href='postView.php?p=".$c['id']."'><i class='fa fa-arrow-right'></i></a></td>";
     $post .= "<td>".$c['titolo']."</td>";
     $post .= "<td>".$c['utente']."</td>";
     $post .= "<td>".$data."</td>";
@@ -29,7 +29,7 @@ while($c = pg_fetch_array($b)){
         <header>Archivio post</header>
         <section class="toolbar">
             <div class="listTool">
-                <?php if(isset($_SESSION["id"])){ ?><a href="post_new.php" title="inserisci un nuovo post"><i class="fa fa-plus"></i>nuovo post</a><?php } ?>
+                <?php if(isset($_SESSION["id"])){ ?><a href="postForm.php" title="inserisci un nuovo post"><i class="fa fa-plus"></i>nuovo post</a><?php } ?>
             </div>
             <div class="tableTool">
                 <select id="change-page-size">
@@ -101,7 +101,7 @@ while($c = pg_fetch_array($b)){
                             data = data.split(" ");
                             var titolo = item.titolo;
                             var utente = item.utente;
-                            $(".tableList tbody").html("<tr><td><a href='post_view.php?p="+id+"'><i class='fa fa-arrow-right'></i></a></td><td>"+titolo+"</td><td>"+utente+"</td><td>"+data[0]+"</td></tr>");
+                            $(".tableList tbody").html("<tr><td><a href='postView.php?p="+id+"'><i class='fa fa-arrow-right'></i></a></td><td>"+titolo+"</td><td>"+utente+"</td><td>"+data[0]+"</td></tr>");
                         });
                     }
                 });

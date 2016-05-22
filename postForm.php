@@ -1,10 +1,28 @@
 <?php
 session_start();
 require("inc/db.php");
+if(isset($_GET['p'])){
+    $p="select * from main.post where id=".$_GET['p'];
+    $pr = pg_query($connection,$p);
+    $post = pg_fetch_array($pr);
+
+    //tag presenti
+    $tagpres = "select t.id, t.tag from liste.tag t, main.tags ts where ts.tag = t.id and ts.rec = ".$_GET['p']." and ts.tab = 1 order by t.tag asc;";
+    $tagpresq = pg_query($connection,$tagpres);
+    $tagpresarr = array();
+    while ($tagprest = pg_fetch_array($tagpresq)) {
+        $x['id'] = $tagprest['id'];
+        $x['tag'] = $tagprest['tag'];
+        array_push($tagpresarr,$x);
+    }
+    $tagpresList = json_encode($tagpresarr);
+}else{
+    $tagpresList = 'noTag';
+}
+
 //lista tag
 $t = "select tag from liste.tag order by tag asc;";
 $tq = pg_query($connection, $t);
-//while($tag = pg_fetch_array($tq)){echo $tag['tag'].", ";}
 $tag = array();
 while ($obj = pg_fetch_array($tq)) { $tag[] = $obj['tag'];}
 $tagList = json_encode($tag);
@@ -14,7 +32,7 @@ $tagList = json_encode($tag);
 <html>
   <head>
       <?php require("inc/meta.php"); ?>
-      <link href="css/post_new.css" rel="stylesheet" media="screen" />
+      <link href="css/postForm.css" rel="stylesheet" media="screen" />
       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   </head>
   <body>
@@ -23,9 +41,11 @@ $tagList = json_encode($tag);
         <section class="form ckform">
             <header>Inserisci un nuovo post</header>
             <form name="postForm" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
+                <input type="hidden" name="get" value="<?php echo $_GET['p']; ?>" >
+                <input type="hidden" name="s" value="<?php echo $post['pubblica']; ?>" >
                 <div class="rowButton">aggiungi tag: <input type="text" name="tags" placeholder="Tags" class="tm-input" ></div>
-                <div class="rowButton"><input type="text" name="titolo" placeholder="Inserisci il titolo del post" ></div>
-                <div class="rowButton"><textarea name="testo" id="testo"></textarea></div>
+                <div class="rowButton"><input type="text" name="titolo" placeholder="Inserisci il titolo del post" value="<?php echo $post['titolo']; ?>" ></div>
+                <div class="rowButton"><textarea name="testo" id="testo"><?php echo $post['testo']; ?></textarea></div>
                 <div class="rowButton">
                     <label class="statoPost">Vuoi salvare il post come bozza o vuoi pubblicarlo subito?<br> Le bozze non saranno visibili agli utenti esterni fino a che non decidi di pubblicarle</label>
                     <div style="text-align:center;">
@@ -57,6 +77,38 @@ $tagList = json_encode($tag);
     <script>
         $(document).ready(function(){
             $('#testo').ckeditor();
+            var dataList = <?php echo $tagList; ?>;
+            var p = $("input[name=get]").val();
+            var prefilled,script;
+            if(p){
+                var stato = $('#input[name=s]').val();
+                $("input[name=stato]").attr("checked",false);
+                $(".radioLabel").removeClass('checked');
+                if(stato==1){
+                    $("#pubblica").attr("checked",true);
+                    $(".radioLabel[for=pubblica]").addClass('checked');
+                }else{
+                    $("#bozza").attr("checked",true);
+                    $(".radioLabel[for=bozza]").addClass('checked');
+                }
+
+                var tagpresarr = <?php echo $tagpresList; ?>;
+                var tags = [];
+                $.each(tagpresarr, function(k,v) { tags.push(v.tag); });
+                prefilled=tags;
+                script = 'postMod.php';
+            }else{
+                prefilled='';
+                script = 'postAdd.php';
+            }
+            $(".tm-input").tagsManager({
+                prefilled: prefilled,
+                hiddenTagListName: 'tagList',
+                hiddenTagListId: 'tagList',
+                deleteTagsOnBackspace: false,
+                AjaxPush: 'script/addTag.php',
+            })
+            .autocomplete({source:dataList});
             var form = $("form[name=postForm]");
             form.submit(function(e){
                 e.preventDefault();
@@ -71,7 +123,7 @@ $tagList = json_encode($tag);
                 else if(!post){$("#msg span").text("Devi inserire un testo per il post!");}
                 else{
                     $.ajax({
-                        url: 'inc/post_add.php',
+                        url: 'inc/'+script,
                         type: 'POST',
                         data: {tag:tag,stato:stato,titolo:titolo,post:post},
                         success: function(data){
@@ -87,18 +139,9 @@ $tagList = json_encode($tag);
                     });
                 }
             });
-            var dataList = <?php echo $tagList; ?>;
-            $(".tm-input").tagsManager({
-                hiddenTagListName: 'tagList',
-                hiddenTagListId: 'tagList',
-                deleteTagsOnBackspace: false,
-                AjaxPush: 'script/addTag.php',
-            })
-            .autocomplete({source:dataList});
 
-            $(".radioLabel").on("click", function(){
-                $(this).addClass('checked').siblings().removeClass('checked');
-            });
+            $(".radioLabel").on("click", function(){ $(this).addClass('checked').siblings().removeClass('checked');});
+
         });
     </script>
   </body>

@@ -1,28 +1,9 @@
 @import url("style.css");
 @import url("ol/style.mobile.css");
-section#main article:nth-child(1){margin-right:1%;}
-section#main article{width:49%;}
-section#main article a{text-decoration:none;font-size:1.2rem;text-shadow: 0px 0px 0px rgba(0,0,0,0);}
-section#main article a:hover{text-shadow: 0px 0px 2px rgba(0,0,0,0.5);}
 
-section#main article ul li{ background: #fff;padding: 30px;margin-bottom: 10px; box-shadow: 0px 1px 1px rgba(0,0,0,0.3);}
-section#main article ul li div{font-size:.8rem;margin-top:10px;}
-section#main article p{font-size:.7rem;}
-.fbsubscribelink,#creditfooter{display:none;}
-.feedburnerFeedBlock .headline a{color:#093 !important;}
-header.sectionMain{padding: 10px 20px;}
-header.sectionMain, header.sectionMain a{color: #fff !important;font-size:1.5rem !important;}
-header.sectionMain i{vertical-align: initial;}
-#post header{ background: #1da1f2;}
-#ator header{ background: #093;}
-#mainAside header{ background: #FBBC05;}
-#post .headline a{color:#1da1f2 !important;}
-#mappa{position:relative;width:100%;background:#fff;margin-bottom:20px !important;box-shadow: 0px 0px 2px rgba(0,0,0,0.5); z-index:1 !important;}
-#mappaTool{ position: absolute; top: 15px; right: 0px; width:25%;z-index: 2000; background: rgba(0,0,0,0.7); padding: 5px 20px; border-radius:5px 0px 0px 5px;}
+#mappa{position:relative;background:#fff; box-shadow: 0px 0px 2px rgba(0,0,0,0.5); z-index:1 !important;}
+#mappaTool{ position: absolute; top: 15px; right: 0px; z-index: 2000; background: rgba(0,0,0,0.7); border-radius:5px 0px 0px 5px;}
 #mappaTool header{color: #fbbc05;}
-#mappaTool header.main{font-size: 1.3rem; cursor:pointer;}
-#mappaTool header.sub{font-size: 1rem;padding-top: 10px; border-top: 1px solid #fbbc05;}
-#mappaTool article{width: 90%; margin: 10px auto; font-size: .8rem; }
 #mappaTool article#infoJob{display: block;}
 #mappaTool article#infoJob div.infoJobContent{color:#fff;}
 #mappaTool article#infoJob div.infoJobContent span{display:block; color:#82C914;}
@@ -32,23 +13,44 @@ header.sectionMain i{vertical-align: initial;}
 #mappaTool article#switchLayer li label:hover{color:#fff;}
 #mappaTool article#switchLayer li i{margin-right:5px;}
 #mappaTool article#switchLayer input[type=checkbox]{max-height: 0; max-width: 0; opacity: 0;}
-.olControlZoom{top: 50px !important; left: 0px !important; background: none !important; border-radius: 0px !important; padding: 0px !important;}
-.olControlZoom a{margin: 0px !important; width:40px !important;height:40px !important;font-size:1.3rem !important;line-height: 40px !important;color:#fff !important;background:rgba(0, 0, 0, 0.7) !important;}
+
+section#servizi{position:relative;width:100%;}
+section#servizi header{background: #FBBC05; padding: 10px;font-size:2rem;}
+.serviziTxt {position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(71,47,36,0.4) url("../img/servizi/bgSlider.png") repeat top left;}
+section#servizi .container { position: absolute; left: 10%; bottom: 10%; right: 10%; padding: 0 3%; margin: 0 auto; color: #fff; overflow: hidden;}
+section#servizi .container h1 { display: block; border-bottom: 1px solid #fff; margin-bottom: 2%; width: 80%;}
+.flex-control-nav { bottom:20px !important;}
+
+p.footerArticle{padding: 3px 5px; color: #fff !important; margin-bottom:10px;}
+p.footerArticle a{display:inline-block; color: #fff !important; width:100%;margin:0px !important;font-size: .8rem !important;}
+p.footerArticle a:nth-child(2){text-align:right;}
+p.footerArticle i{color: #fff; float: none !important; margin: 0px;}
+#ator p.footerArticle a{width:49% !important;}
+#ator header,#ator p.footerArticle { background: #66bbdd;}
+#ator i.fa-5x{color:#66bbdd;}
+#media header, #media p.footerArticle { background: #093;}
+#media a, #media i.fa-5x{color:#093;}
+#post header, #post p.footerArticle { background: #FBBC05;}
+#post a, #post i.fa-5x{color:#FBBC05;}
+#social header { background: #1DA1F2;}
+#social i.fa-5x{color:#1DA1F2;}
+#youtube header, #youtube p.footerArticle { background: #cc181e;}
+#youtube a{color:#cc181e;}
+#youtube div i{color:#cc181e;}
+#tag header, #tag p.footerArticle { background: #494177;}
+#tag div i{color: #494177;}
+#tag a.tag{ color: #494177; margin: 0px 5px; display: inline-block;text-shadow: 0px 0px 0px rgba(0,0,0,0);}
+.mainDiv article div i{ float: left; margin-right: 10px;}
+header.sectionMain, header.sectionMain a {color: #fff !important;}
+header.sectionMain { padding: 10px 20px;}
+section#main article ul li { background: #fff;padding: 30px; margin-bottom: 10px; box-shadow: 0px 1px 1px rgba(0,0,0,0.3);}
+section#main article a {font-size: 1.2rem; text-shadow: 0px 0px 0px rgba(0,0,0,0);}
+.headline a:hover{text-shadow: 0px 0px 1px rgba(0,0,0,0.7) !important;}
+section#main article p { font-size: .7rem;}
+
+.olControlZoom{top: 15px !important; left: 0px !important; background: none !important; border-radius: 0px !important; padding: 0px !important;}
+.olControlZoom a{margin: 0px !important; color:#fff !important;background:rgba(0, 0, 0, 0.7) !important;}
 .olControlZoom a:first-child{border-radius: 0px 5px 0px 0px;}
 .olControlZoom a:last-child {border-radius: 0px 0px 5px 0px;}
 .olControlZoom a:nth-child(2) {border-radius: 0px 0px 0px 0px !important;}
 .olControlZoom a:hover{background:rgba(0, 0, 0, 0.9) !important;}
-section#servizi{position:relative;width:100%;height:500px;background: #FBBC05;margin-bottom:20px;-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;}
-section#servizi article{position:relative;height:460px;margin: 20px 1%;}
-section#servizi article:nth-child(1){width:27%;}
-section#servizi article:nth-child(2){width:68%;}
-section#servizi article header{font-size:1.5vw;display:block;width:100%;border-bottom:1px dotted #000;}
-section#servizi nav{margin-left:20px; text-align:right;}
-section#servizi nav a{display:block;font-size:.9rem;color:#000;text-decoration: none;padding-right:20px;}
-section#servizi nav a:hover, .serviziAct{padding-right:0px !important;color:#fff !important;font-weight:bold;}
-#textInfoWrap{position: absolute; top: 0px; left: 0px; bottom: 0px; width: 50%; padding: 20px; margin: 0px; background: rgba(0,0,0,0.8); color: #fff; font-size:.8rem;}
-#textInfoWrap span{display:block;width:100%;}
-#textInfoWrap span:first-child{margin-bottom:20px;}
-.olControlAttribution{bottom:1px !important;left:2px;font-size:.7rem !important;}
-.layerAct{color:#fff !important;}
-.fa-check-square-o {color:#82C914 !important;}

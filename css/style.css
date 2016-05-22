@@ -1,7 +1,8 @@
 @import url("reset.css");
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,300,200,700);
 @import url("font/css/font-awesome.min.css");
-html{background:#EEE;font-family: 'Open Sans', sans-serif !important;font-size:100% !important;color:#363A3F;}
+html{background:#EEE;font-family: 'Titillium Web', sans-serif !important;font-size:100% !important;color:#363A3F;}
 select, input, textarea,button{border:1px solid #999; font-size:.8rem; padding:6px; vertical-align:top; border-radius: 3px;}
 select{background:#fff;}
 textarea{height:20px;}
@@ -24,50 +25,12 @@ header#main{position: fixed;top: 0; right: 0px; z-index: 3; background: rgba(52,
 .error{border-color: #00c5ca; background-color: #c6f3f5; color: #006366;}
 .transition, a{-webkit-transition: all .30s linear; -moz-transition: all .30s linear; -ms-transition: all .30s linear; -o-transition: all .30s linear; transition: all .30s linear;}
 .olControlAttribution{bottom:0px !important;font-size: .6rem !important;}
-p.fbsubscribelink{text-align: right; padding: 3px 5px; background: #fff;}
-p.fbsubscribelink a{font-size: .8rem !important;}
 
-#mappa{position:relative;background:#fff; box-shadow: 0px 0px 2px rgba(0,0,0,0.5); z-index:1 !important;}
-#mappaTool{ position: absolute; top: 15px; right: 0px; z-index: 2000; background: rgba(0,0,0,0.7); border-radius:5px 0px 0px 5px;}
-#mappaTool header{color: #fbbc05;}
-#mappaTool article#infoJob{display: block;}
-#mappaTool article#infoJob div.infoJobContent{color:#fff;}
-#mappaTool article#infoJob div.infoJobContent span{display:block; color:#82C914;}
-#mappaTool article#switchLayer{display: none;}
-#mappaTool article#switchLayer li{padding:5px 0px;}
-#mappaTool article#switchLayer li label{cursor:pointer;color:#909090;font-weight:bold;}
-#mappaTool article#switchLayer li label:hover{color:#fff;}
-#mappaTool article#switchLayer li i{margin-right:5px;}
-#mappaTool article#switchLayer input[type=checkbox]{max-height: 0; max-width: 0; opacity: 0;}
-
-section#servizi{position:relative;width:100%;}
-section#servizi header{background: #FBBC05; padding: 10px;font-size:2rem;}
-.serviziTxt {position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(71,47,36,0.4) url("../img/servizi/bgSlider.png") repeat top left;}
-section#servizi .container { position: absolute; left: 10%; bottom: 10%; right: 10%; padding: 0 3%; margin: 0 auto; color: #fff; overflow: hidden;}
-section#servizi .container h1 { display: block; border-bottom: 1px solid #fff; margin-bottom: 2%; width: 80%;}
-.flex-control-nav { bottom:20px !important;}
-
-#ator header { background: #093;}
-#post header { background: #1da1f2;}
-#social header { background: #FBBC05;}
-header.sectionMain, header.sectionMain a {color: #fff !important;}
-header.sectionMain { padding: 10px 20px;}
-section#main article ul li { background: #fff;padding: 30px; margin-bottom: 10px; box-shadow: 0px 1px 1px rgba(0,0,0,0.3);}
-section#main article a {font-size: 1.2rem; text-shadow: 0px 0px 0px rgba(0,0,0,0);}
-.feedburnerFeedBlock .headline a{color:#093;}
-section#main article p { font-size: .7rem;}
-
-.olControlZoom{top: 15px !important; left: 0px !important; background: none !important; border-radius: 0px !important; padding: 0px !important;}
-.olControlZoom a{margin: 0px !important; color:#fff !important;background:rgba(0, 0, 0, 0.7) !important;}
-.olControlZoom a:first-child{border-radius: 0px 5px 0px 0px;}
-.olControlZoom a:last-child {border-radius: 0px 0px 5px 0px;}
-.olControlZoom a:nth-child(2) {border-radius: 0px 0px 0px 0px !important;}
-.olControlZoom a:hover{background:rgba(0, 0, 0, 0.9) !important;}
 
 footer, footer a { color: #6E6C6C;}
 footer { position: relative;font-size: 0.8em;text-align: center;background: #d2d2d2;}
 footer #wrapFooter header { font-size: 1rem; color: #82C914;font-weight: bold;}
-
+footer#toolbar{background: none;text-align:left;}
 
 section.content, section.ckform {position: relative; background: #fff; margin: 30px auto; padding: 30px; border: 1px solid #ccc; border-radius: 5px; width: 90%;}
 section.content header, section.ckform header { display: block; width: 100%; border-bottom: 1px solid #999; font-size: 1.5rem; color: #999;}
@@ -77,7 +40,7 @@ section.content header, section.ckform header { display: block; width: 100%; bor
 
 section.toolbar{margin: 10px 0px;font-size:.9rem;}
 section.toolbar div{display:inline-block;width:49.5%;margin:0px;padding:0px;}
-section.toolbar a{display:inline-block;background:#82C914;border:1px solid #64A106;color:#fff;padding:5px;text-decoration:none;}
+section.toolbar a{display:inline-block;background:#82C914;border:1px solid #64A106; color:#fff; padding:3px 5px; border-radius:3px; text-decoration:none;}
 section.toolbar a:hover{background:#64A106;}
 section.toolbar i{margin-right:10px;}
 section.toolbar .tableTool{text-align:right;}
@@ -101,7 +64,7 @@ section.content:not(".footable  ") span{font-size: 1rem; text-align: center; dis
 
 /* mobile */
 @media only screen and (min-width:319px) and (max-width:480px) {
-    section#main article ul li div,.fbsubscribelink,#creditfooter {display:none;}
+    section#main article ul li div,.fbsubscribelink a:nth-child(2),#creditfooter {display:none;}
 
     header#main{left:0px; height: 60px; box-shadow: 0px 2px 3px #000;}
     header#main #wrapLogo{display: inline-block; width: 20%; height: 60px; margin: 0px;}
@@ -183,8 +146,8 @@ section.content:not(".footable  ") span{font-size: 1rem; text-align: center; dis
     section#servizi .container h1 {font-size: 1.5rem;}
     section#servizi .container p {font-size: 1rem; width: 80%; line-height: 1.3em;}
     .flex-viewport { max-height: 580px !important;}
-    header.sectionMain, header.sectionMain a {font-size: 1.5rem !important;}
-    .feedburnerFeedBlock div, #post ul li div{font-size:.8rem;}
+    header.sectionMain, header.sectionMain a {font-size: 1.3rem !important;}
+    .feedburnerFeedBlock div, .postList{font-size:.8rem;}
     .panel {width: 100%; margin: 5px 0px; position: relative; -webkit-perspective: 600px; perspective: 600px;}
     .panel .front {position: absolute;top: 0;left: 0; z-index: 900; width: inherit; height: 100%; background-image:url('../img/layout/moneta1.png'); background-repeat:no-repeat; background-size:100% 100%; -webkit-transform:rotateX(0) rotateY(0); transform: rotateX(0) rotateY(0); -webkit-transform-style: preserve-3d; transform-style: preserve-3d; -webkit-backface-visibility: hidden; backface-visibility: hidden;   -webkit-transition: all .4s ease-in-out; transition: all .4s ease-in-out; }
     .panel.flip .front { z-index: 900; -webkit-transform: rotateY(179deg); transform: rotateY(179deg);}

@@ -1,0 +1,16 @@
+@import url("style.css");
+#mainWrap{width:94% !important;margin:0px 5% 0px 1% !important;}
+section.ckform{display:inline-block;margin:30px 0px !important;vertical-align:top;}
+section.post{width:60%;}
+section.metadata{width:29%;}
+section.metadata header{font-size:1.2rem;}
+section.metadata div{margin-bottom:5px;font-size: .9rem;}
+header#titolo{color:#FBBC05;}
+span.tag{display:inline-block;margin:0px 1px;padding:0px 5px;border-radius:3px;background:#494177;color:#fff;}
+span.tag i{margin-left:7px;}
+div#tag{margin-top:5px;}
+footer#toolbar{margin-top:20px;}
+footer#toolbar a{display:inline-block;color:#fff;padding:3px 7px;border-radius:3px;}
+footer#toolbar a#list{background:#AD8100;}
+footer#toolbar a#mod{background: #82C914;}
+footer#toolbar a#del{background:#cc181e;}
