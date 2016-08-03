@@ -31,7 +31,7 @@ if($_POST['submit'] && $_POST['submit']=="login"){
       $result2=pg_query($connection, $login);
       header("Location:index.php");
     }else{
-      $msgLogin = "Attenzione, la password non è corretta!<br>Se non ricordi la password chiedine una nuova al server utilizzando il pulsante 'nuova password'.";
+      $msgLogin = "Attenzione, la password non è corretta!";
     }
   }else{
     $msgLogin = "Attenzione, login fallito!<br>Riprova facendo attenzione a digitare correttamente l'email o la password.<br>Se il problema persiste il tuo account potrebbe essere non attivo, contatta il responsabile web all'indirizzo:<br>beppenapo@arc-team.com.";

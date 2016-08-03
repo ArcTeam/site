@@ -169,6 +169,7 @@ while($t=pg_fetch_array($tagres)){
         <input type="hidden" id="extent" value="<?php echo $extent; ?>">
         <script src="lib/jquery-1.12.0.min.js"></script>
         <script src="http://openlayers.org/api/OpenLayers.js"></script>
+        <script src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
         <script src="lib/flexslider/jquery.flexslider.js" charset="utf-8" type="text/javascript"></script>
         <script src="script/funzioni.js"></script>
         <script src="script/mappaIndex.js"></script>

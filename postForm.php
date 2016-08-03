@@ -5,7 +5,7 @@ if(isset($_GET['p'])){
     $p="select * from main.post where id=".$_GET['p'];
     $pr = pg_query($connection,$p);
     $post = pg_fetch_array($pr);
-
+    $id = $_GET['p'];
     //tag presenti
     $tagpres = "select t.id, t.tag from liste.tag t, main.tags ts where ts.tag = t.id and ts.rec = ".$_GET['p']." and ts.tab = 1 order by t.tag asc;";
     $tagpresq = pg_query($connection,$tagpres);
@@ -18,6 +18,7 @@ if(isset($_GET['p'])){
     $tagpresList = json_encode($tagpresarr);
 }else{
     $tagpresList = 'noTag';
+    $id = 0;
 }
 
 //lista tag
@@ -41,7 +42,7 @@ $tagList = json_encode($tag);
         <section class="form ckform">
             <header>Inserisci un nuovo post</header>
             <form name="postForm" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
-                <input type="hidden" name="get" value="<?php echo $_GET['p']; ?>" >
+                <input type="hidden" name="get" value="<?php echo $id; ?>" >
                 <input type="hidden" name="s" value="<?php echo $post['pubblica']; ?>" >
                 <div class="rowButton">aggiungi tag: <input type="text" name="tags" placeholder="Tags" class="tm-input" ></div>
                 <div class="rowButton"><input type="text" name="titolo" placeholder="Inserisci il titolo del post" value="<?php echo $post['titolo']; ?>" ></div>
@@ -78,20 +79,18 @@ $tagList = json_encode($tag);
         $(document).ready(function(){
             $('#testo').ckeditor();
             var dataList = <?php echo $tagList; ?>;
-            var p = $("input[name=get]").val();
-            var prefilled,script;
-            if(p){
-                var stato = $('#input[name=s]').val();
+            var prefilled,script, p;
+            p = $("input[name=get]").val();
+            if(p > 0){
+                var stato = $('input[name=s]').val();
                 $("input[name=stato]").attr("checked",false);
+                $("input[name=stato][value="+stato+"]").prop("checked",true);
                 $(".radioLabel").removeClass('checked');
                 if(stato==1){
-                    $("#pubblica").attr("checked",true);
                     $(".radioLabel[for=pubblica]").addClass('checked');
                 }else{
-                    $("#bozza").attr("checked",true);
                     $(".radioLabel[for=bozza]").addClass('checked');
                 }
-
                 var tagpresarr = <?php echo $tagpresList; ?>;
                 var tags = [];
                 $.each(tagpresarr, function(k,v) { tags.push(v.tag); });
@@ -125,7 +124,7 @@ $tagList = json_encode($tag);
                     $.ajax({
                         url: 'inc/'+script,
                         type: 'POST',
-                        data: {tag:tag,stato:stato,titolo:titolo,post:post},
+                        data: {id:p, tag:tag,stato:stato,titolo:titolo,post:post},
                         success: function(data){
                             if(data.indexOf("errore") !== -1){
                                 $("#msg span").text(data);
@@ -133,7 +132,7 @@ $tagList = json_encode($tag);
                                 $("#msg span").text("");
                                 $("input[type=submit]").hide();
                                 $("#msg div").fadeIn('fast');
-                                $("#linkPost").attr("href", "post_view.php?p="+data);
+                                $("#linkPost").attr("href", "postView.php?p="+data);
                             }
                         }
                     });
