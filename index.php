@@ -134,7 +134,15 @@ while($t=pg_fetch_array($tagres)){
                         <header class="sectionMain">OpenDataDocuments <i class="fa fa-creative-commons"></i></header>
                         <ul>
                             <li>
-                                <div><i class="fa fa-creative-commons fa-5x"></i> La libera circolazione delle idee è alla base del nostro lavoro, per questo abbiamo dedicato una sezione del nostro sito alla condivisione di articoli scientifici e presentazioni che la nostra ditta ha prodotto negli anni. Di seguito gli ultimi 5 documenti caricati, in fondo i link all'archivio completo.</div>
+                                <div><i class="fa fa-creative-commons fa-5x"></i> La libera circolazione delle idee è alla base del nostro lavoro, per questo abbiamo dedicato una sezione del nostro sito alla condivisione di articoli scientifici e presentazioni che la nostra ditta ha prodotto negli anni. Alcuni articoli sono Academia.edu, altri su Research Gate; di seguito trovate tutti i link alle varie risorse</div>
+                                <div>
+                                    <header class="head2odd"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Academia.edu</header>
+                                    <a href="https://independent.academia.edu/GiuseppeNaponiello" target="_blank" class="aSubSec"> Giuseppe Naponiello</a>
+                                </div>
+                                <div>
+                                    <header class="head2odd"><img src="img/layout/rg.png">  Research Gate</header>
+                                    <a href="https://www.researchgate.net/profile/Giuseppe_Naponiello" target="_blank" class="aSubSec">Giuseppe Naponiello</a>
+                                </div>
                                 <div>
 
                                 </div>
