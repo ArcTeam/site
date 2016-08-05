@@ -1,12 +1,12 @@
 <?php
 session_start();
 require("inc/db.php");
-$a = "select p.id,p.titolo,p.testo,p.data,r.utente from main.post p, main.usr u, main.rubrica r where p.usr = u.id and u.rubrica = r.id and p.id =".$_GET['p'];
+$a = "SELECT post.id, post.titolo, post.testo, rubrica.utente, log.data FROM main.log, main.post, main.usr, main.rubrica WHERE log.record = post.id AND log.utente = usr.id AND usr.rubrica = rubrica.id AND post.id =".$_GET['p'];
 $b = pg_query($connection,$a);
 $p = pg_fetch_array($b);
 $data = explode(" ",$p['data']);
 
-$t = "select t.tag from liste.tag t, main.tags ts where ts.tag = t.id and ts.rec = ".$_GET['p']." and ts.tab = 1 order by t.tag asc";
+$t = "select t.tag from liste.tag t, main.tags ts where ts.tag = t.id and ts.rec = ".$_GET['p']." and ts.tab = 33 order by t.tag asc";
 $tr = pg_query($connection,$t);
 while($tag = pg_fetch_array($tr)){$tags .= "<span class='tag'>".$tag['tag']."<i class='fa fa-tag'></i></span>";}
 ?>

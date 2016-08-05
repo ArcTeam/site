@@ -2,12 +2,13 @@
 session_start();
 require("inc/db.php");
 if(isset($_GET['p'])){
+    $header = 'Modifica post';
     $p="select * from main.post where id=".$_GET['p'];
     $pr = pg_query($connection,$p);
     $post = pg_fetch_array($pr);
 
     //tag presenti
-    $tagpres = "select t.id, t.tag from liste.tag t, main.tags ts where ts.tag = t.id and ts.rec = ".$_GET['p']." and ts.tab = 1 order by t.tag asc;";
+    $tagpres = "select t.id, t.tag from liste.tag t, main.tags ts where ts.tag = t.id and ts.rec = ".$_GET['p']." and ts.tab = 33 order by t.tag asc;";
     $tagpresq = pg_query($connection,$tagpres);
     $tagpresarr = array();
     while ($tagprest = pg_fetch_array($tagpresq)) {
@@ -18,6 +19,7 @@ if(isset($_GET['p'])){
     $tagpresList = json_encode($tagpresarr);
 }else{
     $tagpresList = 'noTag';
+    $header = 'Inserisci un nuovo post';
 }
 
 //lista tag
@@ -39,7 +41,7 @@ $tagList = json_encode($tag);
     <header id="main"><?php require("inc/header.php"); ?></header>
     <div id="mainWrap">
         <section class="form ckform">
-            <header>Inserisci un nuovo post</header>
+            <header><?php echo $header; ?></header>
             <form name="postForm" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
                 <input type="hidden" name="get" value="<?php echo $_GET['p']; ?>" >
                 <input type="hidden" name="s" value="<?php echo $post['pubblica']; ?>" >
@@ -81,15 +83,17 @@ $tagList = json_encode($tag);
             var p = $("input[name=get]").val();
             var prefilled,script;
             if(p){
-                var stato = $('#input[name=s]').val();
+                var stato = $('input[name=s]').val();
                 $("input[name=stato]").attr("checked",false);
                 $(".radioLabel").removeClass('checked');
                 if(stato==1){
                     $("#pubblica").attr("checked",true);
                     $(".radioLabel[for=pubblica]").addClass('checked');
+                    $("label.statoPost").append("<br/><strong>Il post risulta già pubblicato.</strong>");
                 }else{
                     $("#bozza").attr("checked",true);
                     $(".radioLabel[for=bozza]").addClass('checked');
+                    $("label.statoPost").append("<br/><strong>Il post risulta salvato come bozza.</strong>");
                 }
 
                 var tagpresarr = <?php echo $tagpresList; ?>;
