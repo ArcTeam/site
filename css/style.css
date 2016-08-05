@@ -125,8 +125,8 @@ section.content:not(".footable  ") span{font-size: 1rem; text-align: center; dis
     header#main nav li a#team:hover{border-left:5px solid #FBBC05 !important; color:#FBBC05 !important;}
     header#main nav li a#login:hover{border-left:5px solid #FFF !important; color:#FFF !important;}
     header#main nav li a i { display: block;font-size:2rem; }
-    #settingUl {bottom:0px;display:none;}
-    .subMenu {position: absolute; right:102%; display: block; width: 150px; padding:10px 0px;border-radius:5px 0px 0px 5px; background: rgb(69,73,78); color:#909090 !important;}
+    #settingUl {display:none;}
+    .subMenu {position: relative; margin-left: -152px; margin-top:-68px; display: block; width: 150px; padding:10px 0px;border-radius:5px 0px 0px 5px; background: rgb(69,73,78); color:#909090 !important;}
     .subMenu li{border-top:1px solid #909090;border-bottom:1px solid transparent;text-align:left !important;}
     .subMenu li:last-child{border-bottom:1px solid #909090;}
     .subMenu li:hover{border-top:1px solid #fff;border-bottom:1px solid #fff;}
