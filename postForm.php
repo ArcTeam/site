@@ -19,11 +19,8 @@ if(isset($_GET['p'])){
     $tagpresList = json_encode($tagpresarr);
 }else{
     $tagpresList = 'noTag';
-<<<<<<< HEAD
     $id = 0;
-=======
     $header = 'Inserisci un nuovo post';
->>>>>>> 8b7b7ba3ee371f22d81d9c980a570230adc96472
 }
 
 //lista tag
@@ -84,15 +81,9 @@ $tagList = json_encode($tag);
         $(document).ready(function(){
             $('#testo').ckeditor();
             var dataList = <?php echo $tagList; ?>;
-<<<<<<< HEAD
             var prefilled,script, p;
             p = $("input[name=get]").val();
             if(p > 0){
-=======
-            var p = $("input[name=get]").val();
-            var prefilled,script;
-            if(p){
->>>>>>> 8b7b7ba3ee371f22d81d9c980a570230adc96472
                 var stato = $('input[name=s]').val();
                 $("input[name=stato]").attr("checked",false);
                 $("input[name=stato][value="+stato+"]").prop("checked",true);
