@@ -6,7 +6,7 @@ $b = pg_query($connection,$a);
 $p = pg_fetch_array($b);
 $data = explode(" ",$p['data']);
 
-$t = "select t.tag from liste.tag t, main.tags ts where ts.tag = t.id and ts.rec = ".$_GET['p']." and ts.tab = 33 order by t.tag asc";
+$t = "select t.tag from liste.tag t, main.tags ts where ts.tag = t.id and ts.rec = ".$_GET['p']." and ts.tab = 1 order by t.tag asc";
 $tr = pg_query($connection,$t);
 while($tag = pg_fetch_array($tr)){$tags .= "<span class='tag'>".$tag['tag']."<i class='fa fa-tag'></i></span>";}
 ?>

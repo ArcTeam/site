@@ -10,7 +10,7 @@
     <li><a href="index.php" title="Welcome" id="home"><i class="fa fa-home"></i><span>home</span></a></li>
     <li><a href="http://arc-team-open-research.blogspot.it/" title="Happy Hacking with ATOR (ArcTeam Open Research)" id="hack" target="_blank"><i class="fa fa-code"></i> <span>hack</span></a></li>
     <li><a href="#" title="Free as freedom" id="project"><i class="fa fa-cogs"></i> <span>project</span></a></li>
-    <li><a href="#" title="Open your mind" id="team"><i class="fa fa-users"></i> <span>team</span></a></li>
+    <li><a href="team.php" title="Open your mind" id="team"><i class="fa fa-users"></i> <span>team</span></a></li>
     <li>
         <?php
         if(!$_SESSION['id']){?>
