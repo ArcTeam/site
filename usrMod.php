@@ -6,7 +6,8 @@ require_once("inc/usrModScript.php");
 <html>
     <head>
       <?php require("inc/meta.php"); ?>
-      <link href="css/usrMod.css" rel="stylesheet" media="screen" />
+      <link href="css/usrMod.css" rel="stylesheet" media="screen" >
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     </head>
     <body>
         <header id="main"><?php require("inc/header.php"); ?></header>
@@ -89,6 +90,7 @@ require_once("inc/usrModScript.php");
                     </div>
                     <div class="row">
                         <label>Modifica skills: </label>
+                        <input type="text" name="tags" placeholder="Tags" class="tm-input" >
                     </div>
                     <div class="row">
                         <div class="inline" style="width:100%">
@@ -123,6 +125,8 @@ require_once("inc/usrModScript.php");
         <div style="clear:both !important"></div>
         <footer><?php require("inc/footer.php"); ?></footer>
         <script src="lib/jquery-1.12.0.min.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="lib/tag/tagmanager.js"></script>
         <script src="script/funzioni.js"></script>
         <script>
             var p = document.getElementById("newPwd");
@@ -168,9 +172,24 @@ require_once("inc/usrModScript.php");
                         $("#socialForm").get(0).reset();
                         return;
                     }
-
                     renderImage(file);
                 });
+
+                //tag
+                var dataList = <?php echo $tagList; ?>;
+                var prefilled;
+                var tagpresarr = <?php echo $tagpresList; ?>;
+                var tags = [];
+                $.each(tagpresarr, function(k,v) { tags.push(v.tag); });
+                prefilled=tags;
+                $(".tm-input").tagsManager({
+                    prefilled: prefilled,
+                    hiddenTagListName: 'tagList',
+                    hiddenTagListId: 'tagList',
+                    deleteTagsOnBackspace: false,
+                    AjaxPush: 'script/addTag.php',
+                })
+                .autocomplete({source:dataList});
             });
         </script>
     </body>

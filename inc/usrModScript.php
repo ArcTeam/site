@@ -41,8 +41,27 @@ $tipoexec = pg_query($connection,$tipoq);
 
 //profilo pubblico
 //tag
-$t = "select t.tag from liste.tag t, main.tags ts where ts.tag = t.id and ts.rec = ".$_SESSION['id']." and ts.tab = 2 order by t.tag asc;";
-$t1 = pg_query($connection,$t);
+$tagUsr = "select t.tag from liste.tag t, main.tags ts where ts.tag = t.id and ts.rec = ".$_SESSION['id']." and ts.tab = 2 order by t.tag asc;";
+$tagUsrQ = pg_query($connection,$tagUsr);
+$tagUsrRow = pg_num_rows($tagUsrQ);
+if($tagUsrRow > 0){
+    $tagpresarr = array();
+    while ($tagprest = pg_fetch_array($tagUsrQ)) {
+        $x['id'] = $tagprest['id'];
+        $x['tag'] = $tagprest['tag'];
+        array_push($tagpresarr,$x);
+    }
+    $tagpresList = json_encode($tagpresarr);
+}else{
+    $tagpresList = 'noTag';
+}
+//lista tag
+$t = "select tag from liste.tag order by tag asc;";
+$tq = pg_query($connection, $t);
+$tag = array();
+while ($obj = pg_fetch_array($tq)) { $tag[] = $obj['tag'];}
+$tagList = json_encode($tag);
+
 
 if($_POST['socialMod']){
     $uploaddir = 'img/usr/';

@@ -30,7 +30,7 @@ function rotatey(){
         }
     );
 }
-window.onresize = function(){ map.updateSize();}
+
 var w=$("#mainWrap").width();
 var w2=$("section#main").width();
 $("aside#mainAside").css("width",w-w2-20);

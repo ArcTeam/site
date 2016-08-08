@@ -182,6 +182,7 @@ while($t=pg_fetch_array($tagres)){
         <script src="script/funzioni.js"></script>
         <script src="script/mappaIndex.js"></script>
         <script>
+        window.onresize = function(){ map.updateSize();}
         $(document).ready(function(){
             $("a#home").addClass('actHome');
             $(".headline a").addClass('transition');
