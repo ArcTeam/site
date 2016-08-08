@@ -76,7 +76,8 @@ $t1 = pg_query($connection,$t);
             vertical-align:middle !important;
             text-align:center;
         }
-        #uploadButton{width:30%; margin-left:30px; vertical-align:middle !important;}
+        #myImg img.preview{width:100px;border-radius:100px;}
+        #uploadButton{width:70%; margin-left:30px; vertical-align:middle !important;}
         button[name='triggerUpload']{ background: #AD8100; cursor: pointer; width: 200px;font-size: 1rem; color: #fff; border: 1px solid #8F6C08;}
         button[name='triggerUpload']:hover{background: #8F6C08;}
       </style>
@@ -150,12 +151,13 @@ $t1 = pg_query($connection,$t);
                     <span class="msg"><?php echo $msg; ?></span>
                 </form>
                 <header>Profilo pubblico</header>
-                <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post" name="socialForm">
+                <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post" name="socialForm" id="socialForm">
                     <div class="row">
                         <div class="inline" id="myImg"></div>
                         <div class="inline" id="uploadButton">
                             <button type="button" name="triggerUpload"><i class="fa fa-save"></i> Modifica immagine</button>
                             <input type="file" name="updateImg" id="updateImg" accept="image/*" style="display:none;">
+                            <p class='msg' id="uploadMsg"></p>
                         </div>
                     </div>
                     <div class="row">
@@ -213,9 +215,32 @@ $t1 = pg_query($connection,$t);
             p.onchange = validatePassword;
             cp.onkeyup = validatePassword;
 
+            function renderImage(file) {
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    preview = event.target.result;
+                    $('#myImg').html("<img class='preview' src='" + preview + "' />");
+                }
+                reader.readAsDataURL(file);
+            }
 
             $(document).ready(function(){
                 $("button[name='triggerUpload']").on("click", function(){ $("input[name=updateImg]").click(); });
+                $("input[name=updateImg]").on("change", function() {
+                    var file= this.files[0];
+                    if(file.size<=2*1024*1024) {
+                        $("#uploadMsg").text("Attenzione! La dimensione massima permessa per un'immagine è di 2MB mentre l'immagine che hai caricato è di "+formatBytes(file.size));
+                        $("#socialForm").get(0).reset();
+                        return;
+                    }
+                    if(!file.type.match('image/*')) {
+                        $("#uploadMsg").text("Attenzione! possono essere caricate solo immagini mentre tu stai cercando di caricare un file di tipo "+file.type);
+                        $("#socialForm").get(0).reset();
+                        return;
+                    }
+
+                    renderImage(file);
+                });
             });
         </script>
     </body>
