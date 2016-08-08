@@ -44,12 +44,9 @@ $('.hover').on("mouseenter click", function(){
 var headW = $("header#main").width();
 var headH = $("header#main").height();
 var navPos = $("#login").offset();
+var logged = $("#logged").offset();
 if(headH > 480){$(".panel").css({"height":headW});}
-
-/*$("#logged").parent().on({
-  mouseenter:function(){$("#settingUl").fadeIn('fast');},
-  mouseleave:function(){$("#settingUl").fadeOut('fast');}
-});*/
+$(".subMenu").css({"top":logged.top-50,"right":headW+1});
 $("#logged").clickToggle(
     function(){$("#settingUl").fadeIn('fast');},
     function(){$("#settingUl").fadeOut('fast');}

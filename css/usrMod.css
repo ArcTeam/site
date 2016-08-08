@@ -1,0 +1,26 @@
+@import url("style.css");
+@import url("../lib/tag/tagmanager.css");
+.form{width:80%;}
+.form header{width:80% !important;margin:0px auto 20px;}
+form{width:80%;margin:0px auto;}
+form div.row{margin-bottom:15px;}
+form label{display:block;}
+form textarea,form select, form input{width:95%;}
+#myImg{
+    position:relative;
+    width: 100px;
+    height: 100px;
+    background-color: #d6d6d6;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 100px;
+    border: 4px solid #fff;
+    box-shadow: 0px 0px 10px #000;
+    vertical-align:middle !important;
+    text-align:center;
+}
+#myImg img.preview{width:100px;height:100px;border-radius:100px;}
+#uploadButton{width:70%; margin-left:30px; vertical-align:middle !important;}
+button[name='triggerUpload']{ background: #AD8100; cursor: pointer; width: 200px;font-size: 1rem; color: #fff; border: 1px solid #8F6C08;}
+button[name='triggerUpload']:hover{background: #8F6C08;}

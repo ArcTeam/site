@@ -126,13 +126,14 @@ section.content:not(".footable  ") span{font-size: 1rem; text-align: center; dis
     header#main nav li a#login:hover{border-left:5px solid #FFF !important; color:#FFF !important;}
     header#main nav li a i { display: block;font-size:2rem; }
     #settingUl {display:none;}
-    .subMenu {position: relative; margin-left: -152px; margin-top:-68px; display: block; width: 150px; padding:10px 0px;border-radius:5px 0px 0px 5px; background: rgb(69,73,78); color:#909090 !important;}
+    .subMenu {position: absolute;/* margin-left: -152px; margin-top:-68px;*/ display: block; width: 150px; padding:10px 0px;border-radius:5px 0px 0px 5px; background: rgb(69,73,78); color:#909090 !important;}
     .subMenu li{border-top:1px solid #909090;border-bottom:1px solid transparent;text-align:left !important;}
     .subMenu li:last-child{border-bottom:1px solid #909090;}
     .subMenu li:hover{border-top:1px solid #fff;border-bottom:1px solid #fff;}
     .subMenu li a, .subMenu li i{display: inline-block !important; font-size: .9rem !important; line-height: 1.3em;margin:1px 0px !important;}
     .subMenu li a{width:130px;padding:5px;}
     .subMenu li a:hover{color:#fff;}
+    .logImg{width:80%;border-radius:90%;}
     #mappaTool{width:25%;padding: 5px 20px; border-radius:5px 0px 0px 5px;}
     #mappaTool header.main{font-size: 1.3rem;}
     #mappaTool header.sub{font-size: 1rem;padding-top: 10px; border-top: 1px solid #fbbc05;}
@@ -155,7 +156,7 @@ section.content:not(".footable  ") span{font-size: 1rem; text-align: center; dis
     .panel.flip .back { z-index: 1000; -webkit-transform: rotateX(0) rotateY(0); transform: rotateX(0) rotateY(0);}
 
     footer #wrapFooter {margin: 0px auto; padding: 20px 0px;}
-    footer #wrapFooter #infoContent div {display:inline-block; width: 22%; height: 200px; padding: 0px 10px;vertical-align:top;}
+    footer #wrapFooter #infoContent div {display:inline-block; width: 22%; height: 250px; padding: 0px 10px;vertical-align:top;}
     footer #wrapFooter #infoContent div:nth-child(-n+3) { border-right: 1px dotted #6e6c6c;}
     footer #wrapFooter header { font-size: 1rem; color: #82C914; font-weight: bold;}
     footer #copyright, footer #navFooter{ border-top: 1px dotted #6e6c6c; padding-top: 10px;}

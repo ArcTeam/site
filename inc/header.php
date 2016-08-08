@@ -14,9 +14,13 @@
     <li>
         <?php
         if(!$_SESSION['id']){?>
-            <a href="login.php" id="login" title="login"><i class="fa fa-sign-in"></i> <span>login</span></a>
+            <a href="login.php" id="login" title="login"><i class="fa fa-sign-in"></i><span>login</span></a>
             <?php }else{ ?>
-                <a href="#" id="logged" title="settings"><i class="fa fa-gear"></i> <span>menù</span></a>
+                <a href="#" id="logged" title="settings">
+                    <!--<i class="fa fa-gear"></i>-->
+                    <img src="<?php echo $_SESSION['img']; ?>" class="logImg" >
+                    <span>menù</span>
+                </a>
                 <ul id="settingUl" class="subMenu">
                     <li><a href="post.php"><i class="fa fa-comments-o"></i> post</a></li>
                     <li><a href="lavori.php"><i class="fa fa-wrench"></i> lavori</a></li>

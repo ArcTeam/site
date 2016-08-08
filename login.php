@@ -2,7 +2,7 @@
 session_start();
 require("inc/db.php");
 if($_POST['submit'] && $_POST['submit']=="login"){
-  $a = "select u.id, r.id as rubrica, r.utente, r.tipo, r.email, u.pwd, u.salt from main.usr u, main.rubrica r where u.rubrica = r.id and u.attivo = 1 and r.email = '".$_POST['email']."'";
+  $a = "select u.id, r.id as rubrica, r.utente, r.tipo, r.email, u.pwd, u.salt, u.img from main.usr u, main.rubrica r where u.rubrica = r.id and u.attivo = 1 and r.email = '".$_POST['email']."'";
   $b = pg_query ($connection,$a);
   $row = pg_num_rows($b);
   $arr= pg_fetch_array($b);
@@ -17,6 +17,7 @@ if($_POST['submit'] && $_POST['submit']=="login"){
       $_SESSION['classe']=$arr['tipo'];
       $_SESSION['email']=$arr['email'];
       $_SESSION['salt']=$arr['salt'];
+      $_SESSION['img']="img/usr/".$arr['img'];
       if ( isset($_SERVER['HTTP_CLIENT_IP']) && ! empty($_SERVER['HTTP_CLIENT_IP'])) {
        $ip = $_SERVER['HTTP_CLIENT_IP'];
       } elseif ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ! empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {

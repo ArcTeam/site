@@ -1,86 +1,12 @@
 <?php
 session_start();
-require("inc/db.php");
-if($_POST['usrPwdMod']){
-  $pwd= $_POST['newPwd'];
-  $salt= $_SESSION['salt'];
-  $password =hash('sha512',$pwd . $salt);
-
-  $check="select pwd from main.usr where id = ".$_SESSION['id'];
-  $checkres = pg_query($connection, $check);
-  $array = pg_fetch_array($checkres, 0, PGSQL_ASSOC);
-
-  if($password==$array['pwd']){
-    $msgPwd = "Attenzione, la password digitata corrisponde a quella attuale!";
-  }else{
-    $insert = " UPDATE main.usr SET pwd = '$password' WHERE id = ".$_SESSION['id'];
-    $result = pg_query($connection, $insert);
-    if(!$result){
-      $msgPwd = "Salvataggio fallito: " . pg_last_error($connection);
-    }else{
-      $msgPwd = "Salvataggio avvenuto correttamente!<br/>Dal prossimo login potrai utilizzare la nuova password.";
-    }
-  }
-}
-if($_POST['usrMod']){
-  $upq = "update main.rubrica set tipo = ".$_POST['tipo']." , utente = '".pg_escape_string($_POST['utente'])."', email='".pg_escape_string($_POST['email'])."', indirizzo = '".pg_escape_string($_POST['indirizzo'])."', codfisc = '".pg_escape_string($_POST['codfisc'])."', telefono = '".pg_escape_string($_POST['telefono'])."', fax = '".pg_escape_string($_POST['fax'])."', cell= '".pg_escape_string($_POST['cell'])."', url = '".pg_escape_string($_POST['url'])."', note = '".pg_escape_string($_POST['note'])."' where id = ".$_SESSION['rubrica'];
-  $upexec = pg_query($connection, $upq);
-  if($upexec){
-    $msg = "ok, i tuoi dati sono stati modificati.";
-    header ("Refresh: 3; URL=index.php");
-  }else{
-    $msg = "attenzione, errore ". pg_last_error($connection);
-  }
-}
-//dati generali
-$a="select r.tipo, r.utente, r.email, r.indirizzo, r.codfisc, r.telefono, r.cell, r.fax, r.url, r.note, u.img from main.rubrica r, main.usr u where u.rubrica = r.id and u.id = ".$_SESSION['id'];
-$b = pg_query($connection,$a);
-$c = pg_fetch_array($b);
-
-if($c['img']){$avatar = $c['img']; $bgSize = 'cover';}else{$avatar = 'user.png'; $bgSize = '50%';}
-
-$tipoq="select * from liste.tipo_utente order by definizione asc;";
-$tipoexec = pg_query($connection,$tipoq);
-
-//profilo pubblico
-//tag
-$t = "select t.tag from liste.tag t, main.tags ts where ts.tag = t.id and ts.rec = ".$_SESSION['id']." and ts.tab = 2 order by t.tag asc;";
-$t1 = pg_query($connection,$t);
-
-
+require_once("inc/usrModScript.php");
 ?>
 <!DOCTYPE html>
 <html>
     <head>
       <?php require("inc/meta.php"); ?>
-      <link href="css/style.css" rel="stylesheet" media="screen" />
-      <style>
-        .form{width:80%;}
-        .form header{width:80% !important;margin:0px auto 20px;}
-        form{width:80%;margin:0px auto;}
-        form div.row{margin-bottom:15px;}
-        form label{display:block;}
-        form textarea,form select, form input{width:95%;}
-        #myImg{
-            position:relative;
-            width: 100px;
-            height: 100px;
-            background-color: #d6d6d6;
-            background-image: url("img/usr/<?php echo $avatar; ?>");
-            background-size: <?php echo $bgSize; ?>;
-            background-repeat: no-repeat;
-            background-position: center center;
-            border-radius: 100px;
-            border: 4px solid #fff;
-            box-shadow: 0px 0px 10px #000;
-            vertical-align:middle !important;
-            text-align:center;
-        }
-        #myImg img.preview{width:100px;border-radius:100px;}
-        #uploadButton{width:70%; margin-left:30px; vertical-align:middle !important;}
-        button[name='triggerUpload']{ background: #AD8100; cursor: pointer; width: 200px;font-size: 1rem; color: #fff; border: 1px solid #8F6C08;}
-        button[name='triggerUpload']:hover{background: #8F6C08;}
-      </style>
+      <link href="css/usrMod.css" rel="stylesheet" media="screen" />
     </head>
     <body>
         <header id="main"><?php require("inc/header.php"); ?></header>
@@ -151,7 +77,8 @@ $t1 = pg_query($connection,$t);
                     <span class="msg"><?php echo $msg; ?></span>
                 </form>
                 <header>Profilo pubblico</header>
-                <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post" name="socialForm" id="socialForm">
+                <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post" name="socialForm" id="socialForm" enctype="multipart/form-data">
+                    <input type="hidden" name="sessionImg" value="<?php echo $_SESSION['img']; ?>" >
                     <div class="row">
                         <div class="inline" id="myImg"></div>
                         <div class="inline" id="uploadButton">
@@ -161,14 +88,14 @@ $t1 = pg_query($connection,$t);
                         </div>
                     </div>
                     <div class="row">
-
+                        <label>Modifica skills: </label>
                     </div>
                     <div class="row">
                         <div class="inline" style="width:100%">
+                            <span class="msg"><?php echo $msgSocial; ?></span>
                             <button type="submit" name="socialMod" value="modifica social"><i class="fa fa-save"></i> Modifica profilo pubblico</button>
                         </div>
                     </div>
-                    <span class="msg"><?php echo $msg; ?></span>
                 </form>
                 <header>Modifica password</header>
                 <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post" name="usrPwdModForm">
@@ -220,15 +147,18 @@ $t1 = pg_query($connection,$t);
                 reader.onload = function(event) {
                     preview = event.target.result;
                     $('#myImg').html("<img class='preview' src='" + preview + "' />");
+                    $("#uploadMsg").text("L'anteprima dell'immagine è puramente indicativa, possibili distorsioni verranno eliminate al salvataggio");
                 }
                 reader.readAsDataURL(file);
             }
 
             $(document).ready(function(){
+                var i = $("input[name='sessionImg']").val();
+                $("#myImg").css({"background-image":"url("+i+")"});
                 $("button[name='triggerUpload']").on("click", function(){ $("input[name=updateImg]").click(); });
                 $("input[name=updateImg]").on("change", function() {
                     var file= this.files[0];
-                    if(file.size<=2*1024*1024) {
+                    if(file.size>=2*1024*1024) {
                         $("#uploadMsg").text("Attenzione! La dimensione massima permessa per un'immagine è di 2MB mentre l'immagine che hai caricato è di "+formatBytes(file.size));
                         $("#socialForm").get(0).reset();
                         return;
