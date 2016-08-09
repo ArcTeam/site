@@ -89,8 +89,44 @@ require_once("inc/usrModScript.php");
                         </div>
                     </div>
                     <div class="row">
-                        <label>Modifica skills: </label>
-                        <input type="text" name="tags" placeholder="Tags" class="tm-input" >
+                        <div class="inline"><label>Modifica skills: </label></div>
+                        <div class="inline"><input type="text" name="tags" placeholder="Aggiungi tag" class="tm-input" ></div>
+                    </div>
+                    <div class="row">
+                        <div class="inline"><label>Account social: </label></div>
+                        <div class="inline">
+                            <ul>
+                                <?php
+                                if($sqRow > 0){
+                                    while($socialUsr = pg_fetch_array($sq)){
+                                        echo "<li>";
+                                        echo "<i class='fa ".$socialUsr['ico']."' aria-hidden='true'></i> ";
+                                        echo "<a href='".$socialUsr['link']." target='_blank'>".$socialUsr['link']."</a> ";
+                                        echo "<a href='#' class='prevent delSocial' data-id='".$socialUsr['id']."'><i class='fa fa-times' aria-hidden='true'></i>";
+                                        echo "</li>";
+                                    }
+                                }else{
+                                    echo "<li>Nessun account registrato</li>";
+                                }
+                                ?>
+                            </ul>
+                            <div id="newSocialList">
+                                <ul id="newSocialListUl">
+
+                                </ul>
+                            </div>
+                            <select name="newSocialType">
+                                <option selected disabled>Scegli social</option>
+                                <?php
+                                    while ($socialList = pg_fetch_array($socialQ)) {
+                                        echo "<option value='".$socialList['id']."' data-ico='".$socialList['ico']."'>".$socialList['nome']."</option>";
+                                    }
+                                ?>
+                            </select>
+                            <input type="url" name="newSocialUrl" placeholder="Inserisci link profilo">
+                            <span id="newSocialUrlMsg"></span>
+                            <button type="button" name="newSocialAdd"><i class="fa fa-plus" aria-hidden="true"></i> Aggiungi</button>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="inline" style="width:100%">
@@ -128,69 +164,12 @@ require_once("inc/usrModScript.php");
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script src="lib/tag/tagmanager.js"></script>
         <script src="script/funzioni.js"></script>
+        <script src="script/usrMod.js"></script>
         <script>
-            var p = document.getElementById("newPwd");
-            var cp = document.getElementById("checkPwd");
-            function validatePassword(){
-                if(p.value.length < 6){
-                    p.setCustomValidity("La password deve contenere almeno 6 caratteri!");
-                }else{
-                    p.setCustomValidity('');
-                    if(p.value != cp.value) {
-                        cp.setCustomValidity("Attenzione, le password non coincidono!");
-                    } else {
-                        cp.setCustomValidity('');
-                    }
-                }
-            }
-            p.onchange = validatePassword;
-            cp.onkeyup = validatePassword;
-
-            function renderImage(file) {
-                var reader = new FileReader();
-                reader.onload = function(event) {
-                    preview = event.target.result;
-                    $('#myImg').html("<img class='preview' src='" + preview + "' />");
-                    $("#uploadMsg").text("L'anteprima dell'immagine è puramente indicativa, possibili distorsioni verranno eliminate al salvataggio");
-                }
-                reader.readAsDataURL(file);
-            }
-
-            $(document).ready(function(){
-                var i = $("input[name='sessionImg']").val();
-                $("#myImg").css({"background-image":"url("+i+")"});
-                $("button[name='triggerUpload']").on("click", function(){ $("input[name=updateImg]").click(); });
-                $("input[name=updateImg]").on("change", function() {
-                    var file= this.files[0];
-                    if(file.size>=2*1024*1024) {
-                        $("#uploadMsg").text("Attenzione! La dimensione massima permessa per un'immagine è di 2MB mentre l'immagine che hai caricato è di "+formatBytes(file.size));
-                        $("#socialForm").get(0).reset();
-                        return;
-                    }
-                    if(!file.type.match('image/*')) {
-                        $("#uploadMsg").text("Attenzione! possono essere caricate solo immagini mentre tu stai cercando di caricare un file di tipo "+file.type);
-                        $("#socialForm").get(0).reset();
-                        return;
-                    }
-                    renderImage(file);
-                });
-
-                //tag
-                var dataList = <?php echo $tagList; ?>;
-                var prefilled;
-                var tagpresarr = <?php echo $tagpresList; ?>;
-                var tags = [];
-                $.each(tagpresarr, function(k,v) { tags.push(v.tag); });
-                prefilled=tags;
-                $(".tm-input").tagsManager({
-                    prefilled: prefilled,
-                    hiddenTagListName: 'tagList',
-                    hiddenTagListId: 'tagList',
-                    deleteTagsOnBackspace: false,
-                    AjaxPush: 'script/addTag.php',
-                })
-                .autocomplete({source:dataList});
-            });
+            var dataList = <?php echo $tagList; ?>;
+            var prefilled;
+            var tagpresarr = <?php echo $tagpresList; ?>;
+            var tags = [];
         </script>
     </body>
 </html>

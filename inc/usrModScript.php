@@ -62,6 +62,17 @@ $tag = array();
 while ($obj = pg_fetch_array($tq)) { $tag[] = $obj['tag'];}
 $tagList = json_encode($tag);
 
+//lista social
+$social = "select * from liste.social order by nome asc;";
+$socialQ = pg_query($connection, $social);
+
+//social utente
+$s = "SELECT u.id, s.nome, s.ico, u.link FROM liste.social s, main.usr_social u WHERE
+ u.social = s.id AND u.usr = ".$_SESSION['id']." ORDER BY s.nome ASC;";
+$sq = pg_query($connection, $s);
+$sqRow = pg_num_rows($sq);
+
+
 
 if($_POST['socialMod']){
     $uploaddir = 'img/usr/';

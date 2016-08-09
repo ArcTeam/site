@@ -22,7 +22,7 @@ header#main{position: fixed;top: 0; right: 0px; z-index: 3; background: rgba(52,
 .alert{padding: 15px; border: 1px solid transparent; border-radius: 4px; margin: 0px auto; text-align: center;}
 .success,{border-color: #00c5ca; background-color: #c6f3f5; color: #006366;}
 .warning{border-color: #e5ce23; background-color: #ffef9f; color: #685815;}
-.error{border-color: #00c5ca; background-color: #c6f3f5; color: #006366;}
+.error{border-color: rgb(200,0,0); background-color: rgba(200,0,0,0.3); color: rgb(200,0,0);}
 .transition, a{-webkit-transition: all .30s linear; -moz-transition: all .30s linear; -ms-transition: all .30s linear; -o-transition: all .30s linear; transition: all .30s linear;}
 .olControlAttribution{bottom:0px !important;font-size: .6rem !important;}
 .red{color:#AA1313;}
