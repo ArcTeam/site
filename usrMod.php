@@ -91,6 +91,7 @@ require_once("inc/usrModScript.php");
                     <div class="row">
                         <div class="inline"><label>Modifica skills: </label></div>
                         <div class="inline"><input type="text" name="tags" placeholder="Aggiungi tag" class="tm-input" ></div>
+                        <input type="hidden" name="modTag" value=''>
                     </div>
                     <div class="row">
                         <div class="inline"><label>Account social: </label></div>
@@ -101,8 +102,8 @@ require_once("inc/usrModScript.php");
                                     while($socialUsr = pg_fetch_array($sq)){
                                         echo "<li>";
                                         echo "<i class='fa ".$socialUsr['ico']."' aria-hidden='true'></i> ";
-                                        echo "<a href='".$socialUsr['link']." target='_blank'>".$socialUsr['link']."</a> ";
-                                        echo "<a href='#' class='prevent delSocial' data-id='".$socialUsr['id']."'><i class='fa fa-times' aria-hidden='true'></i>";
+                                        echo "<a href='".$socialUsr['link']."' target='_blank'>".$socialUsr['link']."</a> ";
+                                        echo "<a href='#' class='prevent delSocial' data-id='".$socialUsr['id']."'><i class='fa fa-times' aria-hidden='true'></i></a>";
                                         echo "</li>";
                                     }
                                 }else{
@@ -123,8 +124,9 @@ require_once("inc/usrModScript.php");
                                     }
                                 ?>
                             </select>
-                            <input type="url" name="newSocialUrl" placeholder="Inserisci link profilo">
+                            <input type="url" name="newSocialUrl" placeholder="Inserisci link profilo.">
                             <span id="newSocialUrlMsg"></span>
+                            <input type=hidden name='socialArr' value=''>
                             <button type="button" name="newSocialAdd"><i class="fa fa-plus" aria-hidden="true"></i> Aggiungi</button>
                         </div>
                     </div>

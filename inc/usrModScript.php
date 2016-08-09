@@ -21,6 +21,7 @@ if($_POST['usrPwdMod']){
     }
   }
 }
+
 if($_POST['usrMod']){
   $upq = "update main.rubrica set tipo = ".$_POST['tipo']." , utente = '".pg_escape_string($_POST['utente'])."', email='".pg_escape_string($_POST['email'])."', indirizzo = '".pg_escape_string($_POST['indirizzo'])."', codfisc = '".pg_escape_string($_POST['codfisc'])."', telefono = '".pg_escape_string($_POST['telefono'])."', fax = '".pg_escape_string($_POST['fax'])."', cell= '".pg_escape_string($_POST['cell'])."', url = '".pg_escape_string($_POST['url'])."', note = '".pg_escape_string($_POST['note'])."' where id = ".$_SESSION['rubrica'];
   $upexec = pg_query($connection, $upq);
@@ -31,6 +32,7 @@ if($_POST['usrMod']){
     $msg = "attenzione, errore ". pg_last_error($connection);
   }
 }
+
 //dati generali
 $a="select r.tipo, r.utente, r.email, r.indirizzo, r.codfisc, r.telefono, r.cell, r.fax, r.url, r.note, u.img from main.rubrica r, main.usr u where u.rubrica = r.id and u.id = ".$_SESSION['id'];
 $b = pg_query($connection,$a);
@@ -40,14 +42,15 @@ $tipoq="select * from liste.tipo_utente order by definizione asc;";
 $tipoexec = pg_query($connection,$tipoq);
 
 //profilo pubblico
-//tag
+
+//tag utente
 $tagUsr = "select t.tag from liste.tag t, main.tags ts where ts.tag = t.id and ts.rec = ".$_SESSION['id']." and ts.tab = 2 order by t.tag asc;";
 $tagUsrQ = pg_query($connection,$tagUsr);
 $tagUsrRow = pg_num_rows($tagUsrQ);
 if($tagUsrRow > 0){
     $tagpresarr = array();
     while ($tagprest = pg_fetch_array($tagUsrQ)) {
-        $x['id'] = $tagprest['id'];
+        //$x['id'] = $tagprest['id'];
         $x['tag'] = $tagprest['tag'];
         array_push($tagpresarr,$x);
     }
@@ -75,22 +78,42 @@ $sqRow = pg_num_rows($sq);
 
 
 if($_POST['socialMod']){
+    $msgSocial = '';
+    //********** gestione foto ********************/
     $uploaddir = 'img/usr/';
     $file = $uploaddir . basename($_FILES['updateImg']['name']);
     if (!isset($_FILES['updateImg']) || !is_uploaded_file($_FILES['updateImg']['tmp_name'])) {
-        echo 'Non hai inviato nessun file...';
+        $msgSocial .= 'Non hai inviato nessun file.<br/>';
     }else if(move_uploaded_file($_FILES['updateImg']['tmp_name'], $file)) {
         chmod($file, 0777);
         $qi="update main.usr set img = '".$_FILES['updateImg']['name']."' where id = ".$_SESSION['id'].";";
         $qir = pg_query($connection, $qi);
         if($qir){
             $_SESSION['img']= $file;
-            $msgSocial .= "ok, file caricato";
+            $msgSocial .= "ok, file caricato<br/>";
         }else{
-            $msgSocial .= "errore nella query: ".pg_last_error($connection);
+            $msgSocial .= "errore nella query: ".pg_last_error($connection)."<br/>";
         }
     } else {
-    	$msgSocial .= "errore: ".$_FILES["updateImg"]["error"];
+    	$msgSocial .= "errore: ".$_FILES["updateImg"]["error"]."<br/>";
+    }
+    //********** gestione tag ********************/
+    $tags = explode(",",$_POST["tagList"]);
+    $resetTag = "delete from main.tags where rec = ".$_SESSION['id']." AND tab = 2;";
+    foreach ($tags as $tag) {
+        $a = "select id from liste.tag where tag = '".$tag."'";
+        $b = pg_query($connection, $a);
+        $c = pg_fetch_array($b);
+        $addTag .= "insert into main.tags(tag, rec, tab) values(".$c['id'].", ".$_SESSION['id'].", 2);";
+    }
+
+    //********** gestione social network ********************/
+    if(isset($_POST['tipo'])){
+        $tipo = $_POST['tipo'];
+        $link = $_POST['link'];
+        foreach( $tipo as $key => $n ) { $msgSocial .= "tipo: ".$n." link: ".$link[$key].", "; }
+    }else{
+        $msgSocial .= "nessun social aggiunto";
     }
 }
 ?>

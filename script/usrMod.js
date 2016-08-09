@@ -72,15 +72,31 @@ $(document).ready(function(){
         }else{
             if(!isUrl(url.val())){
                 url.addClass('error');
-                $("#newSocialUrlMsg").text(" link non valido ");
+                $("#newSocialUrlMsg").html(" link non valido <i class='fa fa-question-circle' aria-hidden='true' title='Controlla che non ci siano errori di battitura, che il link sia completo e che sia presente un protocollo iniziale (es. http://, https://, ftp://); un esempio di link valido è https://www.arc-team.com'></i> ");
                  return false;
             }else{
                 url.removeClass('error');
                 $("#newSocialUrlMsg").text("");
             }
         }
-        $("#newSocialListUl").append("<li class='newSocialVal' data-type='"+type.val()+"' data-url='"+url.val()+"'><i class='fa "+ico+"'></i> "+url.val()+" <i class='fa fa-times remove'</li>");
+        $("#newSocialListUl").append("<li class='newSocialVal' data-type='"+type.val()+"' data-url='"+url.val()+"'><i class='fa "+ico+"'></i> "+url.val()+" <i class='fa fa-times remove'></i><input type='hidden' name='tipo[]' value='"+type.val()+"'><input type='hidden' name='link[]' value='"+url.val()+"'></li>");
         $("select[name='newSocialType'] option:first").prop('selected',true);
         url.val('');
+        $(".remove").on("click", function(){ $(this).parent().remove(); });
+
+
     });
+
+    /*$('button[name="socialMod"]').on("click", function(e){
+        e.preventDefault();
+        var arrSocial=[];
+        $(".newSocialVal").each(function(index,item){
+            var tipo = $(item).data('type');
+            var link = $(item).data('url');
+            arrSocial.push({'tipo':tipo, 'link':link});
+        });
+        $("input[name='socialArr']").val(arrSocial);
+        //console.log(arrSocial);
+        $("form[name='socialForm']").submit();
+    });*/
 });
