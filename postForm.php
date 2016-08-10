@@ -109,7 +109,7 @@ $tagList = json_encode($tag);
                 hiddenTagListName: 'tagList',
                 hiddenTagListId: 'tagList',
                 deleteTagsOnBackspace: false,
-                AjaxPush: 'script/addTag.php',
+                AjaxPush: 'inc/addTag.php',
             })
             .autocomplete({source:dataList});
             var form = $("form[name=postForm]");

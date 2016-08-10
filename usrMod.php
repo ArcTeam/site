@@ -14,7 +14,7 @@ require_once("inc/usrModScript.php");
         <div id="mainWrap">
             <section class="form content">
                 <header>Dati generali</header>
-                <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post" name="usrModForm">
+                <form action="usrModDati.php" method="post" name="usrModForm">
                     <div class="row">
                         <div class="inline" style="width:32%;">
                             <label>*Utente: </label>
@@ -78,7 +78,7 @@ require_once("inc/usrModScript.php");
                     <span class="msg"><?php echo $msg; ?></span>
                 </form>
                 <header>Profilo pubblico</header>
-                <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post" name="socialForm" id="socialForm" enctype="multipart/form-data">
+                <form action="usrModSocial.php" method="post" name="socialForm" id="socialForm" enctype="multipart/form-data">
                     <input type="hidden" name="sessionImg" value="<?php echo $_SESSION['img']; ?>" >
                     <div class="row">
                         <div class="inline" id="myImg"></div>
@@ -100,10 +100,14 @@ require_once("inc/usrModScript.php");
                                 <?php
                                 if($sqRow > 0){
                                     while($socialUsr = pg_fetch_array($sq)){
-                                        echo "<li>";
+                                        echo "<li id='social".$socialUsr['id']."'>";
                                         echo "<i class='fa ".$socialUsr['ico']."' aria-hidden='true'></i> ";
-                                        echo "<a href='".$socialUsr['link']."' target='_blank'>".$socialUsr['link']."</a> ";
-                                        echo "<a href='#' class='prevent delSocial' data-id='".$socialUsr['id']."'><i class='fa fa-times' aria-hidden='true'></i></a>";
+                                        echo "<a href='".$socialUsr['link']."' target='_blank' class='genericLink'>".$socialUsr['link']."</a> ";
+                                        echo "<a href='#' class='prevent delSocial genericLink' title='Attenzione! Stai per cancellare il link al tuo account social'><i class='fa fa-times' aria-hidden='true'></i></a>";
+                                        echo "<span style='display:none'>";
+                                        echo "<button type='button' name='delSocialConfirm' class='delSocialButton delSocialConfirm error' data-id='".$socialUsr['id']."'>elimina</button> ";
+                                        echo "<button type='button' name='delSocialAnnulla' class='delSocialButton delSocialAnnulla success' >annulla</button> ";
+                                        echo "<span>";
                                         echo "</li>";
                                     }
                                 }else{
@@ -132,13 +136,12 @@ require_once("inc/usrModScript.php");
                     </div>
                     <div class="row">
                         <div class="inline" style="width:100%">
-                            <span class="msg"><?php echo $msgSocial; ?></span>
                             <button type="submit" name="socialMod" value="modifica social"><i class="fa fa-save"></i> Modifica profilo pubblico</button>
                         </div>
                     </div>
                 </form>
                 <header>Modifica password</header>
-                <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post" name="usrPwdModForm">
+                <form action="usrModPwd.php" method="post" name="usrPwdModForm">
                     <div class="row">
                         <div class="inline" style="width:100%">
                             <label>Nuova password: </label>
@@ -156,7 +159,6 @@ require_once("inc/usrModScript.php");
                             <button type="submit" name="usrPwdMod" value="modifica password"><i class="fa fa-save"></i> Modifica password</button>
                         </div>
                     </div>
-                    <span class="msg"><?php echo $msgPwd; ?></span>
                 </form>
             </section>
         </div>

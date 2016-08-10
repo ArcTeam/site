@@ -31,3 +31,6 @@ input[name='newSocialUrl']{width:400px !important;}
 button[name='newSocialAdd']{padding:8px; cursor:pointer;background:#fff;}
 button[name='newSocialAdd']:hover{background:#d6d6d6;}
 i.remove{cursor:pointer;}
+.delSocialButton{margin-left:5px;cursor:pointer;padding: 3px 6px;}
+form[name='usrPwdModForm'] label{display: inline-block !important; width: 20%; text-align: right;}
+form[name='usrPwdModForm'] input{width:75%;}

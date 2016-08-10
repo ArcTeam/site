@@ -6,12 +6,31 @@ html{background:#EEE;font-family: 'Titillium Web', sans-serif !important;font-si
 select, input, textarea,button{border:1px solid #999; font-size:.8rem; padding:6px; vertical-align:top; border-radius: 3px;}
 select{background:#fff;}
 textarea{height:20px;}
-a.button{background: #dff0d8; border:1px solid #d6e9c6; font-size:.8rem; padding:6px; border-radius: 3px;text-decoration: none; color:#3c763d;}
-a.button:hover{background: #d6e9c6;}
 button[type=submit]{background:#0088cc;cursor:pointer;width:97%;font-size:1.25rem;color:#fff;border:1px solid #0D6FA0;}
 button[type=submit]:hover{background:#0D6FA0;}
 
 header#main{position: fixed;top: 0; right: 0px; z-index: 3; background: rgba(52,56,61,0.9);}
+footer, footer a { color: #6E6C6C;}
+footer { position: relative;font-size: 0.8em;text-align: center;background: #d2d2d2;}
+footer #wrapFooter header { font-size: 1rem; color: #82C914;font-weight: bold;}
+footer#toolbar{background: none;text-align:left;}
+
+section.content, section.ckform {position: relative; background: #fff; margin: 30px auto; padding: 30px; border: 1px solid #ccc; border-radius: 5px; width: 90%;}
+section.content header, section.ckform header { display: block; width: 100%; border-bottom: 1px solid #999; font-size: 1.5rem; color: #999;}
+section.toolbar{margin: 10px 0px;font-size:.9rem;}
+section.toolbar div{display:inline-block;width:49.5%;margin:0px;padding:0px;}
+section.toolbar a{display:inline-block;background:#82C914;border:1px solid #64A106; color:#fff; padding:3px 5px; border-radius:3px; text-decoration:none;}
+section.toolbar a:hover{background:#64A106;}
+section.toolbar i{margin-right:10px;}
+section.toolbar .tableTool{text-align:right;}
+section.content:not(".footable  ") span{font-size: 1rem; text-align: center; display: block; margin-top: 20px; color: red;}
+
+/* link */
+a.button{background: #dff0d8; border:1px solid #d6e9c6; font-size:.8rem; padding:6px; border-radius: 3px;text-decoration: none; color:#3c763d;}
+a.button:hover{background: #d6e9c6;}
+a.genericLink{color:#363A3F;}
+
+/* classi generiche */
 .actHome{color:#ff0000 !important;}
 .actHack{border-left:5px solid #82C914 !important; color:#82C914 !important;}
 .actProject{border-left:5px solid #1da1f2 !important; color:#1da1f2 !important;}
@@ -20,31 +39,15 @@ header#main{position: fixed;top: 0; right: 0px; z-index: 3; background: rgba(52,
 .cursor{cursor:pointer !important;}
 .inline{display:inline-block;vertical-align:top;}
 .alert{padding: 15px; border: 1px solid transparent; border-radius: 4px; margin: 0px auto; text-align: center;}
-.success,{border-color: #00c5ca; background-color: #c6f3f5; color: #006366;}
+.success{border-color: #00c5ca; background-color: #c6f3f5; color: #006366;}
 .warning{border-color: #e5ce23; background-color: #ffef9f; color: #685815;}
 .error{border-color: rgb(200,0,0); background-color: rgba(200,0,0,0.3); color: rgb(200,0,0);}
 .transition, a{-webkit-transition: all .30s linear; -moz-transition: all .30s linear; -ms-transition: all .30s linear; -o-transition: all .30s linear; transition: all .30s linear;}
 .olControlAttribution{bottom:0px !important;font-size: .6rem !important;}
 .red{color:#AA1313;}
-
-footer, footer a { color: #6E6C6C;}
-footer { position: relative;font-size: 0.8em;text-align: center;background: #d2d2d2;}
-footer #wrapFooter header { font-size: 1rem; color: #82C914;font-weight: bold;}
-footer#toolbar{background: none;text-align:left;}
-
-section.content, section.ckform {position: relative; background: #fff; margin: 30px auto; padding: 30px; border: 1px solid #ccc; border-radius: 5px; width: 90%;}
-section.content header, section.ckform header { display: block; width: 100%; border-bottom: 1px solid #999; font-size: 1.5rem; color: #999;}
 .rowButton {margin-top: 20px;}
 .iForm {border: 1px solid #999 !important; border-right: none !important; border-radius: 3px 0px 0px 3px; font-size: 1.7rem; padding: 6px; display: inline-block; margin-right: -5px;}
 .bForm { border-left: 1px transparent !important;}
-
-section.toolbar{margin: 10px 0px;font-size:.9rem;}
-section.toolbar div{display:inline-block;width:49.5%;margin:0px;padding:0px;}
-section.toolbar a{display:inline-block;background:#82C914;border:1px solid #64A106; color:#fff; padding:3px 5px; border-radius:3px; text-decoration:none;}
-section.toolbar a:hover{background:#64A106;}
-section.toolbar i{margin-right:10px;}
-section.toolbar .tableTool{text-align:right;}
-section.content:not(".footable  ") span{font-size: 1rem; text-align: center; display: block; margin-top: 20px; color: red;}
 
 /* tabelle footable lista record */
 .footable{border:1px solid #0088cc;}

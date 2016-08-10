@@ -52,7 +52,7 @@ $(document).ready(function(){
         hiddenTagListName: 'tagList',
         hiddenTagListId: 'tagList',
         deleteTagsOnBackspace: false,
-        AjaxPush: 'script/addTag.php',
+        AjaxPush: 'inc/addTag.php',
     })
     .autocomplete({source:dataList});
 
@@ -87,16 +87,21 @@ $(document).ready(function(){
 
     });
 
-    /*$('button[name="socialMod"]').on("click", function(e){
-        e.preventDefault();
-        var arrSocial=[];
-        $(".newSocialVal").each(function(index,item){
-            var tipo = $(item).data('type');
-            var link = $(item).data('url');
-            arrSocial.push({'tipo':tipo, 'link':link});
+    $('.delSocial').on("click", function(){
+        $(this).next().show();
+        $(".delSocialAnnulla").on("click", function(){ $(this).closest('span').hide(); });
+        $(".delSocialConfirm").on("click", function(){
+            var id = $(this).data('id');
+            //$("#social"+id).remove();
+            $.ajax({
+                type: "POST",
+                url: "inc/delSocial.php",
+                data: {id:id},
+                success: function(data){
+                    if(data == 'ok'){  $("#social"+id).remove(); }else{ console.log('la riga social'+id+' non è stata eliminata: '+data); }
+                    //console.log(data);
+                }
+            });
         });
-        $("input[name='socialArr']").val(arrSocial);
-        //console.log(arrSocial);
-        $("form[name='socialForm']").submit();
-    });*/
+    });
 });
