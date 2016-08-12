@@ -41,9 +41,9 @@ a.genericLink{color:#363A3F;}
 .cursor{cursor:pointer !important;}
 .inline{display:inline-block;vertical-align:top;}
 .alert{padding: 15px; border: 1px solid transparent; border-radius: 4px; margin: 0px auto; text-align: center;}
-.success{border-color: #00c5ca; background-color: #c6f3f5; color: #006366;}
-.warning{border-color: #e5ce23; background-color: #ffef9f; color: #685815;}
-.error{border-color: rgb(200,0,0); background-color: rgba(200,0,0,0.3); color: rgb(200,0,0);}
+.success{border:1px solid #00c5ca; background-color: #c6f3f5; color: #006366; text-align: center;}
+.warning{border:1px solid #e5ce23; background-color: #ffef9f; color: #685815; text-align: center;}
+.error{border:1px solid rgb(200,0,0); background-color: rgba(200,0,0,0.3); color: rgb(200,0,0); text-align: center;}
 .transition, a{-webkit-transition: all .30s linear; -moz-transition: all .30s linear; -ms-transition: all .30s linear; -o-transition: all .30s linear; transition: all .30s linear;}
 .olControlAttribution{bottom:0px !important;font-size: .6rem !important;}
 .red{color:#AA1313;}

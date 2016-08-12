@@ -33,9 +33,11 @@ if($_POST['submit'] && $_POST['submit']=="login"){
       header("Location:index.php");
     }else{
       $msgLogin = "Attenzione, la password non è corretta!";
+      $class='error';
     }
   }else{
     $msgLogin = "Attenzione, login fallito!<br>Riprova facendo attenzione a digitare correttamente l'email o la password.<br>Se il problema persiste il tuo account potrebbe essere non attivo, contatta il responsabile web all'indirizzo:<br>beppenapo@arc-team.com.";
+    $class='error';
   }
 }
 if($_GET['action']){
@@ -57,14 +59,15 @@ if($_GET['action']){
         <form name="loginForm" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
           <div class="rowButton">
               <i class="fa fa-envelope fa-fw iForm"></i>
-              <input type="email" name="email" class="bForm" required >
+              <input type="email" name="email" class="bForm" placeholder="inserisci la tua email" required >
           </div>
           <div class="rowButton">
               <i class="fa fa-key fa-fw iForm"></i>
-              <input type="password" name="password" class="bForm" required >
+              <input type="password" name="password" class="bForm" placeholder="inserisci la tua password" required >
           </div>
           <div class="rowButton"><button type="submit" name="submit" value="login"><i class="fa fa-unlock-alt fa-fwi"></i> Login</button></div>
-          <span id="msgLogin"><?php echo $msgLogin; ?></span>
+          <div id="msgLogin" class='<?php echo $class; ?>'><?php echo $msgLogin; ?></div>
+          <a href="lostPwd.php" id="lostPwd" class='inline' title="chiedi una nuova password al server">Hai dimenticato la password?</a>
         </form>
       </section>
     </div>
