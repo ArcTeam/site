@@ -2,5 +2,5 @@
 
 section.form{ width: 40%;}
 section.form input{border-radius:0px 3px 3px 0px !important; width:85%;font-size:1.25rem !important;line-height:1.35em;}
-#msgLogin{display: block; width:97%; margin-top: 10px; text-align: center;}
+#msgLogin{display: block; width:97%;margin-top: 10px; text-align: center;}
 #lostPwd{margin:20px 0px;}
