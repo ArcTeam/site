@@ -18,3 +18,19 @@ article.section header{font-size:1.5rem;color:#363A3F;display:inline-block;width
 #ditta article.section a:hover{text-shadow: 0px 0px 1px rgba(0,0,0,0.7) !important;}
 #soci header{background: #494177;}
 #collaboratori header{background: #52A5E4;}
+
+.socioWrap{ display: inline-block; width: 300px; height: auto; position: relative; margin: 10px;vertical-align:top;}
+.avatar{z-index: 100; width:150px !important; height:150px !important;}
+.socioDatiContent{ position: relative; width: 290px; height: auto; margin: -75px auto 10px; border: 1px solid #8a8a8a;box-shadow:0px 0px 10px rgb(0,0,0);}
+.socioDatiContent h1{padding-top:80px;text-align:center;font-size:1.3rem;font-weight:bold;}
+.socioDatiContent ul{margin:0px 10px;}
+.socioDatiContent li{list-style-type: none !important;padding:0px 10px !important;font-size: .9rem;}
+.socioDatiContent li span{display: inline-block;}
+.socioDatiContent li span.ico{width:20px;}
+.socioDatiContent .dati{padding:10px 0px;}
+.socioDatiContent .dati h2{ font-size: 1.2rem; font-weight:bold;padding: 0px 20px; border-bottom: 1px dashed #363A3F;}
+.socioDatiContent .dati a{text-shadow: 0px 0px 0px rgba(0,0,0,0);}
+.socioDatiContent .dati a:hover{text-shadow: 0px 0px 1px rgba(0,0,0,0.7) !important;}
+.tagWrap{padding:10px 3px;font-size:.8rem;color:#000;text-align:center;}
+span.tag { display: inline-block; margin: 3px; padding: 0px 5px; border-radius: 3px;border: 1px solid #363A3F;background:#d6d6d6;}
+span.tag i{margin-left:7px;}

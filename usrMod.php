@@ -81,7 +81,7 @@ require_once("inc/usrModScript.php");
                 <form action="usrModSocial.php" method="post" name="socialForm" id="socialForm" enctype="multipart/form-data">
                     <input type="hidden" name="sessionImg" value="<?php echo $_SESSION['img']; ?>" >
                     <div class="row">
-                        <div class="inline" id="myImg"></div>
+                        <div class="inline avatar" id="myImg"></div>
                         <div class="inline" id="uploadButton">
                             <button type="button" name="triggerUpload"><i class="fa fa-save"></i> Modifica immagine</button>
                             <input type="file" name="updateImg" id="updateImg" accept="image/*" style="display:none;">

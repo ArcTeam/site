@@ -1,7 +1,7 @@
 <?php
 session_start();
 require("inc/db.php");
-
+$colori = array("#FBBC05","#82C914","#1da1f2","#9A9A9A","#FF7B59");
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,9 +49,89 @@ require("inc/db.php");
             </section>
             <section id="soci">
                 <header class="sectionMain"><i class="fa fa-user" aria-hidden="true"></i> Soci</header>
+                <article class="section">
+                    <?php
+                        $sociquery = "SELECT u.id as id_usr, r.id as rubrica, r.utente, r.email, r.cell, u.img FROM main.rubrica r, main.usr u WHERE u.rubrica = r.id AND r.tipo = 2 order by utente asc;";
+                        $sociexec = pg_query($connection, $sociquery);
+                        while ($socio = pg_fetch_array($sociexec)){
+                            $id = $socio['id_usr'];
+                            $socialQuery = "SELECT social.ico, social.nome, usr_social.link FROM main.usr, main.usr_social, liste.social WHERE usr_social.usr = usr.id AND usr_social.social = social.id AND usr.id = ".$id." order by nome asc;";
+                            $socialExec = pg_query($connection, $socialQuery);
+                            $tagQuery = "SELECT tag.tag FROM main.usr, liste.tag, main.tags WHERE tags.tag = tag.id AND tags.rec = usr.id AND tags.tab = 2 AND usr.id = ".$id." ORDER BY tag ASC;";
+                            $tagExec = pg_query($connection, $tagQuery);
+                            echo "<div class='socioWrap'>";
+                            echo    "<div class='avatar' style='background-image:url(img/usr/".$socio['img'].")'></div>";
+                            echo    "<div class='socioDatiContent'>";
+                            echo        "<h1 style='background:";
+                            shuffle($colori);
+                            echo $colori[0];
+                            echo        "'>";
+                            echo $socio['utente']."</h1>";
+                            echo        "<div class='dati'>";
+                            echo            "<ul>";
+                            echo                "<li><span class='ico'><i class='fa fa-envelope' aria-hidden='true'></i></span><span class='dato'>".$socio['email']."</span></li>";
+                            echo                "<li><span class='ico'><i class='fa fa-phone' aria-hidden='true'></i></span><span class='dato'>".$socio['cell']."</span></li>";
+                            while ($social = pg_fetch_array($socialExec)){
+                                echo            "<li><span class='ico'><i class='fa ".$social['ico']."' aria-hidden='true'></i></span><span class='dato'><a href='".$social['link']."' target='_blank' title='[link esterno] ".$social['nome']."' class='genericLink transition'>".$social['nome']."</a></span></li>";
+                            }
+                            echo            "</ul>";
+                            echo        "</div>";
+                            echo        "<div class='dati'>";
+                            echo            "<h2>Skills</h2>";
+                            echo            "<div class='tagWrap'>";
+                            while ($tag = pg_fetch_array($tagExec)){
+                                echo            "<span class='tag'>".$tag['tag']."</span>";
+                            }
+                            echo            "</div>";
+                            echo        "</div>";
+                            echo    "</div>";
+                            echo "</div>";
+                        }
+                    ?>
+                </article>
             </section>
             <section id="collaboratori">
                 <header class="sectionMain"><i class="fa fa-puzzle-piece" aria-hidden="true"></i> Collaboratori</header>
+                <article class="section">
+                    <?php
+                        $sociquery = "SELECT u.id as id_usr, r.id as rubrica, r.utente, r.email, r.cell, u.img FROM main.rubrica r, main.usr u WHERE u.rubrica = r.id AND r.tipo = 3 order by utente asc;";
+                        $sociexec = pg_query($connection, $sociquery);
+                        while ($socio = pg_fetch_array($sociexec)){
+                            $id = $socio['id_usr'];
+                            $socialQuery = "SELECT social.ico, social.nome, usr_social.link FROM main.usr, main.usr_social, liste.social WHERE usr_social.usr = usr.id AND usr_social.social = social.id AND usr.id = ".$id." order by nome asc;";
+                            $socialExec = pg_query($connection, $socialQuery);
+                            $tagQuery = "SELECT tag.tag FROM main.usr, liste.tag, main.tags WHERE tags.tag = tag.id AND tags.rec = usr.id AND tags.tab = 2 AND usr.id = ".$id." ORDER BY tag ASC;";
+                            $tagExec = pg_query($connection, $tagQuery);
+                            echo "<div class='socioWrap'>";
+                            echo    "<div class='avatar' style='background-image:url(img/usr/".$socio['img'].")'></div>";
+                            echo    "<div class='socioDatiContent'>";
+                            echo        "<h1 style='background:";
+                            shuffle($colori);
+                            echo $colori[0];
+                            echo        "'>";
+                            echo $socio['utente']."</h1>";
+                            echo        "<div class='dati'>";
+                            echo            "<ul>";
+                            echo                "<li><span class='ico'><i class='fa fa-envelope' aria-hidden='true'></i></span><span class='dato'>".$socio['email']."</span></li>";
+                            echo                "<li><span class='ico'><i class='fa fa-phone' aria-hidden='true'></i></span><span class='dato'>".$socio['cell']."</span></li>";
+                            while ($social = pg_fetch_array($socialExec)){
+                                echo            "<li><span class='ico'><i class='fa ".$social['ico']."' aria-hidden='true'></i></span><span class='dato'><a href='".$social['link']."' target='_blank' title='[link esterno] ".$social['nome']."' class='genericLink transition'>".$social['nome']."</a></span></li>";
+                            }
+                            echo            "</ul>";
+                            echo        "</div>";
+                            echo        "<div class='dati'>";
+                            echo            "<h2>Skills</h2>";
+                            echo            "<div class='tagWrap'>";
+                            while ($tag = pg_fetch_array($tagExec)){
+                                echo            "<span class='tag'>".$tag['tag']."</span>";
+                            }
+                            echo            "</div>";
+                            echo        "</div>";
+                            echo    "</div>";
+                            echo "</div>";
+                        }
+                    ?>
+                </article>
             </section>
         </div>
         <footer id="foo"><?php require("inc/footer.php"); ?></footer>
