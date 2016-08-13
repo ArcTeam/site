@@ -22,11 +22,12 @@
                     <span>menù</span>
                 </a>
                 <ul id="settingUl" class="subMenu">
-                    <li><a href="post.php"><i class="fa fa-comments-o"></i> post</a></li>
-                    <li><a href="lavori.php"><i class="fa fa-wrench"></i> lavori</a></li>
-                    <li><a href="#"><i class="fa fa-calendar"></i> attività</a></li>
-                    <li><a href="#"><i class="fa fa-eur"></i> fatture</a></li>
-                    <li><a href="#"><i class="fa fa-users"></i> utenti</a></li>
+                    <li><a href="post.php" title="elenco post"><i class="fa fa-comments-o"></i> post</a></li>
+                    <li><a href="lavori.php" title="elenco lavori"><i class="fa fa-wrench"></i> lavori</a></li>
+                    <li><a href="#" title="gestione attività giornaliere"><i class="fa fa-calendar"></i> attività</a></li>
+                    <li><a href="#" title="elenco fatture"><i class="fa fa-eur"></i> fatture</a></li>
+                    <li><a href="rubrica.php" title="rubrica generale"><i class="fa fa-phone"></i> rubrica</a></li>
+                    <li><a href="utenti.php" title="utenti di sistema"><i class="fa fa-users"></i> utenti</a></li>
                     <li><a href="usrMod.php" title="modifica i tuoi dati personali"><i class="fa fa-user"></i> dati personali</a></li>
                     <li><a href="login.php?action=logout" title="termina sessione di lavoro"><i class="fa fa-sign-out"></i> logout</a></li>
                 </ul>

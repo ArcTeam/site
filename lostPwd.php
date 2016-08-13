@@ -1,5 +1,5 @@
 <?php
-require ('class/PHPMailer/PHPMailerAutoload.php');
+require ('class/mailer/PHPMailerAutoload.php');
 require('inc/db.php');
 if(!empty($_POST)){
     $checkQuery = "SELECT usr.id, rubrica.utente, rubrica.email, usr.salt FROM main.usr, main.rubrica WHERE usr.rubrica = rubrica.id and usr.attivo = 1 and rubrica.email = '".$_POST['email']."'; ";
