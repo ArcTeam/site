@@ -1,4 +1,5 @@
 <?php
+session_start();
 require ('class/mailer/PHPMailerAutoload.php');
 require('inc/db.php');
 if(!empty($_POST)){
@@ -51,11 +52,11 @@ if(!empty($_POST)){
                 $mail->msgHTML($body, dirname(__FILE__));
                 $mail->AltBody = $altBody;
                 if (!$mail->send()) {
-                    $msg = "errore: " . $mail->ErrorInfo;;
+                    $msg = "errore: " . $mail->ErrorInfo;
                 }else {
-                    header ("Refresh: 5; URL=login.php");
                     $msg = "Password rigenerata con successo!<br/>Un mail con la nuova password è stata inviata all'indirizzo:  ".$dati['email']."<br/>La mail potrebbe impiegare alcuni minuti prima di essere consegnata, se non arriva contata l'amministratore di sistema all'indirizzo info@arc-team.com<br/>Si consiglia di modificare la password assegnata dal server.";
                     $class = 'success';
+                    header ("Refresh: 5; URL=login.php");
                 }
             }
         }

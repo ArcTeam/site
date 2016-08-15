@@ -2,7 +2,7 @@
 session_start();
 require("inc/db.php");
 if($_POST['submit'] && $_POST['submit']=="login"){
-  $a = "select u.id, r.id as rubrica, r.utente, r.tipo, r.email, u.pwd, u.salt, u.img from main.usr u, main.rubrica r where u.rubrica = r.id and u.attivo = 1 and r.email = '".$_POST['email']."'";
+  $a = "select u.id, r.id as rubrica, r.utente, r.tipo, r.email,u.attivo, u.pwd, u.salt, u.img from main.usr u, main.rubrica r where u.rubrica = r.id and u.attivo = 1 and r.email = '".$_POST['email']."'";
   $b = pg_query ($connection,$a);
   $row = pg_num_rows($b);
   $arr= pg_fetch_array($b);
@@ -13,6 +13,7 @@ if($_POST['submit'] && $_POST['submit']=="login"){
     if($pwd === $arr['pwd']){
       $_SESSION['id']=$arr['id'];
       $_SESSION['rubrica']=$arr['rubrica'];
+      $_SESSION['attivo']==$arr["attivo"];
       $_SESSION['utente']==$arr["utente"];
       $_SESSION['classe']=$arr['tipo'];
       $_SESSION['email']=$arr['email'];

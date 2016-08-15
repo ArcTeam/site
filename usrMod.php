@@ -15,6 +15,7 @@ require_once("inc/usrModScript.php");
             <section class="form content">
                 <header>Dati generali</header>
                 <form action="usrModDati.php" method="post" name="usrModForm">
+                    <input type="hidden" name='refresh' value='usrMod.php' >
                     <div class="row">
                         <div class="inline" style="width:32%;">
                             <label>*Utente: </label>

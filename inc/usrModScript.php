@@ -18,7 +18,6 @@ $tagUsrRow = pg_num_rows($tagUsrQ);
 if($tagUsrRow > 0){
     $tagpresarr = array();
     while ($tagprest = pg_fetch_array($tagUsrQ)) {
-        //$x['id'] = $tagprest['id'];
         $x['tag'] = $tagprest['tag'];
         array_push($tagpresarr,$x);
     }
