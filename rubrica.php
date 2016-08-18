@@ -1,7 +1,7 @@
 <?php
 session_start();
 require("inc/db.php");
-$a ="SELECT rubrica.id, usr.id as usr, rubrica.utente, rubrica.email, rubrica.indirizzo, rubrica.codfisc, rubrica.telefono, rubrica.cell, rubrica.fax, rubrica.url, rubrica.note, tipo_utente.id as id_tipo, tipo_utente.tipo, tipo_utente.definizione as categoria, usr.attivo,
+$a ="SELECT rubrica.id, usr.id as usr, rubrica.utente, rubrica.email, rubrica.indirizzo, rubrica.codfisc, rubrica.piva,  rubrica.telefono, rubrica.cell, rubrica.fax, rubrica.url, rubrica.note, tipo_utente.id as id_tipo, tipo_utente.tipo, tipo_utente.definizione as categoria, usr.attivo,
 case
 	when tipo_utente.tipo = 1 then 'warning'::text
 	else ''::text
@@ -26,6 +26,7 @@ while($c = pg_fetch_array($b)){
     $utente .= "<td>".$nome."</td>";
     $utente .= "<td>".$indirizzo."</td>";
     $utente .= "<td>".$c['codfisc']."</td>";
+    $utente .= "<td>".$c['piva']."</td>";
     $utente .= "<td>".$c['email']."</td>";
     $utente .= "<td>".$c['cell']."</td>";
     $utente .= "<td>";
@@ -66,13 +67,16 @@ while($c = pg_fetch_array($b)){
 //crea select per attivazione utente di sistema
 $tipoq="select * from liste.tipo_utente where tipo = 2 order by definizione asc;";
 $tipoexec = pg_query($connection,$tipoq);
-$formDialog =  "<label>Scegli la tipologia da assegnare al nuovo utente: </label>";
-$formDialog .= "<select name='usrClass'>";
+$formDialog='';
+$formDialog .=  "<label style='width:150px;margin-bottom: 10px;' class='inline'>Scegli classe utente: </label>";
+$formDialog .= "<select name='usrClass' style='width:250px;margin-bottom: 10px;' class='inline'>";
 $formDialog .= "<option selected disabled></option>";
 while($opt = pg_fetch_array($tipoexec)){
 $formDialog .= "<option value='".$opt['id']."'>".$opt['definizione']."</option>";
 }
-$formDialog .= "</select>";
+$formDialog .= "</select><br/>";
+$formDialog .=  "<label style='width:150px;' class='inline mailCheck'>Inserisci email: </label>";
+$formDialog .=  "<input type='email' name='email' style='width:250px;' class='inline mailCheck'><br/>";
 
 ?>
 <!DOCTYPE html>
@@ -83,10 +87,10 @@ $formDialog .= "</select>";
         <link href="lib/FooTable/css/footable.core.min.css" rel="stylesheet" media="screen" />
         <style>
             .footable th:nth-child(1){width:150px;}
-            .footable th:nth-child(5){width:90px;}
-            .footable th:nth-child(6){width:150px;}
-            .footable th:nth-child(6), .footable td:nth-child(6){padding:5px 10px;}
-            .footable th:nth-child(11){width:30px; text-align:center;}
+            .footable th:nth-child(6){width:90px;}
+            .footable th:nth-child(7){width:150px;}
+            .footable th:nth-child(7), .footable td:nth-child(7){padding:5px 10px;}
+            .footable th:nth-child(12){width:30px; text-align:center;}
             .footable td{vertical-align: middle;}
             td.action ul{position:relative}
             td.action ul li a{display:block;padding:2px 5px;text-align:center;color:rgba(54,58,63,0.7);}
@@ -138,6 +142,7 @@ $formDialog .= "</select>";
                             <th>Utente</th>
                             <th data-sort-ignore="true" data-hide="phone">Indirizzo</th>
                             <th data-sort-ignore="true" data-hide="all">Cod.Fisc.</th>
+                            <th data-sort-ignore="true" data-hide="all">P.Iva</th>
                             <th>Email</th>
                             <th>Cellulare</th>
                             <th data-sort-ignore="true" data-hide="phone">Categoria</th>
@@ -196,7 +201,7 @@ $formDialog .= "</select>";
                     $("#dialogContent header").text(header);
                     $("#dialogContent article").html(testo);
                     $("#dialogWrap").fadeIn('fast');
-                    $("button[name='conferma']").on("click", function(){ usrAction(id, 'usrStato.php', 0); });
+                    $("button[name='conferma']").on("click", function(){ usrAction(id, 'usrStato.php'); });
                 });
                 $("a.delUsr").on("click", function(){
                     var id = $(this).data('id');
@@ -206,24 +211,34 @@ $formDialog .= "</select>";
                     $("#dialogContent header").text(header);
                     $("#dialogContent article").html(testo);
                     $("#dialogWrap").fadeIn('fast');
-                    $("button[name='conferma']").on("click", function(){ usrAction(id, 'usrDel.php', 0); });
+                    $("button[name='conferma']").on("click", function(){ usrAction(id, 'usrDel.php'); });
                 });
                 $("a.attivaUsr").on("click", function(){
                     var id = $(this).data('id');
                     var utente = $(this).data('utente');
                     var header = $(this).attr('title');
                     var mail = $(this).data('email');
-                    var testo = "Hai scelto di <strong>abilitare il login</strong> per l'utente "+utente+".<br/>Se confermi l'operazione il sistema genererà una password che verrà inviata via email all'utente selezionato, in questo modo potrà accedere alle aree riservate sulla base della classe utente scelta.<br/>Prima di inviare la password controlla che la mail sia corretta o attiva.<br>Stai per inviare una nuova password all'indirizzo: <strong>"+mail+"</strong>";
+                    if (!mail) {
+                        var checkMail = "L'utente non sembra avere una mail di riferimento, per diventare utente di sistema è necessario specificare una mail.";
+                        $(".checkMail").show();
+                    }else {
+                        var checkMail = "Prima di inviare la password controlla che la mail sia corretta o attiva.<br>Stai per inviare una nuova password all'indirizzo: <strong>"+mail+"</strong>";
+                        $(".mailCheck").hide();
+                    }
+                    var testo = "Hai scelto di <strong>abilitare il login</strong> per l'utente "+utente+".<br/>Se confermi l'operazione il sistema genererà una password che verrà inviata via email all'utente selezionato, in questo modo potrà accedere alle aree riservate sulla base della classe utente scelta.<br/>"+checkMail;
                     $("#dialogContent header").text(header);
                     $("#dialogContent article").html(testo);
                     $("#dialogWrap").fadeIn('fast');
                     $(".dialogForm").show();
                     $("button[name='conferma']").on("click", function(){
                         var classe = $("select[name='usrClass']").val();
+                        var email = $("input[name='email']").val();
                         if (!classe) {
                             $(".dialogResult").html('Devi selezionare una classe dalla lista').addClass('warning').show();
+                        }else if (!mail && !email) {
+                            $(".dialogResult").html('Devi inserire unamail valida').addClass('warning').show();
                         }else {
-                            usrAction(id, 'usrPromuovi.php', classe);
+                            usrAction(id, 'usrPromuovi.php', classe, email);
                         }
                     });
                 });

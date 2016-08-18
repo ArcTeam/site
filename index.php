@@ -91,7 +91,7 @@ while($t=pg_fetch_array($tagres)){
                         <header class="sectionMain">Geek corner <i class="fa fa-code"></i></header>
                         <ul>
                             <li>
-                                <div><i class="fa fa-code fa-5x"></i> ATOR (Arc-Team Open Research) è un blog che nasce dall'esigenza di condividere le nostre esperienze in ambito informatico, i problemi riscontrati durante lo sviluppo di un software o i test su applicazioni varie, le soluzioni adottate per risolvere tali problemi. La vasta comunità internazionale che supporta il blog e l'alto livello tecnico degli utenti hanno reso il blog un punto di riferimento per tuto ciò che riguarda l'informatica applicata ai Beni Culturali...ma no solo! Di seguito gli ultimi post inseriti, in fondo il link alla pagina principale del blog.</div>
+                                <div><i class="fa fa-code fa-5x"></i> ATOR (Arc-Team Open Research) è un blog che nasce dall'esigenza di condividere le nostre esperienze in ambito informatico, i problemi riscontrati durante lo sviluppo di un software o i test su applicazioni varie, le soluzioni adottate per risolvere tali problemi. <!--La vasta comunità internazionale che supporta il blog e l'alto livello tecnico degli utenti hanno reso il blog un punto di riferimento per tuto ciò che riguarda l'informatica applicata ai Beni Culturali...ma no solo!--> Di seguito gli ultimi post inseriti, in fondo il link alla pagina principale del blog.</div>
                             </li>
                         </ul>
                         <script src="http://feeds.feedburner.com/blogspot/YduRN?format=sigpro" type="text/javascript" ></script>
@@ -134,15 +134,15 @@ while($t=pg_fetch_array($tagres)){
                         <header class="sectionMain">OpenDataDocuments <i class="fa fa-creative-commons"></i></header>
                         <ul>
                             <li>
-                                <div><i class="fa fa-creative-commons fa-5x"></i> La libera circolazione delle idee è alla base del nostro lavoro, per questo abbiamo dedicato una sezione del nostro sito alla condivisione di articoli scientifici e presentazioni che la nostra ditta ha prodotto negli anni. Alcuni articoli sono Academia.edu, altri su Research Gate; di seguito trovate tutti i link alle varie risorse</div>
-                                <div>
+                                <div><i class="fa fa-creative-commons fa-5x"></i> La libera circolazione delle idee è alla base del nostro lavoro, per questo abbiamo dedicato una sezione del nostro sito alla condivisione di pubblicazioni, articoli scientifici e presentazioni che la nostra ditta ha prodotto negli anni. Alcuni articoli sono su Academia.edu, altri su Research Gate. Di seguito i link alle ultime risorse pubblicate</div>
+                                <!--<div>
                                     <header class="head2odd"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Academia.edu</header>
                                     <a href="https://independent.academia.edu/GiuseppeNaponiello" target="_blank" class="aSubSec"> Giuseppe Naponiello</a>
                                 </div>
                                 <div>
                                     <header class="head2odd"><img src="img/layout/rg.png">  Research Gate</header>
                                     <a href="https://www.researchgate.net/profile/Giuseppe_Naponiello" target="_blank" class="aSubSec">Giuseppe Naponiello</a>
-                                </div>
+                                </div>-->
                                 <div>
 
                                 </div>

@@ -4,11 +4,17 @@ require ('../class/mailer/PHPMailerAutoload.php');
 require ("db.php");
 $msg='';
 $pwd = "";
-$u = "select email,  utente from main.rubrica where id=".$_POST['id'];
+$u = "select email, utente from main.rubrica where id=".$_POST['id'];
 $r = pg_query($connection,$u);
 $arr = pg_fetch_array($r);
 $utente = $arr['utente'];
-$email = $arr['email'];
+if (!$_POST['email']) {
+    $email = $arr['email'];
+    $addMail = '';
+}else {
+    $email = $_POST['email'];
+    $addMail = ", email = '".$email."' ";
+}
 $pwdRand = array_merge(range('A','Z'), range('a','z'), range(0,9));
 for($i=0; $i < 10; $i++) {$pwd .= $pwdRand[array_rand($pwdRand)];}
 $key = '$2y$11$';
@@ -16,7 +22,7 @@ $salt = substr(hash('sha512',uniqid(rand(), true).$key.microtime()), 0, 22);
 $password =hash('sha512',$pwd . $salt);
 
 $p = "BEGIN;";
-$p .= "update main.rubrica set tipo = ".$_POST['form']." where id = ".$_POST['id'].";";
+$p .= "update main.rubrica set tipo = ".$_POST['classe']." ".$addMail." where id = ".$_POST['id'].";";
 $p .= "insert into main.usr(pwd, salt, attivo, rubrica) values ('$password', '$salt', 1, ".$_POST['id'].");";
 $p .= "insert into main.log(tabella, record,operazione, utente) values ('usr', currval('main.usr_id_seq'), 'I', ".$_SESSION['id'].");";
 $p .= "COMMIT;";
@@ -57,5 +63,4 @@ if ($e) {
     $msg .= "<span class='error inline'>errore nella query: ".pg_last_error($connection)."</span>";
 }
 echo $msg;
-//header ("Refresh: 5; URL=rubrica.php");
 ?>

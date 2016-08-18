@@ -4,7 +4,7 @@ require("db.php");
 
 //dati generali
 /*************************************************************************************/
-$a="select r.tipo, r.utente, r.email, r.indirizzo, r.codfisc, r.telefono, r.cell, r.fax, r.url, r.note, u.img from main.rubrica r, main.usr u where u.rubrica = r.id and u.id = ".$_SESSION['id'];
+$a="select r.tipo, r.utente, r.email, r.indirizzo, r.codfisc, r.piva, r.telefono, r.cell, r.fax, r.url, r.note, u.img from main.rubrica r, main.usr u where u.rubrica = r.id and u.id = ".$_SESSION['id'];
 $b = pg_query($connection,$a);
 $c = pg_fetch_array($b);
 

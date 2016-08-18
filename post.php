@@ -1,18 +1,31 @@
 <?php
 session_start();
 require("inc/db.php");
+require("inc/cut.php");
 if(isset($_GET['x'])){$x=0;}else{$x=1;}
-$a ="SELECT p.id, p.data, p.titolo, r.utente FROM main.post p, main.usr u, main.rubrica r WHERE p.usr = u.id AND u.rubrica = r.id AND p.pubblica = 1 order by data desc;";
+$a = "SELECT p.id, p.titolo, p.testo, l.data, r.utente FROM main.log l, main.usr u, main.post p, main.rubrica r WHERE l.record = p.id AND l.utente = u.id AND u.rubrica = r.id AND l.tabella = 'post' AND p.pubblica = 1 order by data desc;";
 $b = pg_query($connection, $a);
 while($c = pg_fetch_array($b)){
     $data = split(" ",$c['data']);
     $data = $data[0];
+    //$testo = strip_tags($p['testo']);
+    $testo = cutHtmlText($c['testo'], 300, "...", false, false, false);
     $post .= "<tr>";
+    $post .= "<td>";
+    $post .= "<header>".$c['titolo']."</header>";
+    $post .= "<article>";
+    $post .= $testo;
+    $post .= "<div><a href='postView.php?p=".$c['id']."' title='Leggi tutto'><i class='fa fa-eye hidden-aria='true'></i> Leggi tutto</a></div>";
+    $post .= "</article>";
+    $post .= "<footer>Pubblicato da <strong>".$c['utente']."</strong> il <strong>".$data."</strong></footer>";
+    $post .= "</td>";
+    $post .= "</tr>";
+    /*$post .= "<tr>";
     $post .= "<td><a href='postView.php?p=".$c['id']."'><i class='fa fa-arrow-right'></i></a></td>";
     $post .= "<td>".$c['titolo']."</td>";
     $post .= "<td>".$c['utente']."</td>";
     $post .= "<td>".$data."</td>";
-    $post .= "</tr>";
+    $post .= "</tr>";*/
 }
 ?>
 <!DOCTYPE html>
@@ -48,9 +61,6 @@ while($c = pg_fetch_array($b)){
             <thead>
                 <tr>
                     <th data-sort-ignore="true"></th>
-                    <th data-sort-ignore="true">Titolo</th>
-                    <th data-hide="phone">Autore</th>
-                    <th data-hide="phone">Data</th>
                 </tr>
             </thead>
             <tbody><?php echo $post; ?></tbody>

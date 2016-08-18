@@ -3,7 +3,7 @@ session_start();
 require_once('inc/db.php');
 $utente = (isset($_POST['usrId'])) ? $_POST['usrId'] : $_SESSION['rubrica'];
 $txt = (isset($_POST['usrId'])) ? "alla rubrica generale" : "alla tua pagina personale";
-$upq = "update main.rubrica set tipo = ".$_POST['tipo']." , utente = '".pg_escape_string($_POST['utente'])."', email='".pg_escape_string($_POST['email'])."', indirizzo = '".pg_escape_string($_POST['indirizzo'])."', codfisc = '".pg_escape_string($_POST['codfisc'])."', telefono = '".pg_escape_string($_POST['telefono'])."', fax = '".pg_escape_string($_POST['fax'])."', cell= '".pg_escape_string($_POST['cell'])."', url = '".pg_escape_string($_POST['url'])."', note = '".pg_escape_string($_POST['note'])."' where id = ".$utente;
+$upq = "update main.rubrica set tipo = ".$_POST['tipo']." , utente = '".pg_escape_string($_POST['utente'])."', email='".pg_escape_string($_POST['email'])."', indirizzo = '".pg_escape_string($_POST['indirizzo'])."', codfisc = '".strtoupper($_POST['codfisc'])."', piva = '".strtoupper($_POST['piva'])."', telefono = '".pg_escape_string($_POST['telefono'])."', fax = '".pg_escape_string($_POST['fax'])."', cell= '".pg_escape_string($_POST['cell'])."', url = '".pg_escape_string($_POST['url'])."', note = '".pg_escape_string($_POST['note'])."' where id = ".$utente;
 $upexec = pg_query($connection, $upq);
 if($upexec){
     $msg = "ok, i tuoi dati sono stati modificati.";

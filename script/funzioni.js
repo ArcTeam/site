@@ -42,17 +42,17 @@ function formatBytes(bytes){
     return (bytes / kb / kb).toFixed(2)+fileSizeTypes[ndx];
 }
 
-function usrAction(id, script, form){
+function usrAction(id, script, classe, email){
     $.ajax({
         type: "POST",
         url: "inc/"+script,
-        data: {id:id, form:form},
+        data: {id:id, classe:classe, email:email},
         success: function(data){
             $(".dialogResult").html(data).show();
             setTimeout(function(){ location.reload(); }, 5000);
         }
     });
-    //console.log(id+" "+script+" "+form);
+    //console.log("classe: "+classe+" email: "+email);
 }
 
 var w=$("#mainWrap").width();

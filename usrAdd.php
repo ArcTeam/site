@@ -55,12 +55,13 @@ $tipoexec = pg_query($connection,$tipoq);
                 <label>*Utente: </label><textarea name="utente" required></textarea>
             </div>
             <div class="inline" style="width:32%;">
-              <label>*E-mail: </label><input type="email" name="email" required>
+              <label id="emailLabel">E-mail: </label><input type="email" name="email">
             </div>
           </div>
           <div class="row">
-            <div class="inline" style="width:67%;"><label>Indirizzo: </label><textarea name="indirizzo"></textarea></div>
-            <div class="inline" style="width:29%;"><label>Codice fiscale / P.Iva: </label><input type="text" name="codfisc"></div>
+            <div class="inline" style="width:66%;"><label>Indirizzo: </label><textarea name="indirizzo"></textarea></div>
+            <div class="inline" style="width:15%;"><label>Codice fiscale: </label><input type="text" name="codfisc"  style="width:90%;"></div>
+            <div class="inline" style="width:15%;"><label>P.Iva: </label><input type="text" name="piva" style="width:90%;"></div>
           </div>
           <div class="row">
             <div class="inline" style="width:32%;"><label>Telefono: </label><input type="text" name="telefono"></div>
@@ -90,9 +91,13 @@ $tipoexec = pg_query($connection,$tipoq);
                 if(tipo==1){
                     $("select[name='tipo'] option[data-tipo=1]").show();
                     $("select[name='tipo'] option[data-tipo=2]").hide();
+                    $("input[name='email']").prop("required", false);
+                    $("#emailLabel").text('E-mail');
                 }else{
                     $("select[name='tipo'] option[data-tipo=1]").hide();
                     $("select[name='tipo'] option[data-tipo=2]").show();
+                    $("input[name='email']").prop("required", true);
+                    $("#emailLabel").text('*E-Mail');
                 }
             });
         });

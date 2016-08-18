@@ -1,6 +1,17 @@
 @import url("style.css");
-.footable th:nth-child(1){width:5%;}
+/*.footable th:nth-child(1){width:5%;}
 .footable th:nth-child(3){width:30%;}
-.footable th:nth-child(4){width:10%;}
+.footable th:nth-child(4){width:10%;}*/
+
+/* stile di prova per il nuovo layout */
+.footable thead tr{border:none;}
+.footable th{background:none;}
+.footable tbody td header{color:#009933;font-size:2rem;}
+.footable tbody td p{font-size:1.2rem;}
+.footable tbody td div a{display: inline-block; color:#009933; padding: 3px 7px; border-radius: 3px;font-size:1.1rem;}
+.footable tbody td div a:hover{background:#009933;color:#fff;}
+.footable tbody td footer{font-size:.9rem;padding:10px;text-align:right;background:none;margin:0px;}
+/***************************************/
+
 #statoLabel{ padding: 7px 10px; border: 1px solid #999; display: inline-block; font-size: .8rem; border-radius: 3px; cursor: pointer;}
 .checkedLabel{background: #ccc;}

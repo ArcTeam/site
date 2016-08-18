@@ -7,6 +7,7 @@ $utente = pg_escape_string($_POST['utente']);
 $email = $_POST['email'];
 $indirizzo = pg_escape_string($_POST['indirizzo']);
 $codfisc = strtoupper($_POST['codfisc']);
+$piva = strtoupper($_POST['piva']);
 $telefono = $_POST['telefono'];
 $cellulare = $_POST['cellulare'];
 $fax = $_POST['fax'];
@@ -50,7 +51,7 @@ if($tipo > 1){
   $p = '';
 }
 $query = "BEGIN;";
-$query .= "insert into main.rubrica(tipo, utente, email, indirizzo, codfisc, telefono, cell, fax, url, note) values ($tipo, '$utente', '$email', '$indirizzo', '$codfisc', '$telefono', '$cellulare', '$fax','$link','$note');";
+$query .= "insert into main.rubrica(tipo, utente, email, indirizzo, codfisc, piva, telefono, cell, fax, url, note) values ($tipo, '$utente', '$email', '$indirizzo', '$codfisc', '$piva', '$telefono', '$cellulare', '$fax','$link','$note');";
 $query .= $p;
 $query .= "insert into main.log(tabella, record,operazione, utente) values ('rubrica', currval('main.rubrica_id_seq'), 'I', ".$_SESSION['id'].");";
 $query .=  "COMMIT; ";

@@ -1,7 +1,7 @@
 <?php
 session_start();
 require("inc/db.php");
-$a = "SELECT post.id, post.titolo, post.testo, rubrica.utente, log.data FROM main.log, main.post, main.usr, main.rubrica WHERE log.record = post.id AND log.utente = usr.id AND usr.rubrica = rubrica.id AND post.id =".$_GET['p'];
+$a = "SELECT p.id, p.titolo, p.testo, l.data, r.utente FROM main.log l, main.usr u, main.post p, main.rubrica r WHERE l.record = p.id AND l.utente = u.id AND u.rubrica = r.id AND l.tabella = 'post' AND l.operazione = 'I' AND p.id =".$_GET['p'];
 $b = pg_query($connection,$a);
 $p = pg_fetch_array($b);
 $data = explode(" ",$p['data']);

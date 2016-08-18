@@ -10,7 +10,7 @@ foreach ($tags as $tag) {
 }
 $q = "BEGIN;";
 $q .= "insert into main.post(titolo, testo, usr, pubblica) values('".pg_escape_string($_POST["titolo"])."','".$_POST['post']."',".$_SESSION["id"].", ".$_POST['stato'].");";
-$q .= "insert into main.log(tabella,record,operazione, utente) values ('post', nextval('main.post_id_seq'), 'I', ".$_SESSION['id'].");"
+$q .= "insert into main.log(tabella,record,operazione, utente) values ('post', currval('main.post_id_seq'), 'I', ".$_SESSION['id'].");";
 $q .= $addTag;
 $q .= "COMMIT;";
 $r = pg_query($connection,$q);

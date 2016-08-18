@@ -13,6 +13,7 @@ $q = "BEGIN;";
 $q .= "update main.post set titolo = '".pg_escape_string($_POST["titolo"])."', testo = '".$_POST['post']."', pubblica =  ".$_POST['stato']." where id = ".$_POST['id'].";";
 $q .= $resetTag;
 $q .= $addTag;
+$q .= "insert into main.log(tabella,record,operazione, utente) values ('post', ".$_POST['id'].", 'U', ".$_SESSION['id'].");";
 $q .= "COMMIT;";
 $r = pg_query($connection,$q);
 if(!$r){$result = "errore: ".pg_last_error($connection);}else{ $result = $_POST['id'];}

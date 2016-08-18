@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once("inc/db.php");
-$a="select r.id, r.tipo, r.utente, r.email, r.indirizzo, r.codfisc, r.telefono, r.cell, r.fax, r.url, r.note from main.rubrica r where r.id = ".$_GET['x'];
+$a="select r.id, r.tipo, r.utente, r.email, r.indirizzo, r.codfisc, r.piva, r.telefono, r.cell, r.fax, r.url, r.note from main.rubrica r where r.id = ".$_GET['x'];
 $b = pg_query($connection,$a);
 $c = pg_fetch_array($b);
 
@@ -44,18 +44,22 @@ $tipoexec = pg_query($connection,$tipoq);
                             </select>
                         </div>
                         <div class="inline" style="width:32%;">
-                            <label>*E-mail: </label>
-                            <input type="email" name="email" value="<?php echo $c['email']; ?>" required>
+                            <label>E-mail: </label>
+                            <input type="email" name="email" value="<?php echo $c['email']; ?>" >
                         </div>
                     </div>
                     <div class="row">
-                        <div class="inline" style="width:67%;">
+                        <div class="inline" style="width:66%;">
                             <label>Indirizzo: </label>
                             <textarea name="indirizzo"><?php echo $c['indirizzo']; ?></textarea>
                         </div>
-                        <div class="inline" style="width:29%;">
-                            <label>Codice fiscale / P.Iva: </label>
-                            <input type="text" name="codfisc" value="<?php echo $c['codfisc']; ?>">
+                        <div class="inline" style="width:15%;">
+                            <label>Codice fiscale: </label>
+                            <input type="text" name="codfisc"  style="width:90%;" value="<?php echo $c['codfisc']; ?>">
+                        </div>
+                        <div class="inline" style="width:15%;">
+                            <label>P.Iva: </label>
+                            <input type="text" name="piva" style="width:90%;" value="<?php echo $c['piva']; ?>">
                         </div>
                     </div>
                     <div class="row">
