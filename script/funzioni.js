@@ -54,6 +54,55 @@ function usrAction(id, script, classe, email){
     });
     //console.log("classe: "+classe+" email: "+email);
 }
+/////////  funzioni per highlight filtro tabelle ////
+function filterTable(search, dati) {
+  dehighlight(document.getElementById(dati));
+  if (search.value.length > 0) highlight(search.value.toLowerCase(), document.getElementById(dati));
+}
+function dehighlight(container) {
+ for (var i = 0; i < container.childNodes.length; i++) {
+  var node = container.childNodes[i];
+  if (node.attributes && node.attributes['class'] && node.attributes['class'].value == 'red') {
+   node.parentNode.parentNode.replaceChild(
+    document.createTextNode(node.parentNode.innerHTML.replace(/<[^>]+>/g, "")), node.parentNode
+   );
+   return;
+  } else if (node.nodeType != 3) {
+   dehighlight(node);
+  }
+ }
+}
+function highlight(search, container) {
+  for (var i = 0; i < container.childNodes.length; i++) {
+   var node = container.childNodes[i];
+   if (node.nodeType == 3) {
+    var data = node.data;
+    var data_low = data.toLowerCase();
+    if (data_low.indexOf(search) >= 0) {
+     var new_node = document.createElement('span');
+     node.parentNode.replaceChild(new_node, node);
+     var result;
+     while ((result = data_low.indexOf(search)) != -1) {
+      new_node.appendChild(document.createTextNode(data.substr(0, result)));
+      new_node.appendChild(create_node(document.createTextNode(data.substr(result, search.length))));
+      data = data.substr(result + search.length);
+      data_low = data_low.substr(result + search.length);
+     }
+     new_node.appendChild(document.createTextNode(data));
+    }
+   } else {
+    highlight(search, node);
+   }
+  }
+}
+function create_node(child) {
+  var node = document.createElement('span');
+  node.setAttribute('class', 'red');
+  node.attributes['class'].value = 'red';
+  node.appendChild(child);
+  return node;
+}
+////////////////////////////////////////////////////////////////////////////////
 
 var w=$("#mainWrap").width();
 var w2=$("section#main").width();

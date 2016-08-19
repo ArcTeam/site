@@ -9,7 +9,7 @@ $coo = explode(",",str_replace(" ", ",", substr($ext['ext'],4,-1)));
 $extent = str_replace(" ", ",", substr($ext['ext'],4,-1));
 
 //post
-$postq = "select * from main.post where pubblica = 1 order by data desc limit 5;";
+$postq = "SELECT p.titolo, p.testo, p.pubblica, p.id FROM main.post p, main.log WHERE p.id = log.record AND log.tabella = 'post' AND log.operazione = 'I' AND p.pubblica = 1 order by log.data desc limit 5;";
 $postr = pg_query($connection,$postq);
 $r = pg_num_rows($postr);
 while($post = pg_fetch_array($postr)){
@@ -23,6 +23,22 @@ while($post = pg_fetch_array($postr)){
     $postList .= "<p class='date'>".$data[0]."</p>";
     $postList .= "<div class='postList'>".$p."</div>";
     $postList .= "</li>";
+}
+
+// open data documents lista
+$odquery="SELECT odd.titolo, odd.categoria, odf.tipo, odf.link, l.sigla as licenza FROM liste.licenze l, main.log, main.opendata odd, main.opendatafile odf WHERE odd.id = log.record AND odf.licenza = l.id AND odf.opendata = odd.id AND log.tabella = 'opendata' AND log.operazione = 'I' ORDER BY log.data DESC LIMIT 10;";
+$odres=pg_query($connection,$odquery);
+while($od = pg_fetch_array($odres)){
+    switch($od['tipo']){
+        case 'pdf': $ico = '<i class="fa fa-file-pdf-o" aria-hidden="true"></i>'; break;
+        case 'html': $ico = '<i class="fa fa-html5" aria-hidden="true"></i>'; break;
+        case 'ppt':
+        case 'odp': $ico = '<i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>'; break;
+        default: $ico = '<i class="fa fa-picture-o" aria-hidden="true"></i>';
+    }
+    $meta = ($od['categoria']=='html') ? "presentazione in html" : $od['categoria'].", ".$od['tipo'];
+    $link = "http://www.museidironzone.it/openLibrary/".$od['categoria']."/".$od['link'];
+    $odList .= "<li><a href='".$link."' target='_blank' title='[link esterno] ".$od['titolo']."' class='aSubSec transition'>".$ico." ".$od['titolo']." (".$meta." - ".$od['licenza'].")</a></li>";
 }
 
 //tag cloud
@@ -135,20 +151,12 @@ while($t=pg_fetch_array($tagres)){
                         <ul>
                             <li>
                                 <div><i class="fa fa-creative-commons fa-5x"></i> La libera circolazione delle idee è alla base del nostro lavoro, per questo abbiamo dedicato una sezione del nostro sito alla condivisione di pubblicazioni, articoli scientifici e presentazioni che la nostra ditta ha prodotto negli anni. Alcuni articoli sono su Academia.edu, altri su Research Gate. Di seguito i link alle ultime risorse pubblicate</div>
-                                <!--<div>
-                                    <header class="head2odd"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Academia.edu</header>
-                                    <a href="https://independent.academia.edu/GiuseppeNaponiello" target="_blank" class="aSubSec"> Giuseppe Naponiello</a>
-                                </div>
                                 <div>
-                                    <header class="head2odd"><img src="img/layout/rg.png">  Research Gate</header>
-                                    <a href="https://www.researchgate.net/profile/Giuseppe_Naponiello" target="_blank" class="aSubSec">Giuseppe Naponiello</a>
-                                </div>-->
-                                <div>
-
+                                    <ul class="oddList"><?php echo $odList; ?></ul>
                                 </div>
                             </li>
                         </ul>
-                        <p class="footerArticle"><a href="#" title="Visualizza l'elenco completo dei documenti disponibili per il download"><i class="fa fa-creative-commons"></i> Visualizza l'elenco completo degli open data documents</a></p>
+                        <p class="footerArticle"><a href="opendatadocs.php" title="Visualizza l'elenco completo dei documenti disponibili per il download"><i class="fa fa-creative-commons"></i> Visualizza l'elenco completo degli open data documents</a></p>
                     </article>
                     <article id="social">
                         <header class="sectionMain">Twitter <i class="fa fa-twitter" aria-hidden="true"></i></header>

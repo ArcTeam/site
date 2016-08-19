@@ -20,12 +20,6 @@ while($c = pg_fetch_array($b)){
     $post .= "<footer>Pubblicato da <strong>".$c['utente']."</strong> il <strong>".$data."</strong></footer>";
     $post .= "</td>";
     $post .= "</tr>";
-    /*$post .= "<tr>";
-    $post .= "<td><a href='postView.php?p=".$c['id']."'><i class='fa fa-arrow-right'></i></a></td>";
-    $post .= "<td>".$c['titolo']."</td>";
-    $post .= "<td>".$c['utente']."</td>";
-    $post .= "<td>".$data."</td>";
-    $post .= "</tr>";*/
 }
 ?>
 <!DOCTYPE html>
@@ -66,7 +60,7 @@ while($c = pg_fetch_array($b)){
             <tbody><?php echo $post; ?></tbody>
             <tfoot class="hide-if-no-paging">
              <tr>
-              <td colspan="4">
+              <td>
                <div class="pagination pagination-centered"></div>
               </td>
              </tr>
@@ -95,6 +89,7 @@ while($c = pg_fetch_array($b)){
 				$('.footable').data('page-size', pageSize);
 				$('.footable').trigger('footable_initialized');
 			});
+            $('.clear-filter').click(function(e) { $('.footable').trigger('footable_clear_filter'); });
             var vis;
             $("#statoLabel").on("click", function(){
                 $(this).toggleClass('checkedLabel');

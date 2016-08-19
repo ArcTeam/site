@@ -1,0 +1,12 @@
+@import url("style.css");
+.footable caption{font-size: 1rem;}
+.footable tr{border:none;}
+.footable th{background:none;}
+.footable tbody td header{color:#009933;font-size:1.5rem;}
+.footable tbody td p{font-size:1.2rem;}
+.footable tbody td div a{display: inline-block; color:#009933; padding: 3px 7px; border-radius: 3px;font-size:1.1rem;}
+.footable tbody td div a:hover{background:#009933;color:#fff;}
+.footable tbody article{width:30%; margin-right:20px;font-size:.9rem;}
+.footable tbody article h1{font-size:1.2rem;}
+.footable .dati{font-weight: bold;}
+/***************************************/

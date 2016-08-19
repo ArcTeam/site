@@ -31,6 +31,7 @@ p.footerArticle i{color: #fff; float: none !important; margin: 0px;}
 #media header.sectionMain, #media p.footerArticle { background: #093;}
 #media header.head2odd{display:inline-block; width:100%; margin:5px 0px; border-bottom:1px solid #093;color:#093;font-size:1.2rem;}
 #media a, #media i.fa-5x{color:#093;}
+#media div:first-child{margin-bottom:20px;}
 #post header, #post p.footerArticle { background: #FBBC05;}
 #post a, #post i.fa-5x{color:#FBBC05;}
 #social header { background: #1DA1F2;}
@@ -58,3 +59,7 @@ section#main article p { font-size: .7rem;}
 .olControlZoom a:last-child {border-radius: 0px 0px 5px 0px;}
 .olControlZoom a:nth-child(2) {border-radius: 0px 0px 0px 0px !important;}
 .olControlZoom a:hover{background:rgba(0, 0, 0, 0.9) !important;}
+
+.oddList li{padding:0px !important;margin-bottom:0px !important;}
+.oddList li a:hover{color:#093 !important;}
+.oddList li a i{float:none !important; margin-right:1px !important;}
