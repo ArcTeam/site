@@ -1,18 +1,18 @@
 <?php
 session_start();
 require_once("db.php");
-$tags = explode(",",$_POST["tag"]);
-$resetTag = "delete from main.tags where rec = ".$_POST['id']." AND tab = 1;";
-foreach ($tags as $tag) {
-    $a = "select id from liste.tag where tag = '".$tag."'";
-    $b = pg_query($connection, $a);
-    $c = pg_fetch_array($b);
-    $addTag .= "insert into main.tags(tag, rec, tab) values(".$c['id'].", ".$_POST['id'].", 1);";
+if (!empty($_POST['tag'])) {
+    $checkTag = "select count(id) as tags from main.tags where rec =".$_POST['id']." and tab = 1;";
+    $checkTagQuery = pg_query($connection,$checkTag);
+    $checkTagRes = pg_fetch_array($checkTagQuery);
+    if($checkTagRes['tags'] == 0){ $tag = "insert into main.tags(tags, rec, tab) values('".$_POST['tag']."', ".$_POST['id'].", 1);";}
+    else { $tag = "update main.tags set tags = '".$_POST['tag']."' where rec = ".$_POST['id']." and tab=1;"; }
+}else {
+    $tag = "delete from main.tags where rec = ".$_POST['id']." and tab=1;";
 }
 $q = "BEGIN;";
 $q .= "update main.post set titolo = '".pg_escape_string($_POST["titolo"])."', testo = '".$_POST['post']."', pubblica =  ".$_POST['stato']." where id = ".$_POST['id'].";";
-$q .= $resetTag;
-$q .= $addTag;
+$q .= $tag;
 $q .= "insert into main.log(tabella,record,operazione, utente) values ('post', ".$_POST['id'].", 'U', ".$_SESSION['id'].");";
 $q .= "COMMIT;";
 $r = pg_query($connection,$q);

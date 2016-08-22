@@ -13,12 +13,16 @@ $odRes = pg_query($connection, $odQuery);
   </head>
   <body>
     <header id="main"><?php require("inc/header.php"); ?></header>
+    <?php require("inc/dialog.php"); ?>
     <div id="mainWrap">
       <section class="content">
-        <header>Archivio Arc-team OpenDataDocuments</header>
+        <header>Archivio OpenDataDocuments</header>
+        <section id="presentazione">
+            <span class='inline'><i class="fa fa-creative-commons fa-5x"></i></span><span class='inline'>La libera circolazione delle idee è alla base del nostro lavoro, per questo abbiamo dedicato una sezione del nostro sito alla condivisione di pubblicazioni, articoli scientifici e presentazioni che la nostra ditta ha prodotto negli anni. Alcuni articoli sono su Academia.edu, altri su Research Gate. Per ogni risorsa è specificata la categoria di appartenenza (presentazione, articolo o poster), il tipo di file (pdf, odp, ppt ecc.) e la licenza applicata. Alcune presentazioni sono in formato html, quindi visibili direttamente da browser, e sono state create utilizzando i framework javascript <a href="https://github.com/tantaman/Strut" target="_blank" title="pagina github di Strut"><i class="fa fa-github" aria-hidden="true"></i> strut</a> e <a href="https://github.com/hakimel/reveal.js" target="_blank" title="pagina github di Reveals"><i class="fa fa-github" aria-hidden="true"></i>  reveals.js</a>, per una corretta visualizzazione è necessario che il browser sia abilitato a gestire i contenuti javascript.</span>
+        </section>
         <section class="toolbar">
             <div class="listTool">
-                <?php if(isset($_SESSION["id"])){ ?><a href="odForm.php" title="inserisci un nuovo post"><i class="fa fa-plus"></i>nuova risorsa</a><?php } ?>
+                <?php if(isset($_SESSION["id"])){ ?><a href="oddForm.php" title="inserisci un nuovo post"><i class="fa fa-plus"></i>nuova risorsa</a><?php } ?>
             </div>
             <div class="tableTool">
                 <select id="change-page-size">
@@ -44,8 +48,11 @@ $odRes = pg_query($connection, $odQuery);
                 while($doc = pg_fetch_array($odRes)){
                     $fileQuery="SELECT odf.tipo, odf.link, licenze.licenza, licenze.sigla, licenze.url FROM main.opendata odd, main.opendatafile odf, liste.licenze WHERE odf.opendata = odd.id AND odf.licenza = licenze.id AND odf.opendata = ".$doc['id'].";";
                     $fileRes= pg_query($connection, $fileQuery);
-                    $tagQuery="SELECT tag.tag FROM liste.tag, main.tags WHERE tags.tag = tag.id AND tags.tab = 4 AND tags.rec = ".$doc['id'].";";
+                    $tagQuery="SELECT tags FROM main.tags WHERE tags.tab = 4 AND tags.rec = ".$doc['id'].";";
                     $tagRes= pg_query($connection, $tagQuery);
+                    $tags = pg_fetch_array($tagRes);
+                    $tagListArr = explode(",",$tags['tags']);
+                    asort($tagListArr);
                     $data = split(" ",$doc['data']);
                     $data = $data[0];
                     switch($doc['categoria']){
@@ -57,26 +64,36 @@ $odRes = pg_query($connection, $odQuery);
                     echo "<tr>";
                     echo    "<td>";
                     echo        "<header>".$doc['titolo']."</header>";
-                    echo        "<article class='inline'>";
+                    echo        "<article class='inline abstract'>";
                     echo            "<h1>Abstract</h1>";
                     echo            "<p>".$doc['descrizione']."</p>";
                     echo        "</article>";
-                    echo        "<article class='inline'>";
+                    echo        "<article class='inline meta'>";
+                    echo "<div class='metadati'>";
                     echo            "<h1>Metadati</h1>";
                     echo            "<ul>";
                     echo                "<li><span class='label'>Autori: </span><span class='dati'>".$doc['autori']."</span></li>";
                     echo                "<li><span class='label'>Pubblicato da: </span><span class='dati'>".$doc['utente']."</span></li>";
                     echo                "<li><span class='label'>Pubblicato il: </span><span class='dati'>".$data."</span></li>";
                     echo            "</ul>";
-                    echo        "</article>";
-                    echo        "<article class='inline'>";
+                    echo "</div>";
+                    echo "<div class='file'>";
                     echo            "<h1>Risorse disponibili</h1>";
                     echo            "<ul>";
                     while($file = pg_fetch_array($fileRes)){echo "<li><a href='".$file['link']."' target='_blank' title ='[link esterno] Apri o scarica elemento'>".$cat."</a> (tipo file: <strong>".$file['tipo']."</strong>, licenza: <a href='".$file['url']."' target='_blank' title='[link esterno] ".$file['licenza']."'>".$file['sigla']."</a>)</li>";}
                     echo            "</ul>";
+                    echo "</div>";
+                    echo "<div class='tag'>";
                     echo            "<h1>Tag</h1>";
-                    while($tag = pg_fetch_array($tagRes)){echo "<span class='tag'>".$tags['tag']."</span>";}
+                    echo            "<div class='tagWrap'>";
+                    foreach ($tagListArr as $tag) { echo "<span class='tag'>".$tag."</span>"; }
+                    echo            "</div>";
+                    echo "</div>";
                     echo        "</article>";
+                    echo        "<div class='oddToolbar'>";
+                    echo            "<a href='oddForm.php?odd=".$doc['id']."' class='button modOdd' title='modifica il documento ".$doc['titolo']."'>modifica</a>";
+                    echo            "<a href='#' class='button prevent delOdd' title='Elimina il documento ".$doc['titolo']."' data-id='".$doc['id']."'>elimina</a>";
+                    echo        "</div>";
                     echo    "</td>";
                     echo "</tr>";
                 }
@@ -111,8 +128,23 @@ $odRes = pg_query($connection, $odQuery);
 				$('.footable').data('page-size', pageSize);
 				$('.footable').trigger('footable_initialized');
 			});
+            var tot = $(".footable tr").length;
             $('.clear-filter').click(function(e) { $('.footable').trigger('footable_clear_filter'); });
-            $("#filtro").keyup(function(){ filterTable(filtro,'dati'); });
+            $("#filtro").keyup(function(){
+                filterTable(filtro,'dati');
+                var rfiltered = $('.footable tbody tr:not(.footable-filtered)').length;
+                var test = "tot: "+parseInt(tot)+" / vis: "+parseInt(rfiltered);
+                console.log(test);
+            });
+            $("a.delOdd").on("click", function(){
+                var id = $(this).data('id');
+                var header = $(this).attr('title');
+                var testo = "Hai scelto di <strong>eliminare</strong> un documento dal database.</br>Se confermi l'eliminazione tutti i dati saranno definitivamente eliminati e non sarà più possibile recuperarli.";
+                $("#dialogContent header").text(header);
+                $("#dialogContent article").html(testo);
+                $("#dialogWrap").fadeIn('fast');
+                $("button[name='conferma']").on("click", function(){ usrAction(id, 'oddDel.php'); });
+            });
         });
     </script>
   </body>

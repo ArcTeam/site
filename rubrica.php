@@ -102,20 +102,7 @@ $formDialog .=  "<input type='email' name='email' style='width:250px;' class='in
     </head>
     <body>
         <header id="main"><?php require("inc/header.php"); ?></header>
-
-        <div id="dialogWrap">
-            <section class='content' id="dialogContent">
-                <header></header>
-                <article></article>
-                <div class="dialogForm"><?php echo $formDialog; ?></div>
-                <div class="dialogButtonDiv">
-                    <button type="button" name='conferma'>conferma</button>
-                    <button type="button" name='closeDialog'>annulla</button>
-                    <div class="inline dialogResult"></div>
-                </div>
-            </div>
-        </div>
-
+        <?php require("inc/dialog.php"); ?>
         <div id="mainWrap">
             <section class="content">
                 <?php if (isset($_SESSION['id'])) {?>

@@ -8,17 +8,18 @@ if(isset($_GET['p'])){
     $post = pg_fetch_array($pr);
     $id = $_GET['p'];
     //tag presenti
-    $tagpres = "select t.id, t.tag from liste.tag t, main.tags ts where ts.tag = t.id and ts.rec = ".$_GET['p']." and ts.tab = 1 order by t.tag asc;";
+    $tagpres = "select tags from main.tags where rec = ".$_GET['p']." and tab = 1;";
     $tagpresq = pg_query($connection,$tagpres);
-    $tagpresarr = array();
-    while ($tagprest = pg_fetch_array($tagpresq)) {
-        $x['id'] = $tagprest['id'];
-        $x['tag'] = $tagprest['tag'];
-        array_push($tagpresarr,$x);
+    $tagpresres = pg_fetch_array($tagpresq);
+    if (!$tagpresres) {
+        $tagpresList = 0;
+    }else {
+        $tags = explode(',',$tagpresres['tags']);
+        asort($tags);
+        $tagpresList = json_encode($tags);
     }
-    $tagpresList = json_encode($tagpresarr);
 }else{
-    $tagpresList = 'noTag';
+    $tagpresList = 0;
     $id = 0;
     $header = 'Inserisci un nuovo post';
 }
@@ -97,8 +98,12 @@ $tagList = json_encode($tag);
                 }
                 var tagpresarr = <?php echo $tagpresList; ?>;
                 var tags = [];
-                $.each(tagpresarr, function(k,v) { tags.push(v.tag); });
-                prefilled=tags;
+                if (tagpresarr == 0) {
+                    prefilled='';
+                }else {
+                    $.each(tagpresarr, function(k,v) { tags.push(v); });
+                    prefilled=tags;
+                }
                 script = 'postMod.php';
             }else{
                 prefilled='';

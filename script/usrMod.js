@@ -45,7 +45,8 @@ $(document).ready(function(){
     });
 
     //tag
-    $.each(tagpresarr, function(k,v) { tags.push(v.tag); });
+    $.each(tagpresarr, function(k,v) { tags.push(v); });
+    console.log(tags);
     prefilled=tags;
     $(".tm-input").tagsManager({
         prefilled: prefilled,

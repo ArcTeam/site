@@ -38,19 +38,7 @@ section.content:not(".footable  ") span{font-size: 1rem; text-align: center; dis
 #noAccess h2{font-size:2rem;}
 
 /*dialog mio*/
-#dialogWrap{
-    position: fixed;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    z-index: 100;
-    display:none;
-    background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
-    background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
-    background: radial-gradient(ellipse at center,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=1 );
-}
+#dialogWrap{ position: fixed; top: 0px; right: 0px; bottom: 0px; left: 0px; z-index: 100; display:none; background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%); background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); background: radial-gradient(ellipse at center,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=1 );}
 #dialogWrap section{width:60%;height:auto;margin:15% auto 0px;}
 .dialogForm, .dialogResult{display:none;}
 .dialogForm{margin:20px 0px;}
@@ -73,6 +61,7 @@ a.genericLink{color:#363A3F;}
 .success{border:1px solid #00c5ca; background-color: #c6f3f5; color: #006366; text-align: center;}
 .warning{border:1px solid #e5ce23; background-color: #ffef9f; color: #685815; text-align: center;}
 .error{border:1px solid rgb(200,0,0); background-color: rgba(200,0,0,0.3); color: rgb(200,0,0); text-align: center;}
+.formError{border:1px solid rgb(200,0,0); color: rgb(200,0,0);}
 .transition, a{-webkit-transition: all .30s linear; -moz-transition: all .30s linear; -ms-transition: all .30s linear; -o-transition: all .30s linear; transition: all .30s linear;}
 .olControlAttribution{bottom:0px !important;font-size: .6rem !important;}
 .red{color:#AA1313;}

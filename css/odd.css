@@ -1,12 +1,21 @@
 @import url("style.css");
+#presentazione{margin:30px 0px; color:#fff;background:#093;border-radius:3px;padding:20px;}
+#presentazione span:first-child{width:10%;}
+#presentazione span:last-child{width:80%;}
+#presentazione a{color:#fff;border-bottom:1px dashed #fff;}
 .footable caption{font-size: 1rem;}
 .footable tr{border:none;}
 .footable th{background:none;}
 .footable tbody td header{color:#009933;font-size:1.5rem;}
-.footable tbody td p{font-size:1.2rem;}
-.footable tbody td div a{display: inline-block; color:#009933; padding: 3px 7px; border-radius: 3px;font-size:1.1rem;}
-.footable tbody td div a:hover{background:#009933;color:#fff;}
-.footable tbody article{width:30%; margin-right:20px;font-size:.9rem;}
+.footable tbody article{font-size:.9rem;}
+.footable tbody article.abstract{width:60%;}
+.footable tbody article.meta{width:38%;margin-left:20px;}
 .footable tbody article h1{font-size:1.2rem;}
 .footable .dati{font-weight: bold;}
+.oddToolbar{margin-top:20px;}
+.oddToolbar a{margin-right:10px;color:#363A3F; background:#f6f6f6; border:1px solid rgba(0,0,0,0.3);padding:2px 3px;}
+.file, .tag{margin-top:20px;padding-top:15px; border-top:1px solid #999; }
+.tagWrap{padding:10px 3px;font-size:.8rem;color:#000;}
+span.tag { display: inline-block; margin: 3px; padding: 0px 5px; border-radius: 3px;border: 1px solid #363A3F;background:#d6d6d6;}
+span.tag i{margin-left:7px;}
 /***************************************/

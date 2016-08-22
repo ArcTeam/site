@@ -102,6 +102,11 @@ function create_node(child) {
   node.appendChild(child);
   return node;
 }
+
+function tagLength(){
+    var tag = $(".tm-tag").length;
+    if(tag==0){ $("input[name='tags']").prop("required", true); }else{ $("input[name='tags']").prop("required", false); }
+}
 ////////////////////////////////////////////////////////////////////////////////
 
 var w=$("#mainWrap").width();
@@ -118,11 +123,7 @@ var headH = $("header#main").height();
 var navPos = $("#login").offset();
 var logged = $("#logged").offset();
 if(headH > 480){$(".panel").css({"height":headW});}
-$(".subMenu").css({"top":logged.top-50,"right":headW+1});
-/*$("#logged").clickToggle(
-    function(){$("#settingUl").fadeIn('fast');},
-    function(){$("#settingUl").fadeOut('fast');}
-);*/
+$(".subMenu").css({"bottom":"0","right":headW+1});
 var mediaQuery = window.getComputedStyle(document.querySelector('body'),':before').content;
 var act = (mediaQuery == '"desktop"') ? "mouseenter mouseleave":"click";
 $(".logged").on(act, function(){$(this).children('ul').stop().animate({width: 'toggle'});});

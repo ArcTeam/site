@@ -12,19 +12,17 @@ $tipoq="select * from liste.tipo_utente order by definizione asc;";
 $tipoexec = pg_query($connection,$tipoq);
 
 //tag utente
-$tagUsr = "select t.tag from liste.tag t, main.tags ts where ts.tag = t.id and ts.rec = ".$_SESSION['id']." and ts.tab = 2 order by t.tag asc;";
+$tagUsr = "select tags from main.tags where rec = ".$_SESSION['id']." and tab = 2;";
 $tagUsrQ = pg_query($connection,$tagUsr);
-$tagUsrRow = pg_num_rows($tagUsrQ);
-if($tagUsrRow > 0){
-    $tagpresarr = array();
-    while ($tagprest = pg_fetch_array($tagUsrQ)) {
-        $x['tag'] = $tagprest['tag'];
-        array_push($tagpresarr,$x);
-    }
-    $tagpresList = json_encode($tagpresarr);
-}else{
+$tagUsrRes = pg_fetch_array($tagUsrQ);
+if (!$tagUsrRes) {
     $tagpresList = 'noTag';
+}else {
+    $tags = explode(',',$tagUsrRes['tags']);
+    asort($tags);
+    $tagpresList = json_encode($tags);
 }
+
 //lista tag
 $t = "select tag from liste.tag order by tag asc;";
 $tq = pg_query($connection, $t);

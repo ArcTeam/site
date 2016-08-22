@@ -42,21 +42,21 @@ while($od = pg_fetch_array($odres)){
 }
 
 //tag cloud
-$tag = "select t.id, t.tag,
-            case
-                when count(tt.tag) < 10 then '.8rem'::text
-		        when count(tt.tag) between 10 and 25 then '1rem'::text
-		        when count(tt.tag) between 26 and 50 then '1.2rem'::text
-                when count(tt.tag) between 51 and 75 then '1.4rem'::text
-                when count(tt.tag) between 76 and 100 then '1.6rem'::text
-                when count(tt.tag) > 100 then '1.8rem'::text
-            end as css
-        from liste.tag t, main.tags tt where tt.tag=t.id
-        group by t.id, t.tag
-        order by tag asc;";
+$tag = "select unnest(string_to_array(tags, ',')) as tag,
+  case
+    when count(unnest(string_to_array(tags, ','))) < 10 then '.8rem'::text
+    when count(unnest(string_to_array(tags, ','))) between 10 and 25 then '1rem'::text
+    when count(unnest(string_to_array(tags, ','))) between 26 and 50 then '1.2rem'::text
+    when count(unnest(string_to_array(tags, ','))) between 51 and 75 then '1.4rem'::text
+    when count(unnest(string_to_array(tags, ','))) between 76 and 100 then '1.6rem'::text
+    when count(unnest(string_to_array(tags, ','))) > 100 then '1.8rem'::text
+  end as css
+from main.tags
+group by tag
+order by tag asc;";
 $tagres = pg_query($connection,$tag);
 while($t=pg_fetch_array($tagres)){
-    $tags .= "<a href='searchTag.php?tag=".$t['id']."' title='cerca contenuti con tag ".$t['tag']."' class='tag transition' style='font-size: ".$t['css']." !important;'>".$t['tag']."</a>";
+    $tags .= "<a href='searchTag.php?tag=".$t['tag']."' title='cerca contenuti con tag ".$t['tag']."' class='tag transition' style='font-size: ".$t['css']." !important;'>".$t['tag']."</a>";
 }
 ?>
 <!DOCTYPE html>

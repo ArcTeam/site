@@ -57,8 +57,11 @@ $colori = array("#FBBC05","#82C914","#1da1f2","#9A9A9A","#FF7B59");
                             $id = $socio['id_usr'];
                             $socialQuery = "SELECT social.ico, social.nome, usr_social.link FROM main.usr, main.usr_social, liste.social WHERE usr_social.usr = usr.id AND usr_social.social = social.id AND usr.id = ".$id." order by nome asc;";
                             $socialExec = pg_query($connection, $socialQuery);
-                            $tagQuery = "SELECT tag.tag FROM main.usr, liste.tag, main.tags WHERE tags.tag = tag.id AND tags.rec = usr.id AND tags.tab = 2 AND usr.id = ".$id." ORDER BY tag ASC;";
+                            $tagQuery = "SELECT tags.tags FROM main.usr, main.tags WHERE tags.rec = usr.id AND tags.tab = 2 AND usr.id = ".$id;
                             $tagExec = pg_query($connection, $tagQuery);
+                            $tagList = pg_fetch_array($tagExec);
+                            $tagListArr = explode(",",$tagList['tags']);
+                            asort($tagListArr);
                             echo "<div class='socioWrap'>";
                             echo    "<div class='avatar' style='background-image:url(img/usr/".$socio['img'].")'></div>";
                             echo    "<div class='socioDatiContent'>";
@@ -71,17 +74,13 @@ $colori = array("#FBBC05","#82C914","#1da1f2","#9A9A9A","#FF7B59");
                             echo            "<ul>";
                             echo                "<li><span class='ico'><i class='fa fa-envelope' aria-hidden='true'></i></span><span class='dato'>".$socio['email']."</span></li>";
                             echo                "<li><span class='ico'><i class='fa fa-phone' aria-hidden='true'></i></span><span class='dato'>".$socio['cell']."</span></li>";
-                            while ($social = pg_fetch_array($socialExec)){
-                                echo            "<li><span class='ico'><i class='fa ".$social['ico']."' aria-hidden='true'></i></span><span class='dato'><a href='".$social['link']."' target='_blank' title='[link esterno] ".$social['nome']."' class='genericLink transition'>".$social['nome']."</a></span></li>";
-                            }
+                            while ($social = pg_fetch_array($socialExec)){ echo "<li><span class='ico'><i class='fa ".$social['ico']."' aria-hidden='true'></i></span><span class='dato'><a href='".$social['link']."' target='_blank' title='[link esterno] ".$social['nome']."' class='genericLink transition'>".$social['nome']."</a></span></li>"; }
                             echo            "</ul>";
                             echo        "</div>";
                             echo        "<div class='dati'>";
                             echo            "<h2>Skills</h2>";
                             echo            "<div class='tagWrap'>";
-                            while ($tag = pg_fetch_array($tagExec)){
-                                echo            "<span class='tag'>".$tag['tag']."</span>";
-                            }
+                            foreach ($tagListArr as $tag) { echo "<span class='tag'>".$tag."</span>"; }
                             echo            "</div>";
                             echo        "</div>";
                             echo    "</div>";
@@ -100,8 +99,11 @@ $colori = array("#FBBC05","#82C914","#1da1f2","#9A9A9A","#FF7B59");
                             $id = $socio['id_usr'];
                             $socialQuery = "SELECT social.ico, social.nome, usr_social.link FROM main.usr, main.usr_social, liste.social WHERE usr_social.usr = usr.id AND usr_social.social = social.id AND usr.id = ".$id." order by nome asc;";
                             $socialExec = pg_query($connection, $socialQuery);
-                            $tagQuery = "SELECT tag.tag FROM main.usr, liste.tag, main.tags WHERE tags.tag = tag.id AND tags.rec = usr.id AND tags.tab = 2 AND usr.id = ".$id." ORDER BY tag ASC;";
+                            $tagQuery = "SELECT tags.tags FROM main.usr, main.tags WHERE tags.rec = usr.id AND tags.tab = 2 AND usr.id = ".$id;
                             $tagExec = pg_query($connection, $tagQuery);
+                            $tagList = pg_fetch_array($tagExec);
+                            $tagListArr = explode(",",$tagList['tags']);
+                            asort($tagListArr);
                             echo "<div class='socioWrap'>";
                             echo    "<div class='avatar' style='background-image:url(img/usr/".$socio['img'].")'></div>";
                             echo    "<div class='socioDatiContent'>";
@@ -114,17 +116,13 @@ $colori = array("#FBBC05","#82C914","#1da1f2","#9A9A9A","#FF7B59");
                             echo            "<ul>";
                             echo                "<li><span class='ico'><i class='fa fa-envelope' aria-hidden='true'></i></span><span class='dato'>".$socio['email']."</span></li>";
                             echo                "<li><span class='ico'><i class='fa fa-phone' aria-hidden='true'></i></span><span class='dato'>".$socio['cell']."</span></li>";
-                            while ($social = pg_fetch_array($socialExec)){
-                                echo            "<li><span class='ico'><i class='fa ".$social['ico']."' aria-hidden='true'></i></span><span class='dato'><a href='".$social['link']."' target='_blank' title='[link esterno] ".$social['nome']."' class='genericLink transition'>".$social['nome']."</a></span></li>";
-                            }
+                            while ($social = pg_fetch_array($socialExec)){ echo "<li><span class='ico'><i class='fa ".$social['ico']."' aria-hidden='true'></i></span><span class='dato'><a href='".$social['link']."' target='_blank' title='[link esterno] ".$social['nome']."' class='genericLink transition'>".$social['nome']."</a></span></li>"; }
                             echo            "</ul>";
                             echo        "</div>";
                             echo        "<div class='dati'>";
                             echo            "<h2>Skills</h2>";
                             echo            "<div class='tagWrap'>";
-                            while ($tag = pg_fetch_array($tagExec)){
-                                echo            "<span class='tag'>".$tag['tag']."</span>";
-                            }
+                            foreach ($tagListArr as $tag) { echo "<span class='tag'>".$tag."</span>"; }
                             echo            "</div>";
                             echo        "</div>";
                             echo    "</div>";

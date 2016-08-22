@@ -19,24 +19,18 @@ if (!isset($_FILES['updateImg']) || !is_uploaded_file($_FILES['updateImg']['tmp_
 	$msg .= "errore upload foto: ".$_FILES["updateImg"]["error"]."<br/>";
 }
 //********** gestione tag ********************/
-$tags = explode(",",$_POST["tagList"]);
-$resetTag = "delete from main.tags where rec = ".$_SESSION['id']." AND tab = 2;";
-foreach ($tags as $tag) {
-    $a = "select id from liste.tag where tag = '".$tag."'";
-    $b = pg_query($connection, $a);
-    $c = pg_fetch_array($b);
-    $addTag .= "insert into main.tags(tag, rec, tab) values(".$c['id'].", ".$_SESSION['id'].", 2);";
+if (!empty($_POST['tagList'])) {
+    $checkTag = "select count(id) as tags from main.tags where rec =".$_SESSION['id']." and tab = 2;";
+    $checkTagQuery = pg_query($connection,$checkTag);
+    $checkTagRes = pg_fetch_array($checkTagQuery);
+    if($checkTagRes['tags'] == 0){ $tag = "insert into main.tags(tags, rec, tab) values('".$_POST['tagList']."', ".$_SESSION['id'].", 2);";}
+    else { $tag = "update main.tags set tags = '".$_POST['tagList']."' where rec = ".$_SESSION['id']." and tab=2;"; }
+}else {
+    $tag = "delete from main.tags where rec = ".$_SESSION['id']." and tab=2;";
 }
-$tagq = "BEGIN;";
-$tagq .= $resetTag;
-$tagq .= $addTag;
-$tagq .= "COMMIT;";
-$tagr = pg_query($connection,$tagq);
-if(!$tagr){
-    $msg .= "errore modifica skills: ".pg_last_error($connection)."<br/>";
-}else{
-    $msg .= "Skills modificate con successo<br/>";
-}
+$tagQuery = pg_query($connection,$tag);
+if(!$tagQuery){ $msg .= "errore modifica skills: ".pg_last_error($connection)."<br/>";}
+else{ $msg .= "Skills modificate con successo<br/>";}
 //********** gestione social network ********************/
 if(isset($_POST['tipo'])){
     $tipo = $_POST['tipo'];
