@@ -1,0 +1,19 @@
+@import url("style.css");
+@import url("../lib/tag/tagmanager.css");
+
+form section{width:70%;margin:20px 0px;}
+header.main{color:#093 !important;}
+header.submain{font-size:1.2rem !important;}
+.metadati span:first-child{width:80px;}
+.metadati span:last-child *{width:99%;}
+textarea[name='descrizione']{height:150px;}
+#filesShowList li{border-bottom:1px solid #999;padding:8px 0px;}
+#filesShowList li span{padding:0px 6px;}
+#filesShowList li span:first-child{width:505px;}
+#filesShowList li span:nth-child(2){width:110px;}
+#filesShowList li a{padding:0px 8px;}
+input[name='link']{width:500px;}
+select[name='licenza']{width:100px;}
+button.addFile{padding:10px;background:#fff;color:rgba(0,0,0,0.7);}
+button.addFile:hover{background:#DDD;color:rgba(0,0,0,0.9);}
+.notUrl{display:none;}
