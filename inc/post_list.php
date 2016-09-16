@@ -1,8 +1,7 @@
 <?php
 session_start();
 require("db.php");
-$vis = $_POST['vis'];
-$a ="SELECT p.id, p.data, p.titolo, r.utente FROM main.post p, main.usr u, main.rubrica r WHERE p.usr = u.id AND u.rubrica = r.id AND p.pubblica = $vis order by data desc;";
+$a ="SELECT post.id, post.titolo, post.testo, log.data, rubrica.utente FROM main.log, main.usr, main.rubrica, main.post WHERE log.utente = usr.id AND log.record = post.id AND usr.rubrica = rubrica.id AND post.pubblica = ".$_POST['vis']." AND post.cat = 1 AND log.tabella = 'post' AND log.operazione = 'I';";
 
 $b = pg_query($connection, $a);
 $arr = array();

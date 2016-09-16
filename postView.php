@@ -6,9 +6,9 @@ $b = pg_query($connection,$a);
 $p = pg_fetch_array($b);
 $data = explode(" ",$p['data']);
 
-$t = "select t.tag from liste.tag t, main.tags ts where ts.tag = t.id and ts.rec = ".$_GET['p']." and ts.tab = 1 order by t.tag asc";
+$t = "select ts.tags from main.tags ts where ts.rec = ".$_GET['p']." and ts.tab = 1 order by ts.tags asc";
 $tr = pg_query($connection,$t);
-while($tag = pg_fetch_array($tr)){$tags .= "<span class='tag'>".$tag['tag']."<i class='fa fa-tag'></i></span>";}
+while($tag = pg_fetch_array($tr)){$tags .= "<span class='tag'>".$tag['tags']."<i class='fa fa-tag'></i></span>";}
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,7 +25,7 @@ while($tag = pg_fetch_array($tr)){$tags .= "<span class='tag'>".$tag['tag']."<i 
                 <footer id="toolbar">
                     <a href="post.php" id="list"><i class="fa fa-th-list"></i> archivio post</a>
                     <?php if(isset($_SESSION['id'])){?>
-                        <a href="postForm.php?p=<?php echo $_GET['p'];?>" id="mod"><i class="fa fa-wrench"></i> modifica post</a>
+                        <a href="postForm.php?t=1&p=<?php echo $_GET['p'];?>" id="mod"><i class="fa fa-wrench"></i> modifica post</a>
                         <a href="#" id="del"><i class="fa fa-times"></i> elimina post</a>
                         <?php } ?>
                 </footer>
@@ -68,6 +68,7 @@ while($tag = pg_fetch_array($tr)){$tags .= "<span class='tag'>".$tag['tag']."<i 
         <script src="script/funzioni.js"></script>
         <script>
         $(document).ready(function(){
+            $("a#post").addClass('actPost prevent');
             $('#testo').ckeditor();
             var form = $("form[name=postForm]");
             form.submit(function(e){

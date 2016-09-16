@@ -1,7 +1,22 @@
 @import url("reset.css");
+@import url("jquery-ui-1.14.min.css");
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300);
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,300,200,700);
-@import url("font/css/font-awesome.min.css");
+/*@import url("font/css/font-awesome.min.css");*/
+
+/************ colori utilizzati per testo **********/
+.base{color:#363A3F !important;}
+.grigio{color:#999 !important;}
+.verde{color:#093 !important;}
+.oliva{color:#82C914 !important;}
+.rosso{color:#FF0000 !important;}
+.arancio{color:#FFA101 !important;}
+.giallo{color:#FBBC05 !important;}
+.celeste{color:#66BBDD !important;}
+.viola{color:#494177 !important;}
+.azzurro{color:#1DA1F2 !important;}
+
+
 html{background:#EEE;font-family: 'Titillium Web', sans-serif !important;font-size:100% !important;color:#363A3F;}
 select, input, textarea,button{border:1px solid #999; font-size:.8rem; padding:6px; vertical-align:top; border-radius: 3px;}
 select{background:#fff;}
@@ -16,7 +31,7 @@ footer #wrapFooter header { font-size: 1rem; color: #82C914;font-weight: bold;}
 footer#toolbar{background: none;text-align:left;}
 
 section.content, section.ckform {position: relative; background: #fff; margin: 30px auto; padding: 30px; border: 1px solid #ccc; border-radius: 5px; width: 90%;}
-section.content header, section.ckform header { display: block; width: 100%; border-bottom: 1px solid #999; font-size: 1.5rem; color: #999;}
+section.content header, section.ckform header { display: block; width: 100%; border-bottom: 1px solid #999; font-size: 2rem; color: #999;}
 
 section.toolbar{margin: 10px 0px;font-size:.9rem;}
 section.toolbar div{display:inline-block;width:49.5%;margin:0px;padding:0px;}
@@ -50,10 +65,13 @@ a.button:hover{background: #d6e9c6;}
 a.genericLink{color:#363A3F;}
 
 /* classi generiche */
-.actHome{color:#ff0000 !important;}
-.actHack{border-left:5px solid #82C914 !important; color:#82C914 !important;}
-.actProject{border-left:5px solid #1da1f2 !important; color:#1da1f2 !important;}
-.actTeam{border-left:5px solid #FBBC05 !important; color:#FBBC05 !important;}
+.actHome{color:#ff0000 !important;border-left:5px solid #ff0000 !important;cursor:default !important;}
+.actPost{color:#FBBC05 !important;border-left:5px solid #FBBC05 !important;cursor:default !important;}
+.actWorks{color:#82C914 !important;border-left:5px solid #82C914 !important;cursor:default !important;}
+.actOdd{color:#093 !important;border-left:5px solid #093 !important;cursor:default !important;}
+.actHack{border-left:5px solid #82C914 !important; color:#82C914 !important;cursor:default !important;}
+.actProject{border-left:5px solid #1da1f2 !important; color:#1da1f2 !important;cursor:default !important;}
+.actTeam{border-left:5px solid #FBBC05 !important; color:#FBBC05 !important;cursor:default !important;}
 .hide, #creditfooter{display:none;};
 .cursor{cursor:pointer !important;}
 .inline{display:inline-block;vertical-align:top;}
@@ -64,10 +82,13 @@ a.genericLink{color:#363A3F;}
 .formError{border:1px solid rgb(200,0,0); color: rgb(200,0,0);}
 .transition, a{-webkit-transition: all .30s linear; -moz-transition: all .30s linear; -ms-transition: all .30s linear; -o-transition: all .30s linear; transition: all .30s linear;}
 .olControlAttribution{bottom:0px !important;font-size: .6rem !important;}
-.red{color:#AA1313;}
 .rowButton {margin-top: 20px;}
 .iForm {border: 1px solid #999 !important; border-right: none !important; border-radius: 3px 0px 0px 3px; font-size: 1.7rem; padding: 6px; display: inline-block; margin-right: -5px;}
 .bForm { border-left: 1px transparent !important;}
+
+/**** sovrascrivi jquery ui  *****/
+.ui-widget-content {background: #fff !important;font-size:.9rem !important;}
+.ui-state-focus{font-weight: normal !important;border:none !important;}
 
 /* tabelle footable lista record */
 /*.footable{border:1px solid #0088cc;}*/
@@ -146,13 +167,16 @@ a.genericLink{color:#363A3F;}
     header#main h1 span { color: red;}
     header#main nav { margin: 30px 0px;}
     header#main nav li { text-align: center;}
-    header#main nav li a { text-decoration: none; display: block; font-size: 1rem; color: #909090; margin: 35px 0px; border-left: 5px solid transparent; text-shadow: 0px 0px 3px #000;}
+    header#main nav li a { text-decoration: none; display: block; font-size: 1rem; color: #909090; margin: 15px 0px; border-left: 5px solid transparent; text-shadow: 0px 0px 3px #000;}
     header#main nav li a#home:hover{border-left:5px solid #ff0000 !important; color:#ff0000 !important;}
-    header#main nav li a#hack:hover{border-left:5px solid #82C914 !important; color:#82C914 !important;}
+    header#main nav li a#post:hover{border-left:5px solid #FBBC05 !important; color:#FBBC05 !important;}
+    header#main nav li a#works:hover{border-left:5px solid #82C914 !important; color:#82C914 !important;}
     header#main nav li a#project:hover{border-left:5px solid #1da1f2 !important; color:#1da1f2 !important;}
+    header#main nav li a#odd:hover{border-left:5px solid #093 !important; color:#093 !important;}
     header#main nav li a#team:hover{border-left:5px solid #FBBC05 !important; color:#FBBC05 !important;}
+    header#main nav li a#hack:hover{border-left:5px solid #82C914 !important; color:#82C914 !important;}
     header#main nav li a#login:hover{border-left:5px solid #FFF !important; color:#FFF !important;}
-    header#main nav li a i { display: block;font-size:2rem; }
+    header#main nav li a i { display: block;font-size:1.5rem; }
     #settingUl {display:none;}
     .subMenu {position: absolute;/* margin-left: -152px; margin-top:-68px;*/ display: block; width: 150px; padding:10px 0px;border-radius:5px 0px 0px 5px; background: rgb(69,73,78); color:#909090 !important;}
     .subMenu li{border-top:1px solid #909090;border-bottom:1px solid transparent;text-align:left !important;}

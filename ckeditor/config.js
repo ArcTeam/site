@@ -25,6 +25,7 @@
  	config.removeButtons = 'NewPage,Templates,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CreateDiv,BidiLtr,BidiRtl,Language,Anchor,Flash,PageBreak,ShowBlocks,Scayt,Smiley,HorizontalRule';
     config.height="400px";
     config.resize_enabled = false;
-    config.extraPlugins = 'imageuploader,html5validation';
+    config.extraPlugins = 'widget,filetools,lineutils,notification,toolbar,button,notificationaggregator,imageuploader,uploadimage,uploadwidget,html5validation';
     config.skin = 'bootstrapck';
+    config.filebrowserUploadUrl = 'inc/upload.php';
  };

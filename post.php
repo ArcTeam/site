@@ -3,7 +3,7 @@ session_start();
 require("inc/db.php");
 require("inc/cut.php");
 if(isset($_GET['x'])){$x=0;}else{$x=1;}
-$a = "SELECT p.id, p.titolo, p.testo, l.data, r.utente FROM main.log l, main.usr u, main.post p, main.rubrica r WHERE l.record = p.id AND l.utente = u.id AND u.rubrica = r.id AND l.tabella = 'post' AND p.pubblica = 1 order by data desc;";
+$a = "SELECT post.id,post.titolo, post.testo, log.data, rubrica.utente FROM main.log, main.usr, main.rubrica, main.post WHERE log.utente = usr.id AND log.record = post.id AND usr.rubrica = rubrica.id AND post.pubblica = 1 AND post.cat = 1 AND log.tabella = 'post' AND log.operazione = 'I' order by log.data desc;";
 $b = pg_query($connection, $a);
 while($c = pg_fetch_array($b)){
     $data = split(" ",$c['data']);
@@ -12,10 +12,10 @@ while($c = pg_fetch_array($b)){
     $testo = cutHtmlText($c['testo'], 300, "...", false, false, false);
     $post .= "<tr>";
     $post .= "<td>";
-    $post .= "<header>".$c['titolo']."</header>";
+    $post .= "<header class='giallo'>".$c['titolo']."</header>";
     $post .= "<article>";
     $post .= $testo;
-    $post .= "<div><a href='postView.php?p=".$c['id']."' title='Leggi tutto'><i class='fa fa-eye hidden-aria='true'></i> Leggi tutto</a></div>";
+    $post .= "<div class='buttonFooter'><a href='postView.php?p=".$c['id']."' title='Leggi tutto'><i class='fa fa-arrow-right hidden-aria='true'></i> Leggi tutto</a></div>";
     $post .= "</article>";
     $post .= "<footer>Pubblicato da <strong>".$c['utente']."</strong> il <strong>".$data."</strong></footer>";
     $post .= "</td>";
@@ -33,10 +33,13 @@ while($c = pg_fetch_array($b)){
     <header id="main"><?php require("inc/header.php"); ?></header>
     <div id="mainWrap">
       <section class="content">
-        <header>Archivio post</header>
+        <header class='giallo'>Archivio post</header>
+        <section id="presentazione">
+            <span class='inline'><i class="fa fa-th-list fa-5x"></i></span><span class='inline'>Notizie, eventi, nuovi progetti, nuovi cantieri e tante altre informazioni dal mondo Arc-Team.</span>
+        </section>
         <section class="toolbar">
             <div class="listTool">
-                <?php if(isset($_SESSION["id"])){ ?><a href="postForm.php" title="inserisci un nuovo post"><i class="fa fa-plus"></i>nuovo post</a><?php } ?>
+                <?php if(isset($_SESSION["id"])){ ?><a href="postForm.php?t=1" title="inserisci un nuovo post"><i class="fa fa-plus"></i>nuovo post</a><?php } ?>
             </div>
             <div class="tableTool">
                 <select id="change-page-size">
@@ -76,11 +79,11 @@ while($c = pg_fetch_array($b)){
     <script type="text/javascript" src="lib/FooTable/js/footable.sort.js"></script>
     <script type="text/javascript" src="lib/FooTable/js/footable.paginate.js"></script>
     <script type="text/javascript" src="lib/FooTable/js/footable.filter.js"></script>
-    <script type="text/javascript" src="lib/FooTable/js/footable.striping.js"></script>
 
     <script src="script/funzioni.js"></script>
     <script>
         $(document).ready(function(){
+            $("a#post").addClass('actPost prevent');
             $('#testo').ckeditor();
             $('.footable').footable();
             $('#change-page-size').change(function (e) {
@@ -100,17 +103,22 @@ while($c = pg_fetch_array($b)){
                     data: {vis:vis},
                     dataType : 'json',
                     success: function(data){
+                        var tr;
                         $.each(data, function(index, item){
                             var id = item.id;
                             var data = item.data;
                             data = data.split(" ");
                             var titolo = item.titolo;
+                            var testo = item.testo;
                             var utente = item.utente;
-                            $(".tableList tbody").html("<tr><td><a href='postView.php?p="+id+"'><i class='fa fa-arrow-right'></i></a></td><td>"+titolo+"</td><td>"+utente+"</td><td>"+data[0]+"</td></tr>");
+                            tr += "<tr><td><header class='giallo'>"+titolo+"</header><article>"+trimString(testo, 300, ' ', ' ...')+"<div class='buttonFooter'><a href='postView.php?p="+id+"' title='Leggi tutto'><i class='fa fa-arrow-right'></i> Leggi tutto</a></div></article><footer>Pubblicato da <strong>"+utente+"</strong> il <strong>"+data[0]+"</strong></footer></td></tr>";
+                            $(".tableList tbody").html(tr);
+                            $(".tableList tbody img").remove();
                         });
                     }
                 });
             });
+            $(".tableList tbody img").remove();
         });
     </script>
   </body>

@@ -1,18 +1,15 @@
 <?php
 session_start();
 require("inc/db.php");
-$a ="select l.id, l.nome, t.definizione as tipo, regexp_replace(ANYARRAY_SORT(ANYARRAY_UNIQ(array_agg(lm.anno)))::text, '[{}]','','g') as anno from main.lavoro l, main.lavoro_metadati lm, liste.tipo_lavoro t where lm.tipo_lavoro = t.id and lm.lavoro = l.id group by l.id, l.nome, t.definizione order by l.nome asc;";
+$a ="select l.id, l.anno, c.categoria, l.nome, l.descrizione from main.lavoro l, liste.cat c where l.tipo = c.id order by l.anno asc, l.nome asc;";
 $b = pg_query($connection, $a);
 while($c = pg_fetch_array($b)){
-    $anno = explode(",",$c['anno']);
-    $primo = $anno[0];
-    $n=count($anno);
-    $anno = ($n==1)?$primo:$primo." - ".$anno[$n-1];
     $post .= "<tr>";
-    $post .= "<td><a href='lavoro_view.php?p=".$c['id']."'><i class='fa fa-arrow-right'></i></a></td>";
+    $post .= "<td><a href='lavoro.php?l=".$c['id']."'><i class='fa fa-arrow-right'></i></a></td>";
+    $post .= "<td>".$c['anno']."</td>";
+    $post .= "<td>".$c['categoria']."</td>";
     $post .= "<td>".$c['nome']."</td>";
-    $post .= "<td>".$c['tipo']."</td>";
-    $post .= "<td>".$anno."</td>";
+    $post .= "<td>".$c['descrizione']."</td>";
     $post .= "</tr>";
 }
 ?>
@@ -24,8 +21,9 @@ while($c = pg_fetch_array($b)){
       <link href="lib/FooTable/css/footable.core.min.css" rel="stylesheet" media="screen" />
       <style>
         .footable th:nth-child(1){width:5%;}
-        .footable th:nth-child(3){width:30%;}
-        .footable th:nth-child(4){width:10%;}
+        .footable th:nth-child(2){width:5%;}
+        .footable th:nth-child(3){width:20%;}
+        .footable th:nth-child(4){width:30%;}
       </style>
   </head>
   <body>
@@ -36,7 +34,7 @@ while($c = pg_fetch_array($b)){
         <section class="toolbar">
             <div class="listTool">
                 <?php if(isset($_SESSION["id"])){ ?>
-                <a href="post_new.php" title="inserisci un nuovo lavoro"><i class="fa fa-plus"></i>nuovo lavoro</a>
+                <a href="lavoroIns.php" title="inserisci un nuovo lavoro"><i class="fa fa-plus"></i>nuovo lavoro</a>
                 <?php } ?>
             </div>
             <div class="tableTool">
@@ -55,9 +53,10 @@ while($c = pg_fetch_array($b)){
             <thead>
                 <tr>
                     <th data-sort-ignore="true"></th>
-                    <th data-sort-ignore="true">Nome</th>
-                    <th data-hide="phone">Tipo lavoro</th>
-                    <th data-hide="phone">Anno</th>
+                    <th data-sort-ignore="true">Anno</th>
+                    <th data-hide="phone">Categoria</th>
+                    <th data-hide="phone">Nome</th>
+                    <th data-hide="phone">Descrizione</th>
                 </tr>
             </thead>
             <tbody><?php echo $post; ?></tbody>

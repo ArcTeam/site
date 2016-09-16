@@ -1,15 +1,15 @@
 @import url("style.css");
-/*.footable th:nth-child(1){width:5%;}
-.footable th:nth-child(3){width:30%;}
-.footable th:nth-child(4){width:10%;}*/
-
-/* stile di prova per il nuovo layout */
+#presentazione{margin:30px 0px; color:#fff;background:#FBBC05;border-radius:3px;padding:20px;}
+#presentazione span:first-child{width:10%;}
+#presentazione span:last-child{width:80%;font-size:1.65rem;}
+#presentazione a{color:#fff;border-bottom:1px dashed #fff;}
 .footable thead tr{border:none;}
 .footable th{background:none;}
-.footable tbody td header{color:#009933;font-size:2rem;}
-.footable tbody td p{font-size:1.2rem;}
-.footable tbody td div a{display: inline-block; color:#009933; padding: 3px 7px; border-radius: 3px;font-size:1.1rem;}
+.footable tbody td header{font-size:1.5rem;}
+.footable tbody td p{font-size:1rem;}
+.footable tbody td div a{display: inline-block; color:#009933; padding: 3px 7px; border-radius: 3px;font-size:.85rem;}
 .footable tbody td div a:hover{background:#009933;color:#fff;}
+.buttonFooter{margin:10px 0px;}
 .footable tbody td footer{font-size:.9rem;padding:10px;text-align:right;background:none;margin:0px;}
 /***************************************/
 

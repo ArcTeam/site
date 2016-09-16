@@ -60,6 +60,7 @@ $odRes = pg_query($connection, $odQuery);
                         case 'html': $cat = 'presentazione'; break;
                         case 'talk': $cat = 'presentazione'; break;
                         case 'paper': $cat = 'articolo'; break;
+                        case 'link': $cat = 'link esterno'; break;
                     }
                     echo "<tr>";
                     echo    "<td>";

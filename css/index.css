@@ -60,6 +60,6 @@ section#main article p { font-size: .7rem;}
 .olControlZoom a:nth-child(2) {border-radius: 0px 0px 0px 0px !important;}
 .olControlZoom a:hover{background:rgba(0, 0, 0, 0.9) !important;}
 
-.oddList li{padding:0px !important;margin-bottom:0px !important;}
+.oddList li{padding:0px !important;margin-bottom:0px !important;box-shadow: none !important;}
 .oddList li a:hover{color:#093 !important;}
 .oddList li a i{float:none !important; margin-right:1px !important;}

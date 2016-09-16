@@ -6,7 +6,7 @@
 .footable caption{font-size: 1rem;}
 .footable tr{border:none;}
 .footable th{background:none;}
-.footable tbody td header{color:#009933;font-size:1.5rem;}
+.footable tbody td header{color:#093;font-size:1.5rem;}
 .footable tbody article{font-size:.9rem;}
 .footable tbody article.abstract{width:60%;}
 .footable tbody article.meta{width:38%;margin-left:20px;}

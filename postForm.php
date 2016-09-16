@@ -1,8 +1,9 @@
 <?php
 session_start();
 require("inc/db.php");
+$cat = ($_GET['t']==1)?'post':'scheda progetto';
 if(isset($_GET['p'])){
-    $header = 'Modifica post';
+    $header = 'Modifica '.$cat;
     $p="select * from main.post where id=".$_GET['p'];
     $pr = pg_query($connection,$p);
     $post = pg_fetch_array($pr);
@@ -21,7 +22,7 @@ if(isset($_GET['p'])){
 }else{
     $tagpresList = 0;
     $id = 0;
-    $header = 'Inserisci un nuovo post';
+    $header = 'Inserisci '.$cat;
 }
 
 //lista tag
@@ -47,6 +48,7 @@ $tagList = json_encode($tag);
             <form name="postForm" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
                 <input type="hidden" name="get" value="<?php echo $id; ?>" >
                 <input type="hidden" name="s" value="<?php echo $post['pubblica']; ?>" >
+                <input type="hidden" name="cat" value="<?php echo $_GET['t']; ?>" >
                 <div class="rowButton">aggiungi tag: <input type="text" name="tags" placeholder="Tags" class="tm-input" ></div>
                 <div class="rowButton"><input type="text" name="titolo" placeholder="Inserisci il titolo del post" value="<?php echo $post['titolo']; ?>" ></div>
                 <div class="rowButton"><textarea name="testo" id="testo"><?php echo $post['testo']; ?></textarea></div>
@@ -82,8 +84,9 @@ $tagList = json_encode($tag);
         $(document).ready(function(){
             $('#testo').ckeditor();
             var dataList = <?php echo $tagList; ?>;
-            var prefilled,script, p;
+            var prefilled,script, p, t;
             p = $("input[name=get]").val();
+            t = $("input[name=cat]").val();
             if(p > 0){
                 var stato = $('input[name=s]').val();
                 $("input[name=stato]").attr("checked",false);
@@ -133,7 +136,7 @@ $tagList = json_encode($tag);
                     $.ajax({
                         url: 'inc/'+script,
                         type: 'POST',
-                        data: {id:p, tag:tag,stato:stato,titolo:titolo,post:post},
+                        data: {id:p, cat:t, tag:tag,stato:stato,titolo:titolo,post:post},
                         success: function(data){
                             if(data.indexOf("errore") !== -1){
                                 $("#msg span").text(data);

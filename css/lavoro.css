@@ -1,0 +1,13 @@
+@import url("style.css");
+@import url("../lib/tag/tagmanager.css");
+.col{width:49%;}
+.col:first-child{margin-right:20px;}
+.sezione, #mappa{border:1px solid #999;border-radius:4px;}
+.sezione header{border: none !important; font-size: 1.5rem !important; color: #424242 !important; background: #cecfea !important;}
+.sezione header span{padding:0px 10px;}
+.sezione div{padding:0px 10px;}
+.sezione div span{display:inline-block;vertical-align: top;}
+.sezione div span:first-child{width:120px;}
+.sezione div span:last-child{font-weight: bold;}
+
+#mappa{position:relative;width:100%;height:500px;margin:0px;padding:0px;}

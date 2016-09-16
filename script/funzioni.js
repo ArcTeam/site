@@ -107,6 +107,15 @@ function tagLength(){
     var tag = $(".tm-tag").length;
     if(tag==0){ $("input[name='tags']").prop("required", true); }else{ $("input[name='tags']").prop("required", false); }
 }
+
+function trimString(str, length, delim, appendix) {
+    if (str.length <= length) return str;
+    var trimmedStr = str.substr(0, length+delim.length);
+    var lastDelimIndex = trimmedStr.lastIndexOf(delim);
+    if (lastDelimIndex >= 0) trimmedStr = trimmedStr.substr(0, lastDelimIndex);
+    if (trimmedStr) trimmedStr += appendix;
+    return trimmedStr;
+}
 ////////////////////////////////////////////////////////////////////////////////
 
 var w=$("#mainWrap").width();
@@ -133,3 +142,4 @@ $("button[name='closeDialog']").on("click", function(){
     $(".dialogForm").hide();
     $(".dialogResult").html('').removeClass();
 });
+$(".toggle").on("click", function(){ $(".toggled").slideToggle("fast"); });

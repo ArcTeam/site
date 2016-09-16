@@ -2,6 +2,7 @@
 #mainWrap{width:94% !important;margin:0px 5% 0px 1% !important;}
 section.ckform{display:inline-block;margin:30px 0px !important;vertical-align:top;}
 section.post{width:60%;}
+.post article{margin:20px 0px;}
 section.metadata{width:29%;}
 section.metadata header{font-size:1.2rem;}
 section.metadata div{margin-bottom:5px;font-size: .9rem;}

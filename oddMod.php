@@ -1,23 +1,30 @@
 <?php
 session_start();
 require("inc/db.php");
-//se sono in modifica...
+$tipi = array("html", "pdf","odt", "ods", "odp", "ppt", "png", "jpeg", "jpg", "doc", "docx", "zip", "tar", "gz");
+
 $link = $_POST['urlArr'];
 $licenza = $_POST['licenzaArr'];
 
 if ($_POST['id']>0) {
-    $metadati = "update main.opendata set titolo = '".pg_escape_string($_POST['titolo'])."', categoria = '".pg_escape_string($_POST['categoria'])."', autori = '".pg_escape_string($_POST['autori'])."', '".pg_escape_string($_POST['descrizione'])."' where id = ".$_POST['id'].";";
-    $tag = "update main.tags set tags = '".$_POST['tag']."' where rec = ".$_POST['id']." and tab=4;";
+    $metadati = "update main.opendata set titolo = '".pg_escape_string($_POST['titolo'])."', categoria = '".pg_escape_string($_POST['categoria'])."', autori = '".pg_escape_string($_POST['autori'])."', descrizione = '".pg_escape_string($_POST['descrizione'])."' where id = ".$_POST['id'].";";
+    $tag = "update main.tags set tags = '".$_POST['tagList']."' where rec = ".$_POST['id']." and tab=4;";
     $file = "delete from main.opendatafile where opendata = ".$_POST['id'].";";
     foreach( $link as $key => $n ) {
-        $file .= "insert into main.opendatafile(opendata, tipo, link, licenza) values (currval('main.opendata_id_seq'), '".end((explode('.', $n)))."', '".$n."', ".$licenza[$key].");";
+        $t = end((explode('.', $n)));
+        $t = strtolower($t);
+        $tipo = (in_array($t, $tipi))?$t:'risorsa esterna';
+        $file .= "insert into main.opendatafile(opendata, tipo, link, licenza) values (".$_POST['id'].", '".$tipo."', '".$n."', ".$licenza[$key].");";
     }
     $log = "insert into main.log(tabella,record,operazione, utente) values ('opendata', ".$_POST['id'].", 'U', ".$_SESSION['id'].");";
 }else{
     $metadati = "insert into main.opendata(titolo, categoria, autori, descrizione) values ('".pg_escape_string($_POST['titolo'])."', '".pg_escape_string($_POST['categoria'])."', '".pg_escape_string($_POST['autori'])."', '".pg_escape_string($_POST['descrizione'])."');";
     $tag = "insert into main.tags(tags, rec, tab) values('".$_POST['tagList']."', currval('main.opendata_id_seq'), 4);";
     foreach( $link as $key => $n ) {
-        $file .= "insert into main.opendatafile(opendata, tipo, link, licenza) values (currval('main.opendata_id_seq'), '".end((explode('.', $n)))."', '".$n."', ".$licenza[$key].");";
+        $t = end((explode('.', $n)));
+        $t = strtolower($t);
+        $tipo = (in_array($t, $tipi))?$t:'risorsa esterna';
+        $file .= "insert into main.opendatafile(opendata, tipo, link, licenza) values (currval('main.opendata_id_seq'), '".$tipo."', '".$n."', ".$licenza[$key].");";
     }
     $log = "insert into main.log(tabella,record,operazione, utente) values ('opendata', currval('main.opendata_id_seq'), 'I', ".$_SESSION['id'].");";
 }
@@ -29,6 +36,7 @@ if(!$queryExec){
 }else {
     $msg = "Ok, il documento è stato modificato con successo.";
 }
+header ("Refresh: 5; URL=".$_POST['refresh']);
 ?>
 
 <!DOCTYPE html>

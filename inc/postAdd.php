@@ -3,7 +3,7 @@ session_start();
 require_once("db.php");
 
 $q = "BEGIN;";
-$q .= "insert into main.post(titolo, testo, usr, pubblica) values('".pg_escape_string($_POST["titolo"])."','".$_POST['post']."',".$_SESSION["id"].", ".$_POST['stato'].");";
+$q .= "insert into main.post(titolo, testo, pubblica, cat) values('".pg_escape_string($_POST["titolo"])."','".$_POST['post']."', ".$_POST['stato'].", ".$_POST['cat'].");";
 $q .= "insert into main.tags(tags, rec, tab) values('".$_POST['tag']."', currval('main.post_id_seq'), 1);";
 $q .= "insert into main.log(tabella,record,operazione, utente) values ('post', currval('main.post_id_seq'), 'I', ".$_SESSION['id'].");";
 $q .= "COMMIT;";

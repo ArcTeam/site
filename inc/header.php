@@ -9,11 +9,11 @@
   <ul>
     <li><a href="index.php" title="Welcome" id="home"><i class="fa fa-home"></i><span>home</span></a></li>
     <li><a href="post.php" title="Post" id="post"><i class="fa fa-th-list"></i> <span>post</span></a></li>
-    <li><a href="#" title="Sul campo" id="works"><i class="fa fa-users"></i> <span>works</span></a></li>
+    <li><a href="#" title="Sul campo" id="works"><i class="fa fa-wrench"></i> <span>works</span></a></li>
     <li><a href="#" title="Free as freedom" id="project"><i class="fa fa-cogs"></i> <span>project</span></a></li>
     <li><a href="opendatadocs.php" title="Share your knowledge" id="odd"><i class="fa fa-creative-commons"></i> <span>open</span></a></li>
     <li><a href="team.php" title="Open your mind" id="team"><i class="fa fa-users"></i> <span>team</span></a></li>
-    <li><a href="http://arc-team-open-research.blogspot.it/" title="Happy Hacking with ATOR (ArcTeam Open Research)" id="hack" target="_blank"><i class="fa fa-code"></i> <span>hack</span></a></li>
+    <!--<li><a href="http://arc-team-open-research.blogspot.it/" title="Happy Hacking with ATOR (ArcTeam Open Research)" id="hack" target="_blank"><i class="fa fa-code"></i> <span>hack</span></a></li>-->
     <?php if(!$_SESSION['id']){?>
     <li><a href="login.php" id="login" title="login"><i class="fa fa-sign-in"></i><span>login</span></a></li>
     <?php }else{ ?>
