@@ -10,4 +10,7 @@
 .sezione div span:first-child{width:120px;}
 .sezione div span:last-child{font-weight: bold;}
 
-#mappa{position:relative;width:100%;height:500px;margin:0px;padding:0px;}
+.main{margin-bottom:20px;}
+.main:last-child{margin-bottom:0px !important;}
+
+#mappa{position:relative;width:100%;margin:0px;padding:0px;}

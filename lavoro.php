@@ -22,9 +22,27 @@ $c = pg_fetch_array($b);
                     <a href="#" class='prevent' title="Modifica dati principali lavoro"><i class="fa fa-plus"></i>modifica dati</a>
                 </div>
             </section>
-            <div class="inline col">
+            <div class="inline col sx">
                 <section class="sezione inline main">
                     <header><span>Dati principali</span></header>
+                    <div><span>Inizio progetto: </span><span><?php echo $c['anno']; ?></span></div>
+                    <div><span>Categoria: </span><span><?php echo $c['categoria']; ?></span></div>
+                    <div><span>Descrizione: </span><span><?php echo $c['descrizione']; ?></span></div>
+                </section>
+                <section class="sezione inline main">
+                    <header><span>Interventi</span></header>
+                    <div><span>Inizio progetto: </span><span><?php echo $c['anno']; ?></span></div>
+                    <div><span>Categoria: </span><span><?php echo $c['categoria']; ?></span></div>
+                    <div><span>Descrizione: </span><span><?php echo $c['descrizione']; ?></span></div>
+                </section>
+                <section class="sezione inline main">
+                    <header><span>Fatturazione</span></header>
+                    <div><span>Inizio progetto: </span><span><?php echo $c['anno']; ?></span></div>
+                    <div><span>Categoria: </span><span><?php echo $c['categoria']; ?></span></div>
+                    <div><span>Descrizione: </span><span><?php echo $c['descrizione']; ?></span></div>
+                </section>
+                <section class="sezione inline main">
+                    <header><span>Fatturazione</span></header>
                     <div><span>Inizio progetto: </span><span><?php echo $c['anno']; ?></span></div>
                     <div><span>Categoria: </span><span><?php echo $c['categoria']; ?></span></div>
                     <div><span>Descrizione: </span><span><?php echo $c['descrizione']; ?></span></div>
@@ -44,6 +62,9 @@ $c = pg_fetch_array($b);
     <script>
         $(document).ready(function(){
             $(".sezione span:last-child").css({"width":$(".sezione").width()-140});
+            var h = $(".sx").outerHeight();
+            $("#mappa").css({"height":h});
+            console.log("height: "+h);
         });
     </script>
   </body>
