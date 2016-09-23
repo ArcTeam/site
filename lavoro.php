@@ -18,34 +18,32 @@ $c = pg_fetch_array($b);
             <header><?php echo $c['nome']; ?></header>
             <section class="toolbar">
                 <div class="listTool">
-                    <a href="lavori.php" title="Torna all'archivio lavori"><i class="fa fa-plus"></i>archivio lavori</a>
-                    <a href="#" class='prevent' title="Modifica dati principali lavoro"><i class="fa fa-plus"></i>modifica dati</a>
+                    <a href="lavori.php" title="Torna all'archivio lavori">archivio lavori</a>
+                    <a href="#" class='prevent' title="Modifica dati principali lavoro">modifica dati</a>
+                    <a href="#" class='prevent' title="Aggiungi attività">aggiungi attività</a>
+                    <a href="#" class='prevent' title="Aggiungi fattura">aggiungi fattura</a>
+                    <a href="#" class='prevent' title="Modifica geometrie">modifica geometrie</a>
                 </div>
             </section>
             <div class="inline col sx">
                 <section class="sezione inline main">
-                    <header><span>Dati principali</span></header>
-                    <div><span>Inizio progetto: </span><span><?php echo $c['anno']; ?></span></div>
-                    <div><span>Categoria: </span><span><?php echo $c['categoria']; ?></span></div>
-                    <div><span>Descrizione: </span><span><?php echo $c['descrizione']; ?></span></div>
+                    <header class="act"><span><i class="fa fa-angle-down"></i> Dati principali</span></header>
+                    <div class="toggle">
+                        <div><span>Inizio progetto: </span><span><?php echo $c['anno']; ?></span></div>
+                        <div><span>Categoria: </span><span><?php echo $c['categoria']; ?></span></div>
+                        <div><span>Ore attività: </span><span><?php echo $c['categoria']; ?></span></div>
+                        <div><span>Descrizione: </span><span class="descr"><?php echo $c['descrizione']; ?></span></div>
+                    </div>
                 </section>
-                <section class="sezione inline main">
-                    <header><span>Interventi</span></header>
-                    <div><span>Inizio progetto: </span><span><?php echo $c['anno']; ?></span></div>
-                    <div><span>Categoria: </span><span><?php echo $c['categoria']; ?></span></div>
-                    <div><span>Descrizione: </span><span><?php echo $c['descrizione']; ?></span></div>
+                <section class="sezione inline attivita">
+                    <header><span><i class="fa fa-angle-right"></i> Attività</span></header>
+                    <div class="toggle hide">
+                    </div>
                 </section>
-                <section class="sezione inline main">
-                    <header><span>Fatturazione</span></header>
-                    <div><span>Inizio progetto: </span><span><?php echo $c['anno']; ?></span></div>
-                    <div><span>Categoria: </span><span><?php echo $c['categoria']; ?></span></div>
-                    <div><span>Descrizione: </span><span><?php echo $c['descrizione']; ?></span></div>
-                </section>
-                <section class="sezione inline main">
-                    <header><span>Fatturazione</span></header>
-                    <div><span>Inizio progetto: </span><span><?php echo $c['anno']; ?></span></div>
-                    <div><span>Categoria: </span><span><?php echo $c['categoria']; ?></span></div>
-                    <div><span>Descrizione: </span><span><?php echo $c['descrizione']; ?></span></div>
+                <section class="sezione inline fatture">
+                    <header><span><i class="fa fa-angle-right"></i> Fatturazione</span></header>
+                    <div class="toggle hide">
+                    </div>
                 </section>
             </div>
             <div class="inline col">
@@ -64,7 +62,16 @@ $c = pg_fetch_array($b);
             $(".sezione span:last-child").css({"width":$(".sezione").width()-140});
             var h = $(".sx").outerHeight();
             $("#mappa").css({"height":h});
-            console.log("height: "+h);
+            $(".sezione header").on("click", function(){
+                if(!$(this).hasClass('act')){
+                    $(this).addClass('act');
+                    $(".toggle").slideUp();
+                    $(this).parent().siblings().find("header > span > i").removeClass('fa-angle-right').addClass('fa-angle-down');
+                    $(this).parent().siblings().find("header").removeClass('act');
+                    $(this).next('.toggle').slideDown();
+                    $(this).children('span').children('i').toggleClass('fa-angle-right fa-angle-down');
+                }
+            });
         });
     </script>
   </body>

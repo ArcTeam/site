@@ -35,8 +35,8 @@ section.content header, section.ckform header { display: block; width: 100%; bor
 
 section.toolbar{margin: 10px 0px;font-size:.9rem;}
 section.toolbar div{display:inline-block;width:49.5%;margin:0px;padding:0px;}
-section.toolbar a{display:inline-block;background:#82C914;border:1px solid #64A106; color:#fff; padding:3px 5px; border-radius:3px; text-decoration:none;}
-section.toolbar a:hover{background:#64A106;}
+section.toolbar a{display:inline-block;background:#64A106;border:1px solid #64A106; color:#fff; padding:3px 5px; border-radius:3px; text-decoration:none;}
+section.toolbar a:hover{background:#82C914;}
 section.toolbar i{margin-right:10px;}
 section.toolbar i.clear-filter{ text-align: center; padding: 9px; margin: 0px 0px 0px -5px; background: #e2e2e2; border: 1px solid #999; border-radius: 0px 3px 3px 0px; border-left: none; cursor: pointer;}
 section.toolbar #filtro{border-right:none;}

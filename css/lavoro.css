@@ -3,14 +3,14 @@
 .col{width:49%;}
 .col:first-child{margin-right:20px;}
 .sezione, #mappa{border:1px solid #999;border-radius:4px;}
-.sezione header{border: none !important; font-size: 1.5rem !important; color: #424242 !important; background: #cecfea !important;}
+.sezione{margin-bottom:20px;width: 95%;}
+.sezione:last-child{margin-bottom:0px !important;}
+.sezione header{border: none !important; font-size: 1.5rem !important; color: #424242 !important; background: #cecfea !important;border-radius:4px 4px 0px 0px; cursor:pointer;}
 .sezione header span{padding:0px 10px;}
-.sezione div{padding:0px 10px;}
-.sezione div span{display:inline-block;vertical-align: top;}
-.sezione div span:first-child{width:120px;}
-.sezione div span:last-child{font-weight: bold;}
-
-.main{margin-bottom:20px;}
-.main:last-child{margin-bottom:0px !important;}
-
+.toggle{height:300px;}
+.toggle div{padding:0px 10px;}
+.toggle div span{display:inline-block;vertical-align: top;}
+.main div span:first-child{width:120px;}
+.main div span:last-child{font-weight: bold;}
+.main span.descr{height: 215px; overflow: auto;}
 #mappa{position:relative;width:100%;margin:0px;padding:0px;}
