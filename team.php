@@ -49,7 +49,7 @@ $colori = array("#FBBC05","#82C914","#1da1f2","#9A9A9A","#FF7B59");
             </section>
             <section id="soci">
                 <header class="sectionMain"><i class="fa fa-user" aria-hidden="true"></i> Soci</header>
-                <article class="section">
+                <article class="section usr">
                     <?php
                         $sociquery = "SELECT u.id as id_usr, r.id as rubrica, r.utente, r.email, r.cell, u.img FROM main.rubrica r, main.usr u WHERE u.rubrica = r.id AND r.tipo = 2 order by utente asc;";
                         $sociexec = pg_query($connection, $sociquery);
@@ -91,7 +91,7 @@ $colori = array("#FBBC05","#82C914","#1da1f2","#9A9A9A","#FF7B59");
             </section>
             <section id="collaboratori">
                 <header class="sectionMain"><i class="fa fa-puzzle-piece" aria-hidden="true"></i> Collaboratori</header>
-                <article class="section">
+                <article class="section usr">
                     <?php
                         $sociquery = "SELECT u.id as id_usr, r.id as rubrica, r.utente, r.email, r.cell, u.img FROM main.rubrica r, main.usr u WHERE u.rubrica = r.id AND r.tipo = 3 order by utente asc;";
                         $sociexec = pg_query($connection, $sociquery);
