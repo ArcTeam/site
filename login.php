@@ -29,7 +29,7 @@ if($_POST['submit'] && $_POST['submit']=="login"){
 
       $ip = filter_var($ip, FILTER_VALIDATE_IP);
       $ip = ($ip === false) ? '0.0.0.0' : $ip;
-      $login = ("insert into main.login(utente, ip)values(".$arr['id'].", '$ip');");
+      $login = ("insert into main.login(utente, ip, sito)values(".$arr['id'].", '$ip', 'arcteam');");
       $result2=pg_query($connection, $login);
       header("Location:index.php");
     }else{
