@@ -1,38 +1,5 @@
-/*
-$("input[name=layer]").on("change", function(){
-  $(this).closest('label').toggleClass('layerAct');
-  $(this).next('i').toggleClass('fa-check-square-o fa-square-o');
-  lavori.setVisibility(false);
-  var tot=$('input[name="layer"]').length;
-  var length=$('input[name="layer"]:checked').length;
-  if(length==0){
-    lavori.setVisibility(false);
-    return;
-  }else if(length==tot){
-    filter = 'tipo_id > 0';
-    info.cql_filter=filter;
-    lavori.mergeNewParams({'CQL_FILTER': "tipo_id > 0"});
-    lavori.setVisibility(true);
-    return;
-  }else{
-    cql = [];
-    $('input[name="layer"]:checked').each(function(){
-      var param = $(this).val();
-      cql.push("tipo_id = " + param);
-    });
-    filter = cql.join(" OR ");
-    console.log(filter);
-    lavori.setVisibility(true);
-    lavori.mergeNewParams({'CQL_FILTER': filter});
-    info.cql_filter=filter;
-    lavori.redraw();
-    return;
-  }
-});
-*/
-
 function init() {
-    OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
+    OpenLayers.ProxyHost = proxy;
     var extent = document.getElementById('extent').value;
     var coo = extent.split(",");
     map = new OpenLayers.Map('mappa', mapOpt);
@@ -129,7 +96,7 @@ function init() {
         renderers: ['Canvas','SVG'],
         protocol: new OpenLayers.Protocol.WFS({
             version:       "1.0.0",
-            url:           "http://localhost:8080/geoserver/wfs",
+            url:           wfsHost,
             featureType:   "lavori",
             featureNS:     "http://www.geoserver.org/arcteam",
             geometryName:  "geom",
