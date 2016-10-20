@@ -1,7 +1,7 @@
 @import url("style.css");
 @import url("../lib/tag/tagmanager.css");
 
-form section{width:70%;margin:20px 0px;}
+form section{margin:20px 0px;}
 header.main{color:#093 !important;}
 header.submain{font-size:1.2rem !important;}
 .metadati span:first-child{width:80px;}

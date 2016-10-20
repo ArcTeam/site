@@ -1,6 +1,7 @@
 <?php
 session_start();
 require("inc/db.php");
+require("class/funzioni.php");
 $odQuery = "SELECT odd.id, odd.titolo, odd.categoria, odd.autori, odd.descrizione, log.data, rubrica.utente FROM main.log, main.opendata odd, main.usr, main.rubrica WHERE log.utente = usr.id AND odd.id = log.record AND usr.rubrica = rubrica.id AND log.tabella = 'opendata' AND log.operazione = 'I' ORDER BY log.data DESC; ";
 $odRes = pg_query($connection, $odQuery);
 ?>
@@ -48,11 +49,7 @@ $odRes = pg_query($connection, $odQuery);
                 while($doc = pg_fetch_array($odRes)){
                     $fileQuery="SELECT odf.tipo, odf.link, licenze.licenza, licenze.sigla, licenze.url FROM main.opendata odd, main.opendatafile odf, liste.licenze WHERE odf.opendata = odd.id AND odf.licenza = licenze.id AND odf.opendata = ".$doc['id'].";";
                     $fileRes= pg_query($connection, $fileQuery);
-                    $tagQuery="SELECT tags FROM main.tags WHERE tags.tab = 4 AND tags.rec = ".$doc['id'].";";
-                    $tagRes= pg_query($connection, $tagQuery);
-                    $tags = pg_fetch_array($tagRes);
-                    $tagListArr = explode(",",$tags['tags']);
-                    asort($tagListArr);
+
                     $data = split(" ",$doc['data']);
                     $data = $data[0];
                     switch($doc['categoria']){
@@ -87,7 +84,7 @@ $odRes = pg_query($connection, $odQuery);
                     echo "<div class='tag'>";
                     echo            "<h1>Tag</h1>";
                     echo            "<div class='tagWrap'>";
-                    foreach ($tagListArr as $tag) { echo "<span class='tag'>".$tag."</span>"; }
+                    echo tag($doc['id'],4);
                     echo            "</div>";
                     echo "</div>";
                     echo        "</article>";

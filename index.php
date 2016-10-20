@@ -1,7 +1,7 @@
 <?php
 session_start();
 require("inc/db.php");
-include("inc/cut.php");
+include("class/cut.php");
 $extq="select st_extent(geom) as ext from main.attivita;";
 $extres = pg_query($connection, $extq);
 $ext = pg_fetch_array($extres);
@@ -38,7 +38,7 @@ while($od = pg_fetch_array($odres)){
     }
     $meta = ($od['categoria']=='html') ? "presentazione in html" : $od['categoria'].", ".$od['tipo'];
     $link = "http://www.museidironzone.it/openLibrary/".$od['categoria']."/".$od['link'];
-    $odList .= "<li><a href='".$link."' target='_blank' title='[link esterno] ".$od['titolo']."' class='aSubSec transition'>".$ico." ".$od['titolo']." (".$meta." - ".$od['licenza'].")</a></li>";
+    $odList .= "<li><a href='".$link."' target='_blank' title='[link esterno] ".$od['titolo']."' class='aSubSec transition'><span class='oddIco'>".$ico."</span><span class='oddText'>".$od['titolo']." (".$meta." - ".$od['licenza'].")</span></a></li>";
 }
 
 //tag cloud
@@ -148,7 +148,7 @@ while($t=pg_fetch_array($tagres)){
                 <div class="mainDiv">
                     <article id="media">
                         <header class="sectionMain">OpenDataDocuments <i class="fa fa-creative-commons"></i></header>
-                        <ul>
+                        <ul class="oddMainList">
                             <li>
                                 <div><i class="fa fa-creative-commons fa-5x"></i> La libera circolazione delle idee è alla base del nostro lavoro, per questo abbiamo dedicato una sezione del nostro sito alla condivisione di pubblicazioni, articoli scientifici e presentazioni che la nostra ditta ha prodotto negli anni. Alcuni articoli sono su Academia.edu, altri su Research Gate. Di seguito i link alle ultime risorse pubblicate</div>
                                 <div>

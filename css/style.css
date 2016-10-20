@@ -31,7 +31,7 @@ footer #wrapFooter header { font-size: 1rem; color: #82C914;font-weight: bold;}
 footer#toolbar{background: none;text-align:left;}
 
 section.content, section.ckform {position: relative; background: #fff; margin: 30px auto; padding: 30px; border: 1px solid #ccc; border-radius: 5px; width: 90%;}
-section.content header, section.ckform header { display: block; width: 100%; border-bottom: 1px solid #999; font-size: 2rem; color: #999;}
+section.content header, section.ckform header { display: block; border-bottom: 1px solid #999; font-size: 2rem; color: #999;}
 
 section.toolbar{margin: 10px 0px;font-size:.9rem;}
 section.toolbar div{display:inline-block;width:49.5%;margin:0px;padding:0px;}

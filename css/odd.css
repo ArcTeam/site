@@ -6,13 +6,13 @@
 .footable caption{font-size: 1rem;}
 .footable tr{border:none;}
 .footable th{background:none;}
-.footable tbody td header{color:#093;font-size:1.5rem;}
+.footable tbody td header{color:#093;font-size:1.5rem;padding-left:20px;}
 .footable tbody article{font-size:.9rem;}
-.footable tbody article.abstract{width:60%;}
+.footable tbody article.abstract{width:55%;padding-left:20px;}
 .footable tbody article.meta{width:38%;margin-left:20px;}
 .footable tbody article h1{font-size:1.2rem;}
 .footable .dati{font-weight: bold;}
-.oddToolbar{margin-top:20px;}
+.oddToolbar{margin:20px;}
 .oddToolbar a{margin-right:10px;color:#363A3F; background:#f6f6f6; border:1px solid rgba(0,0,0,0.3);padding:2px 3px;}
 .file, .tag{margin-top:20px;padding-top:15px; border-top:1px solid #999; }
 .tagWrap{padding:10px 3px;font-size:.8rem;color:#000;}

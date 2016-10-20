@@ -1,6 +1,7 @@
 <?php
 session_start();
 require("inc/db.php");
+require("class/funzioni.php");
 $colori = array("#FBBC05","#82C914","#1da1f2","#9A9A9A","#FF7B59");
 ?>
 <!DOCTYPE html>
@@ -57,11 +58,6 @@ $colori = array("#FBBC05","#82C914","#1da1f2","#9A9A9A","#FF7B59");
                             $id = $socio['id_usr'];
                             $socialQuery = "SELECT social.ico, social.nome, usr_social.link FROM main.usr, main.usr_social, liste.social WHERE usr_social.usr = usr.id AND usr_social.social = social.id AND usr.id = ".$id." order by nome asc;";
                             $socialExec = pg_query($connection, $socialQuery);
-                            $tagQuery = "SELECT tags.tags FROM main.usr, main.tags WHERE tags.rec = usr.id AND tags.tab = 2 AND usr.id = ".$id;
-                            $tagExec = pg_query($connection, $tagQuery);
-                            $tagList = pg_fetch_array($tagExec);
-                            $tagListArr = explode(",",$tagList['tags']);
-                            asort($tagListArr);
                             echo "<div class='socioWrap'>";
                             echo    "<div class='avatar' style='background-image:url(img/usr/".$socio['img'].")'></div>";
                             echo    "<div class='socioDatiContent'>";
@@ -80,7 +76,8 @@ $colori = array("#FBBC05","#82C914","#1da1f2","#9A9A9A","#FF7B59");
                             echo        "<div class='dati'>";
                             echo            "<h2>Skills</h2>";
                             echo            "<div class='tagWrap'>";
-                            foreach ($tagListArr as $tag) { echo "<span class='tag'>".$tag."</span>"; }
+                            //foreach ($tagListArr as $tag) { echo "<span class='tag'>".$tag."</span>"; }
+                            echo tag($id,2);
                             echo            "</div>";
                             echo        "</div>";
                             echo    "</div>";
@@ -139,6 +136,7 @@ $colori = array("#FBBC05","#82C914","#1da1f2","#9A9A9A","#FF7B59");
         <script>
         $(document).ready(function(){
             $("a#team").addClass('actTeam');
+            $("span.tag i").remove();
             $('.flexslider').flexslider({
                 animation: 'slide',
                 easing: 'easeInQuad',

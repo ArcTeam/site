@@ -1,7 +1,7 @@
 <?php
 session_start();
 require("inc/db.php");
-require("inc/cut.php");
+require("class/cut.php");
 if(isset($_GET['x'])){$x=0;}else{$x=1;}
 $a = "SELECT post.id,post.titolo, post.testo, log.data, rubrica.utente FROM main.log, main.usr, main.rubrica, main.post WHERE log.utente = usr.id AND log.record = post.id AND usr.rubrica = rubrica.id AND post.pubblica = 1 AND post.cat = 1 AND log.tabella = 'post' AND log.operazione = 'I' order by log.data desc;";
 $b = pg_query($connection, $a);

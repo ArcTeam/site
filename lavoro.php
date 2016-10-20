@@ -1,17 +1,10 @@
 <?php
 session_start();
 require("inc/db.php");
+require("class/funzioni.php");
 $a ="select l.id, l.anno, c.categoria, l.nome, l.descrizione from main.lavoro l, liste.cat c where l.tipo = c.id and l.id = ".$_GET['l'].";";
 $b = pg_query($connection, $a);
 $c = pg_fetch_array($b);
-
-$t = "select ts.tags from main.tags ts where ts.rec = ".$_GET['l']." and ts.tab = 3 order by ts.tags asc";
-$tr = pg_query($connection,$t);
-$tagList = pg_fetch_array($tr);
-$tagListArr = explode(",",$tagList['tags']);
-asort($tagListArr);
-foreach ($tagListArr as $tag) { $tags .= "<span class='tag'>".$tag."<i class='fa fa-tag'></i></span>"; }
-
 
 $extq="select st_extent(geom) as ext from main.attivita where lavoro = ".$_GET['l'].";";
 $extres = pg_query($connection, $extq);
@@ -50,7 +43,7 @@ else{
                     <div id="descr">
                         <?php echo $c['descrizione']; ?>
                         <div><strong>Inizio progetto: </strong> <?php echo $c['anno']; ?> | <strong>Categoria: </strong><?php echo $c['categoria']; ?></div>
-                        <div id="tag"><?php echo $tags; ?></div>
+                        <div id="tag"><?php echo tag($_GET['l'],3); ?></div>
                     </div>
                 </article>
             </section>

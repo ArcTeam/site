@@ -1,14 +1,11 @@
 <?php
 session_start();
 require("inc/db.php");
+require("class/funzioni.php");
 $a = "SELECT p.id, p.titolo, p.testo, l.data, r.utente FROM main.log l, main.usr u, main.post p, main.rubrica r WHERE l.record = p.id AND l.utente = u.id AND u.rubrica = r.id AND l.tabella = 'post' AND l.operazione = 'I' AND p.id =".$_GET['p'];
 $b = pg_query($connection,$a);
 $p = pg_fetch_array($b);
 $data = explode(" ",$p['data']);
-
-$t = "select ts.tags from main.tags ts where ts.rec = ".$_GET['p']." and ts.tab = 1 order by ts.tags asc";
-$tr = pg_query($connection,$t);
-while($tag = pg_fetch_array($tr)){$tags .= "<span class='tag'>".$tag['tags']."<i class='fa fa-tag'></i></span>";}
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,7 +31,7 @@ while($tag = pg_fetch_array($tr)){$tags .= "<span class='tag'>".$tag['tags']."<i
                 <header>INFO POST</header>
                 <div id="meta">Post scritto da <strong><?php echo $p['utente']; ?></strong> il <strong><?php echo $data[0]; ?></strong></div>
                 <header>TAGS</header>
-                <div id="tag"><?php echo $tags; ?></div>
+                <div id="tag"><?php echo tag($_GET['p'],1);; ?></div>
                 <header>COMMENTI</header>
                 <div id="disqus_thread"></div>
                 <script>
