@@ -9,17 +9,22 @@
 .main header{background: #494177 !important;color:#fff !important;}
 .main article span{display: inline-block;}
 #descr{height: auto;max-height: 400px; overflow: auto;}
-.mappa, .attivita{width:50%;}
+.mappa{width:50%;position:relative;margin:0px;padding:0px;}
 .main, .mappa{height:450px !important;}
-#mappa{position:relative;margin:0px;padding:0px;}
 #cooDiv{position:absolute;top:0px;right:0px;padding:3px 10px;background:rgba(0, 0, 0, 0.7);font-size:1rem;color:#fbbc05;z-index:2;border-radius:0px 3px 0px 3px;}
 .olMapViewport{z-index: 1 !important;}
-.odd{width:25%;}
+.attivita header{background: #66bbdd; color:#fff !important;}
+.odd, .attivita{width:30%;}
 .odd header{background: #093 !important;color:#fff !important;}
-.foto{width:74%;}
+.foto{width:38.5%;}
 .foto header{background: #FFA101 !important;color:#fff !important;}
-.attivita header, .fatture header{background: #999 !important;color:#363A3F !important;}
 #noGeom{ position: absolute; top: 200px; left: 25%; width: 50%; padding: 20px; text-align: center; z-index: 1002; border-radius: 4px; display:none;}
 div#tag{margin-top:10px;}
 span.tag{display:inline-block;margin:0px 1px;padding:0px 5px;border-radius:3px;background:#494177;color:#fff;font-size:.8rem;}
 span.tag i{margin-left:7px;}
+
+#attList li{ padding: 0px 10px; font-size: .9rem;}
+#attList li span{display:inline-block;}
+.modAtt, .fattura{width:16px;}
+.cat{width:110px;}
+.inizio, .fine{width:85px;}

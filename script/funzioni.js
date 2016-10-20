@@ -52,13 +52,14 @@ function usrAction(id, script, classe, email){
             setTimeout(function(){ location.reload(); }, 5000);
         }
     });
-    //console.log("classe: "+classe+" email: "+email);
 }
+
 /////////  funzioni per highlight filtro tabelle ////
 function filterTable(search, dati) {
   dehighlight(document.getElementById(dati));
   if (search.value.length > 0) highlight(search.value.toLowerCase(), document.getElementById(dati));
 }
+
 function dehighlight(container) {
  for (var i = 0; i < container.childNodes.length; i++) {
   var node = container.childNodes[i];
@@ -72,6 +73,7 @@ function dehighlight(container) {
   }
  }
 }
+
 function highlight(search, container) {
   for (var i = 0; i < container.childNodes.length; i++) {
    var node = container.childNodes[i];
@@ -95,6 +97,7 @@ function highlight(search, container) {
    }
   }
 }
+
 function create_node(child) {
   var node = document.createElement('span');
   node.setAttribute('class', 'red');
@@ -117,6 +120,13 @@ function trimString(str, length, delim, appendix) {
     return trimmedStr;
 }
 ////////////////////////////////////////////////////////////////////////////////
+
+function setCenter(lon,lat){
+    var lonlat = new OpenLayers.LonLat(lon,lat);
+    var zoom = 17;
+    map.setCenter(lonlat, zoom );
+}
+
 
 var w=$("#mainWrap").width();
 var w2=$("section#main").width();

@@ -18,6 +18,21 @@ else{
     $extent = str_replace(" ", ",", substr($ext['ext'],4,-1));
     $countF = 1;
 }
+
+//attività
+$a = "select a.gid, c.ico, a.data_inizio inizio, a.data_fine fine, s.def categoria, st_x(a.geom) as lon, st_y(a.geom) as lat from main.attivita a, liste.cat c, liste.subcat s where a.tipo_lavoro = s.id and s.cat = c.id and a.lavoro = ".$_GET['l']." order by inizio asc;";
+$b = pg_query($connection, $a);
+while($att = pg_fetch_array($b)){
+    $fine=(!$att['fine'])?'in corso':$att['fine'];
+    $attivita .= "<li>";
+    $attivita .= "<span class='modAtt'><i class='fa ".$att['ico']."' aria-hidden='true' data-gid='".$att['gid']."'></i></span>";
+    $attivita .= "<span class='cat'>".$att['categoria']."</span>";
+    $attivita .= "<span class='inizio'>".$att['inizio']."</span>";
+    $attivita .= "<span class='fine'>".$fine."</span>";
+    $attivita .= "<span class='centra'><i class='fa fa-map-marker' aria-hidden='true' data-lonlat='".$att['lon'].",".$att['lat']."' title='centra mappa sull&#39;oggetto'></i></span>";
+    $attivita .= "<span class='fattura'></span>";
+    $attivita .= "</li>";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,7 +53,7 @@ else{
                 <a href="attivitaForm.php?lavoro=<?php echo $_GET['l'];?>&ext=<?php echo $extent;?>&mod=1" title="Modifica geometrie">modifica geometrie</a>
             </nav>
             <section class="sezione inline main">
-                <header class="act"><span>Dati principali</span></header>
+                <header><span>Dati principali</span></header>
                 <article>
                     <div id="descr">
                         <?php echo $c['descrizione']; ?>
@@ -49,23 +64,19 @@ else{
             </section>
             <section id="mappa" class="sezione inline mappa">
                 <div id="cooDiv"><span>[epsg:4326]</span> <span id="coo"></span></div>
-                <div id="noGeom" class="error">Nessuna geometria presente per questo lavoro</div>
-            </section>
-            <section class="sezione inline odd">
-                <header class="act oliva"><span>Materiale scaricabile</span></header>
-
-            </section>
-            <section class="sezione inline foto">
-                <header class="act"><span>Galleria fotogafica</span></header>
-
+                <div id="noGeom" class="error">Nessuna attività presente per questo lavoro</div>
             </section>
             <section class="sezione inline attivita">
                 <header><span>Attività</span></header>
-                <div class="toggle hide"></div>
+                <ul id="attList"><?php echo $attivita; ?></ul>
             </section>
-            <section class="sezione inline fatture">
-                <header><span>Fatturazione</span></header>
-                <div class="toggle hide"></div>
+            <section class="sezione inline odd">
+                <header><span>Materiale scaricabile</span></header>
+
+            </section>
+            <section class="sezione inline foto">
+                <header><span>Galleria fotogafica</span></header>
+
             </section>
         </section>
     </div>
@@ -84,7 +95,12 @@ else{
     <script src="script/mappaLavoro.js"></script>
     <script>
         $(document).ready(function(){
-
+            $(".centra i").on("click",function(){
+                var ll = $(this).data("lonlat");
+                ll = ll.split(',');
+                setCenter(ll[0],ll[1]);
+                //console.log(ll[0]);
+            });
         });
 
     </script>

@@ -48,10 +48,7 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['cate
       <link href="css/postForm.css" rel="stylesheet" media="screen" />
       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
       <style>
-        /*.rowButton span:first-child{width:150px;text-align: right; padding-right: 10px;}*/
-        #colSx{width:69%;margin-right:20px;/*border-right: 1px solid #363A3F;*/}
-        #colDx{width:29%;}
-        select[name='tipo'], input[name='lavoro'], textarea[name='descr']{width:70%;}
+        input[name='lavoro'], textarea[name='descr']{width:100%;}
         textarea[name='descr']{height:300px;}
       </style>
   </head>
@@ -62,9 +59,9 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['cate
             <header><?php echo $header; ?></header>
             <nav class="toolbar">
                 <a href="lavori.php" title="Torna all'archivio lavori">archivio lavori</a>
-                <a href="lavoro.php?l=<?php echo $_GET['p']; ?>" title="Torna alla scheda lavoro">scheda lavoro</a>
+                <?php if(isset($_GET['p'])){?><a href="lavoro.php?l=<?php echo $_GET['p']; ?>" title="Torna alla scheda lavoro">scheda lavoro</a><?php } ?>
             </nav>
-            <div id="colSx" class='inline'>
+            <div>
                 <form name="postForm" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
                     <input type="hidden" name="get" value="<?php echo $id; ?>" >
                     <input type="hidden" name="tipo" value="<?php echo $post['tipo']; ?>" >
@@ -75,8 +72,6 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['cate
                             <option value="" disabled selected >scegli tipo lavoro</option>
                             <?php echo $tipo; ?>
                         </select>
-                    </div>
-                    <div class="rowButton">
                         <select name="anno">
                             <option value="" disabled selected >anno inizio lavoro</option>
                             <?php echo $anniList; ?>
@@ -97,9 +92,6 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['cate
                         </div>
                     </div>
                 </form>
-            </div>
-            <div id="colDx" class='inline'>
-
             </div>
         </section>
     </div>

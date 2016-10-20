@@ -10,7 +10,7 @@ if(isset($_GET['lavoro'])){
 $header=($_GET['mod']==0)?'Inserisci attività':'Modifica geometrie';
 
 //lista tipo attività
-$l="select s.id, s.def from liste.subcat s, main.lavoro l where s.cat = l.tipo and l.id = 12 order by def asc;";
+$l="select s.id, s.def from liste.subcat s order by def asc;";
 $lq = pg_query($connection,$l);
 while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def']."</option>";}
 ?>
