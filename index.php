@@ -5,8 +5,14 @@ include("class/cut.php");
 $extq="select st_extent(geom) as ext from main.attivita;";
 $extres = pg_query($connection, $extq);
 $ext = pg_fetch_array($extres);
-$coo = explode(",",str_replace(" ", ",", substr($ext['ext'],4,-1)));
-$extent = str_replace(" ", ",", substr($ext['ext'],4,-1));
+
+if(!$ext['ext']){
+    $extent= "594297.89483444,3654301.447749,6244523.0248882,6589483.3334912";
+}
+else{
+    $coo = explode(",",str_replace(" ", ",", substr($ext['ext'],4,-1)));
+    $extent = str_replace(" ", ",", substr($ext['ext'],4,-1));
+}
 
 //post
 $postq = "SELECT p.titolo, p.testo, p.pubblica, p.id FROM main.post p, main.log WHERE p.id = log.record AND log.tabella = 'post' AND log.operazione = 'I' AND p.pubblica = 1 order by log.data desc limit 5;";
