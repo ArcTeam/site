@@ -43,7 +43,7 @@ while($od = pg_fetch_array($odres)){
         default: $ico = '<i class="fa fa-picture-o" aria-hidden="true"></i>';
     }
     $meta = ($od['categoria']=='html') ? "presentazione in html" : $od['categoria'].", ".$od['tipo'];
-    $link = "http://www.museidironzone.it/openLibrary/".$od['categoria']."/".$od['link'];
+    $link = $od['link'];
     $odList .= "<li><a href='".$link."' target='_blank' title='[link esterno] ".$od['titolo']."' class='aSubSec transition'><span class='oddIco'>".$ico."</span><span class='oddText'>".$od['titolo']." (".$meta." - ".$od['licenza'].")</span></a></li>";
 }
 
