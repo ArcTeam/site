@@ -1,15 +1,17 @@
 <?php
 session_start();
 require("inc/db.php");
+require("inc/cut.php");
 $a ="select l.id, l.anno, c.categoria, l.nome, l.descrizione from main.lavoro l, liste.cat c where l.tipo = c.id order by l.anno asc, l.nome asc;";
 $b = pg_query($connection, $a);
 while($c = pg_fetch_array($b)){
+    $descrizione = nl2br($c['descrizione']);
     $post .= "<tr>";
     $post .= "<td><a href='lavoro.php?l=".$c['id']."'><i class='fa fa-arrow-right'></i></a></td>";
     $post .= "<td>".$c['anno']."</td>";
     $post .= "<td>".$c['categoria']."</td>";
     $post .= "<td>".$c['nome']."</td>";
-    $post .= "<td>".$c['descrizione']."</td>";
+    $post .= "<td>".cutHtmlText($descrizione, 500, '...', false, false, true)."</td>";
     $post .= "</tr>";
 }
 ?>

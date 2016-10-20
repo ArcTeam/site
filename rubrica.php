@@ -87,7 +87,7 @@ $formDialog .=  "<input type='email' name='email' style='width:250px;' class='in
         <link href="lib/FooTable/css/footable.core.min.css" rel="stylesheet" media="screen" />
         <style>
             .footable th:nth-child(1){width:150px;}
-            .footable th:nth-child(6){width:90px;}
+            .footable th:nth-child(6){width:100px;}
             .footable th:nth-child(7){width:150px;}
             .footable th:nth-child(7), .footable td:nth-child(7){padding:5px 10px;}
             .footable th:nth-child(12){width:30px; text-align:center;}

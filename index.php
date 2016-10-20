@@ -2,7 +2,7 @@
 session_start();
 require("inc/db.php");
 include("inc/cut.php");
-$extq="select st_extent(st_transform(geom, 3857)) as ext from main.lavoro_metadati;";
+$extq="select st_extent(geom) as ext from main.attivita;";
 $extres = pg_query($connection, $extq);
 $ext = pg_fetch_array($extres);
 $coo = explode(",",str_replace(" ", ",", substr($ext['ext'],4,-1)));
@@ -86,7 +86,7 @@ while($t=pg_fetch_array($tagres)){
                     <article id="switchLayer" style="display:none;">
                         <ul>
                             <?php
-                            $layerq = "select * from liste.tipo_lavoro where id in(select tipo_lavoro from main.lavoro_metadati);";
+                            $layerq = "select * from liste.subcat where id in(select tipo_lavoro from main.attivita);";
                             $layerqres = pg_query($connection,$layerq);
                             while($layer = pg_fetch_array($layerqres)){
                                 echo "<li><label for='layer".$layer['id']."' class='layerAct'><input type='checkbox' name='layer' value='".$layer['id']."' id='layer".$layer['id']."' checked ><i class='fa fa-check-square-o'></i> ".$layer['definizione']."</label></li>";
@@ -188,6 +188,7 @@ while($t=pg_fetch_array($tagres)){
         <script src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
         <script src="lib/flexslider/jquery.flexslider.js" charset="utf-8" type="text/javascript"></script>
         <script src="script/funzioni.js"></script>
+        <script src="script/varGeom.js"></script>
         <script src="script/mappaIndex.js"></script>
         <script>
         window.onresize = function(){ map.updateSize();}

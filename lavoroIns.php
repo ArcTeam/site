@@ -39,9 +39,7 @@ foreach($anni as $value) {$anniList .= '<option value="'.$value.'">'.$value.'</o
 //lista tipo lavoro
 $l="select * from liste.cat order by categoria asc;";
 $lq = pg_query($connection,$l);
-while($t=pg_fetch_array($lq)){
-    $tipo .= "<option value='".$t['id']."'>".$t['categoria']."</option>";
-}
+while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['categoria']."</option>";}
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,14 +60,15 @@ while($t=pg_fetch_array($lq)){
     <div id="mainWrap">
         <section class="form ckform">
             <header><?php echo $header; ?></header>
-            <section class="toolbar">
-                <div class="listTool">
-                    <a href="lavori.php" title="Torna all'archivio lavori"><i class="fa fa-plus"></i>archivio lavori</a>
-                </div>
-            </section>
+            <nav class="toolbar">
+                <a href="lavori.php" title="Torna all'archivio lavori">archivio lavori</a>
+                <a href="lavoro.php?l=<?php echo $_GET['p']; ?>" title="Torna alla scheda lavoro">scheda lavoro</a>
+            </nav>
             <div id="colSx" class='inline'>
                 <form name="postForm" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
                     <input type="hidden" name="get" value="<?php echo $id; ?>" >
+                    <input type="hidden" name="tipo" value="<?php echo $post['tipo']; ?>" >
+                    <input type="hidden" name="anno" value="<?php echo $post['anno']; ?>" >
                     <div class="rowButton"><input type="text" name="tags" placeholder="aggiungi tag" class="tm-input" ></div>
                     <div class="rowButton">
                         <select name="tipo">
@@ -78,14 +77,17 @@ while($t=pg_fetch_array($lq)){
                         </select>
                     </div>
                     <div class="rowButton">
-                        <select name="lavoro">
+                        <select name="anno">
                             <option value="" disabled selected >anno inizio lavoro</option>
                             <?php echo $anniList; ?>
                         </select>
                     </div>
                     <div class="rowButton"><input type="text" name="lavoro" placeholder="Inserisci il nome" value="<?php echo $post['nome']; ?>" ></div>
                     <div class="rowButton"><textarea name="descr" id="descr" placeholder="Aggiungi una descrizione anche breve"><?php echo $post['descrizione']; ?></textarea></div>
-                    <div class="rowButton"><input type="submit" name="submit" value="salva lavoro"></div>
+                    <div class="rowButton">
+                        <input type="submit" name="submit" value="salva lavoro">
+                        <input type="button" name="annulla" value="annulla operazione">
+                    </div>
                     <div class="rowButton" id="msg">
                         <span></span>
                         <div class="hide">
@@ -110,7 +112,7 @@ while($t=pg_fetch_array($lq)){
     <script>
         $(document).ready(function(){
             var dataList = <?php echo $tagList; ?>;
-            var prefilled,script, p;
+            var prefilled,script, p, t, a, link;
             p = $("input[name=get]").val();
             if(p > 0){
                 var tagpresarr = <?php echo $tagpresList; ?>;
@@ -121,10 +123,16 @@ while($t=pg_fetch_array($lq)){
                     $.each(tagpresarr, function(k,v) { tags.push(v); });
                     prefilled=tags;
                 }
+                t = $("input[name='tipo']").val();
+                a = $("input[name='anno']").val();
+                $("select[name='tipo']  option[value="+t+"]").prop("selected", true);
+                $("select[name='anno']  option[value="+a+"]").prop("selected", true);
                 script = 'lavoroMod.php';
+                link = 'lavoro.php?l='+p;
             }else{
                 prefilled='';
                 script = 'lavoroAdd.php';
+                link = 'lavori.php';
             }
             $(".tm-input").tagsManager({
                 prefilled: prefilled,
@@ -134,11 +142,12 @@ while($t=pg_fetch_array($lq)){
                 AjaxPush: 'inc/addTag.php',
             })
             .autocomplete({source:dataList});
+            $("input[name='annulla']").on("click", function(){window.location.href=link;});
             var form = $("form[name=postForm]");
             form.submit(function(e){
                 e.preventDefault();
                 var tag = $("input[name=tagList]").val();
-                var tipo = $("select[name=anno]").val();
+                var anno = $("select[name=anno]").val();
                 var tipo = $("select[name=tipo]").val();
                 var nome = $("input[name=lavoro]").val();
                 var descr = $("textarea[name=descr]").val();
@@ -149,6 +158,7 @@ while($t=pg_fetch_array($lq)){
                 else if(!nome){$("#msg span").text("Devi inserire un nome per identificare il lavoro!");}
                 else if(!descr){$("#msg span").text("Devi inserire una descrizione, anche breve!");}
                 else{
+                    //console.log(tag);return false;
                     $.ajax({
                         url: 'inc/'+script,
                         type: 'POST',
@@ -160,7 +170,7 @@ while($t=pg_fetch_array($lq)){
                                 $("#msg span").text("");
                                 $("input[type=submit]").hide();
                                 $("#msg div").fadeIn('fast');
-                                $("#linkLavori").attr("href", "lavoroView.php?p="+data);
+                                $("#linkLavori").attr("href", "lavoro.php?l="+data);
                             }
                         }
                     });

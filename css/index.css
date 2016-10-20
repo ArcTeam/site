@@ -41,7 +41,8 @@ p.footerArticle i{color: #fff; float: none !important; margin: 0px;}
 #youtube div i{color:#cc181e;}
 #tag header, #tag p.footerArticle { background: #494177;}
 #tag div i{color: #494177;}
-#tag a.tag{ color: #494177; margin: 0px 5px; display: inline-block;text-shadow: 0px 0px 0px rgba(0,0,0,0);}
+#tag a.tag{ color: #494177; margin: 1px; display: inline-block;text-shadow: 0px 0px 0px rgba(0,0,0,0);padding:0px 5px;}
+#tag a.tag:hover{background: #494177; color:#fff;border-radius:3px;}
 .mainDiv article div i{ float: left; margin-right: 10px;}
 header.sectionMain, header.sectionMain a {color: #fff !important;}
 header.sectionMain { padding: 10px 20px;}
