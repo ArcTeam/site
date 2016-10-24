@@ -50,39 +50,68 @@ function init() {
     osm = new OpenLayers.Layer.OSM.CycleMap("CycleMap");
     map.addLayer(osm);
     stylePoi = new OpenLayers.StyleMap({
-        "default": new OpenLayers.Style(null, {rules: [ new OpenLayers.Rule({ symbolizer: { pointRadius: 6, fillColor: "#427109", fillOpacity:1, strokeWidth: 2, strokeColor: "#72B51E" } })]}),
-        "select": new OpenLayers.Style({ fillColor: "#0C06AF", strokeColor: "#00ccff", strokeWidth: 1}),
-        "temporary": new OpenLayers.Style(null, { rules: [ new OpenLayers.Rule({ symbolizer: { pointRadius: 6, fillColor: "#0C06AF", fillOpacity: 1, strokeWidth: 1, strokeColor: "#333333" }})]})
+        "default": new OpenLayers.Style(null, {
+            rules: [
+                new OpenLayers.Rule({
+                    symbolizer: {
+                        pointRadius: 6,
+                        fillColor: "#427109",
+                        fillOpacity: 1,
+                        strokeWidth: 1,
+                        strokeColor: "#72B51E"
+                    }
+                })
+            ]
+        }),
+        "select": new OpenLayers.Style({
+            fillColor: "#0C06AF",
+            strokeColor: "#00ccff",
+            strokeWidth: 1
+        }),
+        "temporary": new OpenLayers.Style(null, {
+            rules: [
+                new OpenLayers.Rule({
+                    symbolizer: {
+                        pointRadius: 6,
+                        fillColor: "#0C06AF",
+                        fillOpacity: 1,
+                        strokeWidth: 1,
+                        strokeColor: "#333333"
+                    }
+                })
+            ]
+        })
     });
+    /*var lavori = new OpenLayers.Layer.WMS("progetti", wmsHost,{
+        LAYERS: 'arcteam:lavori'
+        ,format: format
+        ,tiled: true
+        ,tilesOrigin : map.maxExtent.left + ',' + map.maxExtent.bottom
+        ,transparent: true
+        ,CQL_FILTER: 'id='+lavoro
+    },{
+        buffer: 10
+        ,isBaseLayer: false
+        , visibility: true
+        , tileSize: new OpenLayers.Size(256,256)
+    });
+    map.addLayer(lavori);*/
+
     newpoi = new OpenLayers.Layer.Vector("wfs", {
-        styleMap: stylePoi,
+        //styleMap: stylePoi,
         strategies: [new OpenLayers.Strategy.BBOX(), saveStrategy],
         protocol: new OpenLayers.Protocol.WFS({
-            version:       "1.1.0",
+            version:       "1.0.0",
             url: "http://localhost:8080/geoserver/arcteam/wfs",
             featureType: "attivita",
             srsName: "EPSG:3857",
             featureNS: "http://www.geoserver.org/arcteam",
             geometryName: "geom",
-            schema: "http://localhost:8080/geoserver/arcteam/wfs?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName=arcteam:attivita"
+            schema: "http://localhost:8080/geoserver/arcteam/wfs?service=WFS&version=1.0.0&request=DescribeFeatureType&TypeName=arcteam:attivita"
         })
     });
     map.addLayer(newpoi);
 
-    var lavori = new OpenLayers.Layer.WMS("progetti", wmsHost,{
-      LAYERS: 'arcteam:lavori'
-      ,format: format
-      ,tiled: true
-      ,tilesOrigin : map.maxExtent.left + ',' + map.maxExtent.bottom
-      ,transparent: true
-      ,CQL_FILTER: 'id='+lavoro
-    },{
-      buffer: 10
-      ,isBaseLayer: false
-      , visibility: true
-      , tileSize: new OpenLayers.Size(256,256)
-    });
-    map.addLayer(lavori);
 
     // add the custom editing toolbar
     navigate = new OpenLayers.Control.DragPan({isDefault: true, title: "Naviga all'interno della mappa", displayClass: "olControlNavigation"});
@@ -106,12 +135,12 @@ function init() {
     panel.addControls([navigate,draw,edit,del]);
     map.addControl(panel);
     if(mod==0){
-        newpoi.setVisibility(false);
-        lavori.setVisibility(true);
-        $(".olControlDeleteFeatureItemInactive").remove();
+        //newpoi.setVisibility(false);
+        //lavori.setVisibility(true);
+        $(".olControlDeleteFeatureItemInactive, .olControlModifyFeatureItemInactive").remove();
     }else{
-        newpoi.setVisibility(true);
-        lavori.setVisibility(false);
+        //newpoi.setVisibility(true);
+        //lavori.setVisibility(false);
         $(".olControlDrawFeaturePointItemInactive").remove();
     }
 
@@ -138,13 +167,14 @@ function onFeatureInsert(feature){
 
 // Passa attributi al form
 function insert(){
-    var fid, script, form, lavoro, attivita, tipo, inizio;
+    var fid, script, form, lavoro, attivita, tipo, inizio, fine;
     fid = $("#fid").val();
     form = $("form[name=postForm]");
     lavoro = $("input[name=lavoro]").val();
     attivita = $("input[name=attivita]").val();
     tipo = $("select[name=tipo]");
     inizio = $("input[name=inizio]");
+    fine = $("input[name=fine]").val();
     tipo.removeClass('error');
     inizio.removeClass('error');
     if(!tipo.val()){
@@ -162,6 +192,8 @@ function insert(){
         f.attributes.lavoro = lavoro;
         f.attributes.tipo_lavoro = tipo.val();
         f.attributes.data_inizio = inizio.val();
+        //fine = (fine=='NULL'|| fine=='')?'1900-01-01':fine;
+        if(fine!='NULL'|| fine==''){f.attributes.data_fine};
         saveStrategy.save();
         if(edit.feature) {
             var msg = msgUpdate;
@@ -179,17 +211,21 @@ function insert(){
 }
 
 function update(e){
-    var data, anno, mese, giorno, dataArr;
+    var data, anno, mese, giorno, dataArr, data_inizio, data_fine;
     $("#fid").val(e.feature.id);
     $("select[name=tipo] option[value=" + e.feature.attributes.tipo_lavoro + "]").prop("selected", true);
-    //data = new Date();
-    dataArr = e.feature.attributes.data_inizio;
+    data_inizio = e.feature.attributes.data_inizio;
+    data_fine = e.feature.attributes.data_fine;
+    /*dataArr = e.feature.attributes.data_inizio;
     dataArr = dataArr.split('-');
     anno = dataArr[0];
     mese = dataArr[1];
     giorno = dataArr[2].slice(0, -1);
     data = anno+"-"+mese+"-"+giorno;
-    $("input[name=inizio]").val(data);
+    $("input[name=inizio]").val(dataArr);*/
+    console.log("inizio:"+data_inizio+" fine:"+data_fine);
+    $("input[name=inizio]").val(data_inizio);
+    $("input[name=fine]").attr("min",data_inizio).val(data_fine);
     $("#formDiv").fadeIn('fast');
 }
 

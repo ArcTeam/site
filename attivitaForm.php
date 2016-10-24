@@ -31,7 +31,9 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
         #panel div[class*="olControlSaveFeature"]:before{content: "\f164";}
         #panel div[class*="olControlDeleteFeature"]:before{content: "\f014";}
         #formDiv,#deleteGeom{ position: absolute; background: #fff; padding: 20px; z-index: 1001; border-radius: 4px; border: 1px solid rgba(0,0,0,0.3); box-shadow: 0px 0px 10px rgba(0,0,0,0.7);}
-        #formDiv{top: 50px; right: 50px; width: 250px;}
+        #formDiv{top: 50px; right: 50px; width: 300px;}
+        #formDiv header{font-size:1.5rem; padding:0px; margin:0px;}
+        #formDiv label{display:inline-block;width:90px;}
         #deleteGeom{top: 200px; left: 20%; width: 60%;}
         #coo{position:absolute;top:5px;right:10px;color:#000;text-shadow:0px 0px 5px rgba(0, 0, 0, 1);z-index: 1000;font-size:.9rem;}
         #geocoder{position:absolute;top:10px;left:100px;z-index:1001;}
@@ -69,14 +71,21 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
                         <input type="hidden" name="lavoro" id="lavoro" value="<?php echo $_GET['lavoro']; ?>" >
                         <input type="hidden" name="attivita" value="<?php echo $id; ?>" >
                         <input type="hidden" name="fid" id="fid" value="" >
+                        <header class="headForm">Metadati attività</header>
                         <div class="rowButton">
+                            <label>Categoria: </label>
                             <select name="tipo">
                                 <option value="" disabled selected >scegli tipo lavoro</option>
                                 <?php echo $tipo; ?>
                             </select>
                         </div>
                         <div class="rowButton">
+                            <label>Inizio lavoro: </label>
                             <input type="date" name="inizio" min="<?php echo $maxDate;?>" value="">
+                        </div>
+                        <div class="rowButton">
+                            <label>Fine lavoro: </label>
+                            <input type="date" name="fine" min="" value="">
                         </div>
                         <div class="rowButton" id="salva">
                             <button type="button" name="salva" class="button success">salva punto</button>
@@ -119,6 +128,10 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
             /********* GEOCODE NOMINATIM   ********/
             $("#resultSearch").hide();
             $("button[name='search']").on("click",function(){var q = $("input[name='go']").val(); cercaIndirizzo(q);});
+            $("input[name=inizio]").on("change",function(){
+                var initDate = $(this).val();
+                $("input[name=fine]").attr("min",initDate);
+            });
             $("button[name='salva']").on("click",function(){insert();});
             $("button[name='confermaDel']").on("click",function(){elimina();});
             $("button[name=annulla], button[name=continua]").click(function(){
@@ -127,6 +140,7 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
                 $("#fid").val('');
                 $("select[name=tipo]").val('');
                 $("input[name=inizio]").val('');
+                $("input[name=fine]").val('');
             });
             $("button[name=continua]").click(function(){
                 $("#salva").delay(1000).show();
@@ -138,9 +152,7 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
                     $('.postDel').hide();
                 });
             });
-            $("button[name=chiudi]").click(function(){
-                window.location.href = "lavoro.php?l="+lavoro
-            });
+            $("button[name=chiudi]").click(function(){ window.location.href = "lavoro.php?l="+lavoro });
         });
     </script>
   </body>

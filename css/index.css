@@ -7,6 +7,7 @@
 #mappaTool article#infoJob{display: block;}
 #mappaTool article#infoJob div.infoJobContent{color:#fff;}
 #mappaTool article#infoJob div.infoJobContent span{display:block; color:#82C914;}
+.descrAttiv{position:relative;height:auto;max-height:200px;overflow:auto;}
 #mappaTool article#switchLayer{display: none;}
 #mappaTool article#switchLayer li{padding:5px 0px;}
 #mappaTool article#switchLayer li label{cursor:pointer;color:#909090;font-weight:bold;}
@@ -68,7 +69,7 @@ header.sectionMain { padding: 10px 20px;}
 .head2odd img{vertical-align:middle;}
 .olControlZoom{top: 15px !important; left: 0px !important; background: none !important; border-radius: 0px !important; padding: 0px !important;}
 .olControlZoom a{margin: 0px !important; color:#fff !important;background:rgba(0, 0, 0, 0.7) !important;}
-.olControlZoom a:first-child{border-radius: 0px 5px 0px 0px;}
+.olControlZoom a:first-child{border-radius: 0px 5px 0px 0px !important;}
 .olControlZoom a:last-child {border-radius: 0px 0px 5px 0px;}
 .olControlZoom a:nth-child(2) {border-radius: 0px 0px 0px 0px !important;}
 .olControlZoom a:hover{background:rgba(0, 0, 0, 0.9) !important;}

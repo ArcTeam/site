@@ -140,9 +140,10 @@ function init() {
                         data_fine = attributes.data_fine.split("-");
                         anno_fine = data_fine[0];
                     }
-                    if(anno_inizio == anno_fine || !attributes.data_fine){anno = anno_inizio}
-                    else{ anno = anno_inizio+"-"+anno_fine}
-                    $("#infoJob").html("<header class='sub'>"+attributes.nome+"</header><div class='infoJobContent'><span>categoria: "+attributes.categoria+" | "+anno+" | attività svolta: "+attributes.sottocategoria+"</span>"+attributes.descrizione+"</div>");
+                    if(anno_inizio == anno_fine){anno = anno_inizio;}
+                    else if(!attributes.data_fine){anno = anno_inizio+"-in corso";}
+                    else{ anno = anno_inizio+"-"+anno_fine;}
+                    $("#infoJob").html("<header class='sub'><i class='fa "+attributes.ico_lavoro+"'></i> "+attributes.nome+"</header><div class='infoJobContent'><span>"+anno+" | attività svolta: <i class='fa "+attributes.ico_attivita+"'></i> "+attributes.sottocategoria+"</span><div class='descrAttiv'>"+attributes.descrizione+"</div></div>");
                 }
             },
             beforegetfeatureinfo: function(event){
