@@ -88,11 +88,12 @@ while($c = pg_fetch_array($b)){
             $('#testo').ckeditor();
             $('.footable').footable();
             $('#change-page-size').change(function (e) {
-				e.preventDefault();
-				var pageSize = $(this).val();
-				$('.footable').data('page-size', pageSize);
-				$('.footable').trigger('footable_initialized');
-			});
+      				e.preventDefault();
+      				var pageSize = $(this).val();
+      				$('.footable').data('page-size', pageSize);
+      				$('.footable').trigger('footable_initialized');
+      			});
+            $('.clear-filter').click(function () { clearFilter(); });
         });
     </script>
   </body>

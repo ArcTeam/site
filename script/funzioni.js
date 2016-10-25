@@ -127,6 +127,10 @@ function setCenter(lon,lat){
     map.setCenter(lonlat, zoom );
 }
 
+function clearFilter(){
+  $('#filtro').val('');
+  $('.footable').trigger('footable_clear_filter');
+}
 
 var w=$("#mainWrap").width();
 var w2=$("section#main").width();
