@@ -143,7 +143,7 @@ var navPos = $("#login").offset();
 var logged = $("#logged").offset();
 if(headH > 480){$(".panel").css({"height":headW});}
 //$(".subMenu").css({"bottom":"0","right":headW+1});
-$(".subMenu").css({"margin-top":"-300px","right":headW+1});
+$(".subMenu").css({"margin-top":"-250px","right":headW+1});
 var mediaQuery = window.getComputedStyle(document.querySelector('body'),':before').content;
 var act = (mediaQuery == '"desktop"') ? "mouseenter mouseleave":"click";
 $(".logged").on(act, function(){$(this).children('ul').stop().animate({width: 'toggle'});});

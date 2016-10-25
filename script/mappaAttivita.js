@@ -1,4 +1,4 @@
-var extent, max, newpoi, msgDel, msgUpdate, DeleteFeature, saveStrategy, stylePoi;
+var extent, max, newpoi, msgDel, msgUpdate, DeleteFeature, saveStrategy;
 var navigate, save, del, draw, edit, divPannello, panel;
 var lavoro, ext, coo, mod;
 max = '<a href="#" class="olButton" id="max" title="torna allo zoom iniziale"><i class="fa fa-globe"></i></a>';
@@ -49,56 +49,8 @@ function init() {
 
     osm = new OpenLayers.Layer.OSM.CycleMap("CycleMap");
     map.addLayer(osm);
-    stylePoi = new OpenLayers.StyleMap({
-        "default": new OpenLayers.Style(null, {
-            rules: [
-                new OpenLayers.Rule({
-                    symbolizer: {
-                        pointRadius: 6,
-                        fillColor: "#427109",
-                        fillOpacity: 1,
-                        strokeWidth: 1,
-                        strokeColor: "#72B51E"
-                    }
-                })
-            ]
-        }),
-        "select": new OpenLayers.Style({
-            fillColor: "#0C06AF",
-            strokeColor: "#00ccff",
-            strokeWidth: 1
-        }),
-        "temporary": new OpenLayers.Style(null, {
-            rules: [
-                new OpenLayers.Rule({
-                    symbolizer: {
-                        pointRadius: 6,
-                        fillColor: "#0C06AF",
-                        fillOpacity: 1,
-                        strokeWidth: 1,
-                        strokeColor: "#333333"
-                    }
-                })
-            ]
-        })
-    });
-    /*var lavori = new OpenLayers.Layer.WMS("progetti", wmsHost,{
-        LAYERS: 'arcteam:lavori'
-        ,format: format
-        ,tiled: true
-        ,tilesOrigin : map.maxExtent.left + ',' + map.maxExtent.bottom
-        ,transparent: true
-        ,CQL_FILTER: 'id='+lavoro
-    },{
-        buffer: 10
-        ,isBaseLayer: false
-        , visibility: true
-        , tileSize: new OpenLayers.Size(256,256)
-    });
-    map.addLayer(lavori);*/
 
     newpoi = new OpenLayers.Layer.Vector("wfs", {
-        //styleMap: stylePoi,
         strategies: [new OpenLayers.Strategy.BBOX(), saveStrategy],
         protocol: new OpenLayers.Protocol.WFS({
             version:       "1.0.0",
@@ -216,14 +168,6 @@ function update(e){
     $("select[name=tipo] option[value=" + e.feature.attributes.tipo_lavoro + "]").prop("selected", true);
     data_inizio = e.feature.attributes.data_inizio;
     data_fine = e.feature.attributes.data_fine;
-    /*dataArr = e.feature.attributes.data_inizio;
-    dataArr = dataArr.split('-');
-    anno = dataArr[0];
-    mese = dataArr[1];
-    giorno = dataArr[2].slice(0, -1);
-    data = anno+"-"+mese+"-"+giorno;
-    $("input[name=inizio]").val(dataArr);*/
-    console.log("inizio:"+data_inizio+" fine:"+data_fine);
     $("input[name=inizio]").val(data_inizio);
     $("input[name=fine]").attr("min",data_inizio).val(data_fine);
     $("#formDiv").fadeIn('fast');

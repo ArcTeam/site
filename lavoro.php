@@ -25,11 +25,11 @@ $b = pg_query($connection, $a);
 while($att = pg_fetch_array($b)){
     $fine=(!$att['fine'])?'in corso':$att['fine'];
     $attivita .= "<li>";
-    $attivita .= "<span class='modAtt'><i class='fa ".$att['ico']."' aria-hidden='true' data-gid='".$att['gid']."'></i></span>";
+    $attivita .= "<span class='modAtt'><a href='attivita_scheda.php?a=".$att['gid']."&l=".$_GET['l']."' class='link base' title='accedi alla scheda attività'><i class='fa ".$att['ico']."' aria-hidden='true'></i></a></span>";
     $attivita .= "<span class='cat'>".$att['categoria']."</span>";
     $attivita .= "<span class='inizio'>".$att['inizio']."</span>";
     $attivita .= "<span class='fine'>".$fine."</span>";
-    $attivita .= "<span class='centra'><i class='fa fa-map-marker' aria-hidden='true' data-lonlat='".$att['lon'].",".$att['lat']."' title='centra mappa sull&#39;oggetto'></i></span>";
+    $attivita .= "<span class='centraSpan'><a href='#' class='prevent link centra base' data-lonlat='".$att['lon'].",".$att['lat']."' title='centra mappa sull&#39;oggetto'><i class='fa fa-map-marker' aria-hidden='true'></i></a></span>";
     $attivita .= "<span class='fattura'></span>";
     $attivita .= "</li>";
 }
@@ -95,7 +95,7 @@ while($att = pg_fetch_array($b)){
     <script src="script/mappaLavoro.js"></script>
     <script>
         $(document).ready(function(){
-            $(".centra i").on("click",function(){
+            $(".centra").on("click",function(){
                 var ll = $(this).data("lonlat");
                 ll = ll.split(',');
                 setCenter(ll[0],ll[1]);

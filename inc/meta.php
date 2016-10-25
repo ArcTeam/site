@@ -11,7 +11,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:description" content="Arc-Team" />
 <meta property="og:title" content="Arc-Team" />
-<!--<meta property="og:url" content="http://184.106.205.13/eburum/" />-->
 <meta property="og:site_name" content="Arc-Team" />
+<!--<meta property="og:url" content="http://184.106.205.13/eburum/" />-->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" media="all" >
 <title>Arc-Team Open Research</title>

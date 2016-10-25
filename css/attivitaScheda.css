@@ -1,0 +1,50 @@
+@import url("style.css");
+@import url("../lib/tag/tagmanager.css");
+
+.sezione{margin-bottom:2px;min-height:100px;height:auto;max-height:450px;}
+.sezione, .mappa{border:1px solid #999;border-radius:4px;}
+.sezione:last-child{margin-bottom:0px !important;}
+.sezione header{border: none !important; font-size: 1.2rem !important; border-radius:4px 4px 0px 0px;}
+.sezione header span, .sezione article{padding:0px 10px;}
+.main article#fatture{margin:20px 0px !important; padding:0px !important;}
+.main article#fatture header{background:none !important; border-bottom:1px solid #999 !important;color:#999 !important;}
+.main, .mappa, .attivita{height:450px;}
+.main{width:24%;}
+.attivita{width:25%;}
+.mappa{width:50%;position:relative;margin:0px;padding:0px;}
+.odd{width:49.5%;}
+.foto{width:50%;}
+
+.main header{background: #494177 !important;color:#fff !important;}
+.main article span{display: inline-block;font-size:1.2rem;}
+.main article span:first-child{min-width:100px;width:auto;max-width:30%;}
+.main article span:last-child{min-width:250px;width:auto;max-width:70%;}
+
+.main, .mappa{height:450px !important;}
+#cooDiv{position:absolute;top:0px;right:0px;padding:3px 10px;background:rgba(0, 0, 0, 0.7);font-size:1rem;color:#fbbc05;z-index:2;border-radius:0px 3px 0px 3px;}
+.olMapViewport{z-index: 1 !important;}
+.attivita header{background: #66bbdd; color:#fff !important;}
+.odd header{background: #093 !important;color:#fff !important;}
+.foto header{background: #FFA101 !important;color:#fff !important;}
+
+#attList li{ padding: 0px 10px; font-size: .9rem;}
+#attList li span{display:inline-block;}
+.modAtt, .fattura{width:16px;}
+.cat{width:110px;}
+.inizio, .fine{width:85px;}
+
+#panel div{ font-family: "FontAwesome"; width: 40px; height: 40px; font-size: 1.3rem; line-height: 40px; background: rgba(0, 60, 136, 0.5);margin:1px;text-align:center;color:#fff;cursor:pointer;}
+#panel div:hover{background: rgba(0, 60, 136, 0.7);}
+#panel div[class*="ItemActive"] { background: #82C914 !important;}
+#panel div[class*="olControlNavigation"]:before{content: "\f047";}
+#panel div[class*="olControlDrawFeaturePoint"]:before{content: "\f041";}
+#panel div[class*="olControlModifyFeature"]:before{content: "\f021";}
+#panel div[class*="olControlSaveFeature"]:before{content: "\f164";}
+#panel div[class*="olControlDeleteFeature"]:before{content: "\f014";}
+
+#msgGeom{ position: absolute; top: 8px; left: 65px; background: rgba(255,255,255,0.4); border-radius: 4px; padding: 2px; z-index: 2;display: none;}
+#msgGeomContent{background: rgba(0, 60, 136, 0.5); color: #fff; border-radius: 4px; padding: 8px 10px}
+
+#formDiv{ position: absolute; top: 180px; left: 25%; width: 300px; background: #fff; padding: 20px; z-index: 1001; border-radius: 4px; border: 1px solid rgba(0,0,0,0.3); box-shadow: 0px 0px 10px rgba(0,0,0,0.7);}
+#formDiv header{font-size:1.5rem; padding:0px; margin:0px;}
+#formDiv label{display:inline-block;width:90px;}
