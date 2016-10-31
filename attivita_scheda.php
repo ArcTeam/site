@@ -51,13 +51,14 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
               <li><a href="lavoro.php?l=<?php echo $_GET['l'];?>" title="Torna alla scheda progetto">scheda progetto</a></li>
               <li><a href="#" class='prevent modMainData' title="modifca dati principali">modifica dati</a></li>
               <li class="viewSub"><a href="#" class='prevent' title="Aggiungi ore">aggiungi</a>
-                <ul class="addList">
+                <ul class="subList">
                   <li><a href="#" class='prevent' title="Aggiungi ore">ore lavoro</a></li>
                   <li><a href="#" class='prevent' title="Aggiungi ore">fattura</a></li>
                   <li><a href="#" class='prevent' title="Aggiungi ore">materiale scaricabile</a></li>
                   <li><a href="#" class='prevent' title="Aggiungi ore">foto</a></li>
                 </ul>
               </li>
+              <li><a href="#" class='prevent delRecord' title="elimina attivita">elimina attività</a></li>
             </ul>
           </nav>
           <section class="sezione inline main">
@@ -114,6 +115,13 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
             <div class="rowButton" id="msg"></div>
         </form>
     </section>
+    <section id="delRec">
+        <div class="warning" id="deleteMsg"><span></span></div>
+        <div class="rowButton" id="deleteButton">
+            <button type="button" name="confermaDel" class="button error ">conferma</button>
+            <button type="button" name="chiudiDel" class="button base ">annulla</button>
+        </div>
+    </section>
 
     <input type="hidden" id="extent" value="<?php echo $extent; ?>">
     <input type="hidden" id="lavoro" value="<?php echo $_GET['l']; ?>">
@@ -132,6 +140,7 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
     <script src="script/mappaAttivitaScheda.js"></script>
     <script>
         $(document).ready(function(){
+          var lavoro = $("#lavoro").val();
           var attivita = $("#attivita").val();
           $(".modMainData").on("click", function(){
             var tipoVal = $("#tipoVal").val();
@@ -165,6 +174,21 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
             });
           });
           $("button[name=annulla]").click(function(){ $('#formDiv').fadeOut('fast'); $("#msg").text(''); });
+
+          var msgDel = "Stai per eliminare un'attività e le geometrie associate.\nL'azione non può essere annullata, confermi l'eliminazione?";
+          var msgDel2 = "ok";
+          $(".delRecord").on("click",function(){
+              $("#deleteMsg").text(msgDel);
+              $('#delRec').fadeIn('fast');
+              $("button[name='chiudiDel']").on("click", function(){ $('#delRec').fadeOut('fast'); $("#deleteMsg span").text(msgDel); });
+              $("button[name='confermaDel']").on("click",function(){
+                  //$.post("inc/attivitaDel.php", { gid:attivita }, function(data){
+                  $("#deleteMsg span").text(msgDel2);
+                  $('#delRecord').delay(3000).fadeOut('fast');
+                  //window.location.href = "lavoro.php?l="+lavoro;
+                  //});
+              });
+          });
         });
 
     </script>
