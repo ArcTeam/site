@@ -14,9 +14,10 @@
 #cooDiv{position:absolute;top:0px;right:0px;padding:3px 10px;background:rgba(0, 0, 0, 0.7);font-size:1rem;color:#fbbc05;z-index:2;border-radius:0px 3px 0px 3px;}
 .olMapViewport{z-index: 1 !important;}
 .attivita header{background: #66bbdd; color:#fff !important;}
-.odd, .attivita{width:30%;}
+.attivita{width:55%;}
+.odd{width:44%;}
 .odd header{background: #093 !important;color:#fff !important;}
-.foto{width:38.5%;}
+.foto{width:100%;}
 .foto header{background: #FFA101 !important;color:#fff !important;}
 #noGeom{ position: absolute; top: 200px; left: 25%; width: 50%; padding: 20px; text-align: center; z-index: 1002; border-radius: 4px; display:none;}
 div#tag{margin-top:10px;}

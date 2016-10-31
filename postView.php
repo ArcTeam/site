@@ -14,6 +14,7 @@ $data = explode(" ",$p['data']);
         <link href="css/postView.css" rel="stylesheet" media="screen" />
     </head>
     <body>
+        <input type="hidden" name="post" value="<?php echo $_GET['p']; ?>">
         <header id="main"><?php require("inc/header.php"); ?></header>
         <div id="mainWrap">
             <section class="form ckform post">
@@ -22,9 +23,9 @@ $data = explode(" ",$p['data']);
                 <footer id="toolbar">
                     <a href="post.php" id="list"><i class="fa fa-th-list"></i> archivio post</a>
                     <?php if(isset($_SESSION['id'])){?>
-                        <a href="postForm.php?t=1&p=<?php echo $_GET['p'];?>" id="mod"><i class="fa fa-wrench"></i> modifica post</a>
-                        <a href="#" id="del"><i class="fa fa-times"></i> elimina post</a>
-                        <?php } ?>
+                    <a href="postForm.php?t=1&p=<?php echo $_GET['p'];?>" id="mod"><i class="fa fa-wrench"></i> modifica post</a>
+                    <a href="#" id="del" class="delRecord prevent"><i class="fa fa-times"></i> elimina post</a>
+                    <?php } ?>
                 </footer>
             </section>
             <section class="form ckform metadata">
@@ -47,16 +48,20 @@ $data = explode(" ",$p['data']);
 
                 (function() {  // DON'T EDIT BELOW THIS LINE
                     var d = document, s = d.createElement('script');
-
                     s.src = '//arc-team.disqus.com/embed.js';
-
                     s.setAttribute('data-timestamp', +new Date());
                     (d.head || d.body).appendChild(s);
                 })();
             </script>
             <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
             </section>
-
+            <section id="delRec">
+                <div class="warning" id="deleteMsg"><span></span></div>
+                <div class="rowButton" id="deleteButton">
+                    <button type="button" name="confermaDel" class="button error ">conferma</button>
+                    <button type="button" name="chiudiDel" class="button base ">annulla</button>
+                </div>
+            </section>
         </div>
         <footer><?php require("inc/footer.php"); ?></footer>
         <script src="lib/jquery-1.12.0.min.js"></script>
@@ -65,6 +70,7 @@ $data = explode(" ",$p['data']);
         <script src="script/funzioni.js"></script>
         <script>
         $(document).ready(function(){
+            var post = $("input[name=post]").val();
             $("a#post").addClass('actPost prevent');
             $('#testo').ckeditor();
             var form = $("form[name=postForm]");
@@ -93,6 +99,19 @@ $data = explode(" ",$p['data']);
                         }
                     });
                 }
+            });
+
+            var msgDel = "Stai per eliminare un post.\nL'azione non può essere annullata, confermi l'eliminazione?";
+            $(".delRecord").on("click",function(){
+                $("#deleteMsg").text(msgDel);
+                $('#delRec').fadeIn('fast');
+                $("button[name='chiudiDel']").on("click", function(){ $('#delRec').fadeOut('fast'); $("#deleteMsg span").text(msgDel); });
+                $("button[name='confermaDel']").on("click",function(){
+                    $.post("inc/postDel.php", { id:post }, function(data){
+                        $("#deleteMsg").text(data);
+                        $('#delRec').delay(2000).fadeOut('fast', function(){  window.location.href = "post.php"; });
+                    });
+                });
             });
         });
         </script>

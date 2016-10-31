@@ -68,12 +68,12 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
             </article>
             <article id="fatture">
               <header><span>Fatture emesse</span></header>
-              <ul id="fatture"></ul>
+              <ul id="fattureList"></ul>
             </article>
-          </section>
-          <section class="sezione inline attivita">
-            <header><span>Ore lavoro</span></header>
-              <ul id="attList"></ul>
+            <article id="ore">
+                <header><span>Ore lavoro</span></header>
+                <ul id="oreList"></ul>
+            </article>
           </section>
           <section id="mappa" class="sezione inline mappa">
             <div id="panel" class="customEditingToolbar"></div>
@@ -176,17 +176,15 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
           $("button[name=annulla]").click(function(){ $('#formDiv').fadeOut('fast'); $("#msg").text(''); });
 
           var msgDel = "Stai per eliminare un'attività e le geometrie associate.\nL'azione non può essere annullata, confermi l'eliminazione?";
-          var msgDel2 = "ok";
           $(".delRecord").on("click",function(){
               $("#deleteMsg").text(msgDel);
               $('#delRec').fadeIn('fast');
-              $("button[name='chiudiDel']").on("click", function(){ $('#delRec').fadeOut('fast'); $("#deleteMsg span").text(msgDel); });
+              $("button[name='chiudiDel']").on("click", function(){ $('#delRec').fadeOut('fast'); $("#deleteMsg").text(data); });
               $("button[name='confermaDel']").on("click",function(){
-                  //$.post("inc/attivitaDel.php", { gid:attivita }, function(data){
-                  $("#deleteMsg span").text(msgDel2);
-                  $('#delRecord').delay(3000).fadeOut('fast');
-                  //window.location.href = "lavoro.php?l="+lavoro;
-                  //});
+                  $.post("inc/attivitaDel.php", { gid:attivita }, function(data){
+                      $("#deleteMsg").text(data);
+                      $('#delRec').delay(2000).fadeOut('fast', function(){  window.location.href = "lavoro.php?l="+lavoro; });
+                  });
               });
           });
         });

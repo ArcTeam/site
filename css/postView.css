@@ -15,3 +15,4 @@ footer#toolbar a{display:inline-block;color:#fff;padding:3px 7px;border-radius:3
 footer#toolbar a#list{background:#AD8100;}
 footer#toolbar a#mod{background: #82C914;}
 footer#toolbar a#del{background:#cc181e;}
+#delRec{ position: absolute; top: 200px; left: 25%; width: 25%; background: #fff; padding: 20px; z-index: 2; border-radius: 4px;display:none;}

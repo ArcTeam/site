@@ -144,8 +144,8 @@ function insert(){
         f.attributes.lavoro = lavoro;
         f.attributes.tipo_lavoro = tipo.val();
         f.attributes.data_inizio = inizio.val();
-        //fine = (fine=='NULL'|| fine=='')?'1900-01-01':fine;
-        if(fine!='NULL'|| fine==''){f.attributes.data_fine};
+        if(fine){f.attributes.data_fine=fine};
+        //console.log(inizio.val()+", fine: "+fine); return false;
         saveStrategy.save();
         if(edit.feature) {
             var msg = msgUpdate;

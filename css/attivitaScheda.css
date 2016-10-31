@@ -6,21 +6,21 @@
 .sezione:last-child{margin-bottom:0px !important;}
 .sezione header{border: none !important; font-size: 1.2rem !important; border-radius:4px 4px 0px 0px;}
 .sezione header span, .sezione article{padding:0px 10px;}
-.main article#fatture{margin:20px 0px !important; padding:0px !important;}
-.main article#fatture header{background:none !important; border-bottom:1px solid #999 !important;color:#999 !important;}
+.main article{margin:20px 0px !important; padding:0px !important;}
+.main article header{background:none !important; border-bottom:1px solid #999 !important;color:#999 !important;}
 .main, .mappa, .attivita{height:450px;}
-.main{width:24%;}
-.attivita{width:25%;}
-.mappa{width:50%;position:relative;margin:0px;padding:0px;}
-.odd{width:49.5%;}
-.foto{width:50%;}
-
+.main{width:35%;}
 .main header{background: #494177 !important;color:#fff !important;}
 .main article span{display: inline-block;font-size:1.2rem;}
 .main article span:first-child{min-width:100px;width:auto;max-width:30%;}
-.main article span:last-child{min-width:250px;width:auto;max-width:70%;}
-
+.main article span:last-child{min-width:185px;width:auto;max-width:65%;}
+.main #mainData{margin:0px 10px;}
 .main, .mappa{height:450px !important;}
+.attivita{width:25%;}
+.mappa{width:64%;position:relative;margin:0px;padding:0px;}
+.odd{width:40%;}
+.foto{width:59%;}
+
 #cooDiv{position:absolute;top:0px;right:0px;padding:3px 10px;background:rgba(0, 0, 0, 0.7);font-size:1rem;color:#fbbc05;z-index:2;border-radius:0px 3px 0px 3px;}
 .olMapViewport{z-index: 1 !important;}
 .attivita header{background: #66bbdd; color:#fff !important;}
