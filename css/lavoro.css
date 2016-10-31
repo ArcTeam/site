@@ -1,23 +1,26 @@
 @import url("style.css");
 @import url("../lib/tag/tagmanager.css");
 
-.sezione{margin-bottom:2px;width: 49%;min-height:100px;height:auto;max-height:450px;}
+.sezione{margin-bottom:2px;min-height:100px;height:auto;}
 .sezione, #mappa{border:1px solid #999;border-radius:4px;}
 .sezione:last-child{margin-bottom:0px !important;}
 .sezione header{border: none !important; font-size: 1.2rem !important; border-radius:4px 4px 0px 0px;}
 .sezione header span, .sezione article{padding:0px 10px;}
+.main{height:450px;}
 .main header{background: #494177 !important;color:#fff !important;}
-.main article span{display: inline-block;}
+.main article span, #colSx{display: inline-block;}
+#colSx{width:40%;height:700px}
+.attivita{width:99.5%;height:246px;}
 #descr{height: auto;max-height: 400px; overflow: auto;}
-.mappa{width:50%;position:relative;margin:0px;padding:0px;}
-.main, .mappa{height:450px !important;}
+.mappa{width:59%;height:700px !important;position:relative;margin:0px;padding:0px;}
+
 #cooDiv{position:absolute;top:0px;right:0px;padding:3px 10px;background:rgba(0, 0, 0, 0.7);font-size:1rem;color:#fbbc05;z-index:2;border-radius:0px 3px 0px 3px;}
 .olMapViewport{z-index: 1 !important;}
 .attivita header{background: #66bbdd; color:#fff !important;}
-.attivita{width:55%;}
-.odd{width:44%;}
+.odd, .foto{margin-top:10px;}
+.odd{width:40%;}
 .odd header{background: #093 !important;color:#fff !important;}
-.foto{width:100%;}
+.foto{width:59%;}
 .foto header{background: #FFA101 !important;color:#fff !important;}
 #noGeom{ position: absolute; top: 200px; left: 25%; width: 50%; padding: 20px; text-align: center; z-index: 1002; border-radius: 4px; display:none;}
 div#tag{margin-top:10px;}

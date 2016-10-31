@@ -52,23 +52,25 @@ while($att = pg_fetch_array($b)){
                 <a href="#" class='prevent' title="Aggiungi fattura">aggiungi fattura</a>
                 <a href="attivitaForm.php?lavoro=<?php echo $_GET['l'];?>&ext=<?php echo $extent;?>&mod=1" title="Modifica geometrie">modifica geometrie</a>
             </nav>
-            <section class="sezione inline main">
-                <header><span>Dati principali</span></header>
-                <article>
-                    <div id="descr">
-                        <?php echo $c['descrizione']; ?>
-                        <div><strong>Inizio progetto: </strong> <?php echo $c['anno']; ?> | <strong>Categoria: </strong><?php echo $c['categoria']; ?></div>
-                        <div id="tag"><?php echo tag($_GET['l'],3); ?></div>
-                    </div>
-                </article>
-            </section>
+            <div id="colSx">
+                <section class="sezione inline main">
+                    <header><span>Dati principali</span></header>
+                    <article>
+                        <div id="descr">
+                            <?php echo nl2br($c['descrizione']); ?>
+                            <div><strong>Inizio progetto: </strong> <?php echo $c['anno']; ?> | <strong>Categoria: </strong><?php echo $c['categoria']; ?></div>
+                            <div id="tag"><?php echo tag($_GET['l'],3); ?></div>
+                        </div>
+                    </article>
+                </section>
+                <section class="sezione inline attivita">
+                    <header><span>Attività</span></header>
+                    <ul id="attList"><?php echo $attivita; ?></ul>
+                </section>
+            </div>
             <section id="mappa" class="sezione inline mappa">
                 <div id="cooDiv"><span>[epsg:4326]</span> <span id="coo"></span></div>
                 <div id="noGeom" class="error">Nessuna attività presente per questo lavoro</div>
-            </section>
-            <section class="sezione inline attivita">
-                <header><span>Attività</span></header>
-                <ul id="attList"><?php echo $attivita; ?></ul>
             </section>
             <section class="sezione inline odd">
                 <header><span>Materiale scaricabile</span></header>
