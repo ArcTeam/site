@@ -7,7 +7,9 @@
 #mappaTool article#infoJob{display: block;}
 #mappaTool article#infoJob div.infoJobContent{color:#fff;}
 #mappaTool article#infoJob div.infoJobContent span{display:block; color:#82C914;}
-.descrAttiv{position:relative;height:auto;max-height:200px;overflow:auto;}
+#mappaTool article#infoJob div.infoJobContent div.linkSchede a{display:inline-block; color:#82C914;margin-right:5px;padding: 2px 5px; border-radius: 3px;}
+#mappaTool article#infoJob div.infoJobContent div.linkSchede a:hover{background:#82C914;color:#000;}
+.descrAttiv{position:relative;height:auto;max-height:180px;overflow:auto;}
 #mappaTool article#switchLayer{display: none;}
 #mappaTool article#switchLayer li{padding:5px 0px;}
 #mappaTool article#switchLayer li label{cursor:pointer;color:#909090;font-weight:bold;}

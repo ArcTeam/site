@@ -54,6 +54,20 @@ function usrAction(id, script, classe, email){
     });
 }
 
+function delRec(tab,campo,id,page){
+    var msgDel = "Stai per eliminare un record e tutti i dati ad esso associati.\nL'azione non può essere annullata, confermi l'eliminazione?";
+    //console.log(tab+" | "+campo+" | "+id+" | "+page);
+    $("#deleteMsg").text(msgDel);
+    $('#delRec').fadeIn('fast');
+    $("button[name='chiudiDel']").on("click", function(){ $('#delRec').fadeOut('fast'); $("#deleteMsg").text(msgDel); });
+    $("button[name='confermaDel']").on("click",function(){
+        $.post("inc/delRecScript.php", { tab:tab, campo:campo, id:id }, function(data){
+            $("#deleteMsg").text(data);
+            $('#delRec').delay(2000).fadeOut('fast', function(){  window.location.href = page; });
+        });
+    });
+}
+
 /////////  funzioni per highlight filtro tabelle ////
 function filterTable(search, dati) {
   dehighlight(document.getElementById(dati));
@@ -120,7 +134,7 @@ function trimString(str, length, delim, appendix) {
     return trimmedStr;
 }
 ////////////////////////////////////////////////////////////////////////////////
-
+///////// FUNZIONI MAPPE /////////////////////
 function setCenter(lon,lat){
     var lonlat = new OpenLayers.LonLat(lon,lat);
     var zoom = 17;
@@ -132,6 +146,17 @@ function clearFilter(){
   $('.footable').trigger('footable_clear_filter');
 }
 
+function zoomtocluster(event) {
+    var f = event.feature;
+    if (f.cluster.length > 1){
+        clusterpoints = [];
+        for(var i = 0; i<f.cluster.length; i++){ clusterpoints.push(f.cluster[i].geometry); }
+        var linestring = new OpenLayers.Geometry.LineString(clusterpoints);
+        map.zoomToExtent(linestring.getBounds());
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
 var w=$("#mainWrap").width();
 var w2=$("section#main").width();
 $("aside#mainAside").css("width",w-w2-20);

@@ -2,6 +2,7 @@
 session_start();
 require("inc/db.php");
 require("class/funzioni.php");
+require("inc/delRecDiv.php");
 $a ="select l.id, l.anno, c.categoria, l.nome, l.descrizione from main.lavoro l, liste.cat c where l.tipo = c.id and l.id = ".$_GET['l'].";";
 $b = pg_query($connection, $a);
 $c = pg_fetch_array($b);
@@ -46,11 +47,23 @@ while($att = pg_fetch_array($b)){
         <section class="form ckform">
             <header><?php echo $c['nome']; ?></header>
             <nav class="toolbar">
-                <a href="lavori.php" title="Torna all'archivio lavori">archivio lavori</a>
-                <a href="lavoroIns.php?p=<?php echo $_GET['l']; ?>" title="Modifica dati principali lavoro">modifica dati</a>
-                <a href="attivitaForm.php?lavoro=<?php echo $_GET['l'];?>&ext=<?php echo $extent;?>&mod=0" title="Aggiungi attività">aggiungi attività</a>
-                <a href="#" class='prevent' title="Aggiungi fattura">aggiungi fattura</a>
-                <a href="attivitaForm.php?lavoro=<?php echo $_GET['l'];?>&ext=<?php echo $extent;?>&mod=1" title="Modifica geometrie">modifica geometrie</a>
+                <ul>
+                    <li><a href="lavori.php" title="Torna all'archivio lavori"><i class="fa fa-list" aria-hidden="true"></i> lavori</a></li>
+                    <li class="viewSub"><a href="#" class='prevent' title="Modifica"><i class="fa fa-pencil" aria-hidden="true"></i> modifca</a>
+                        <ul class="subList">
+                            <li><a href="lavoroIns.php?p=<?php echo $_GET['l']; ?>" title="Modifica dati principali lavoro">modifica dati</a></li>
+                            <li><a href="attivitaForm.php?lavoro=<?php echo $_GET['l'];?>&ext=<?php echo $extent;?>&mod=1" title="Modifica geometrie">modifica geometrie</a></li>
+                            <li><a href="#" class='prevent delRecord' title="elimina lavoro">elimina lavoro</a></li>
+                        </ul>
+                    </li>
+                    <li class="viewSub"><a href="#" class='prevent' title="aggiungi"><i class="fa fa-plus" aria-hidden="true"></i> aggiungi</a>
+                        <ul class="subList">
+                            <li><a href="attivitaForm.php?lavoro=<?php echo $_GET['l'];?>&ext=<?php echo $extent;?>&mod=0" title="Aggiungi attività">attività</a></li>
+                            <li><a href="#" class='prevent' title="Aggiungi odd">materiale scaricabile</a></li>
+                            <li><a href="#" class='prevent' title="Aggiungi foto">foto</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </nav>
             <div id="colSx">
                 <section class="sezione inline main">
@@ -90,19 +103,18 @@ while($att = pg_fetch_array($b)){
     <script src="lib/jquery-ui-1.14.min.js"></script>
     <script src="http://openlayers.org/api/OpenLayers.js"></script>
     <script src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
-    <!--<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script src="lib/tag/tagmanager.js"></script>-->
     <script src="script/funzioni.js"></script>
     <script src="script/varGeom.js"></script>
     <script src="script/mappaLavoro.js"></script>
     <script>
         $(document).ready(function(){
+            var lavoro = $("#lavoro").val();
             $(".centra").on("click",function(){
                 var ll = $(this).data("lonlat");
                 ll = ll.split(',');
                 setCenter(ll[0],ll[1]);
-                //console.log(ll[0]);
             });
+            $(".delRecord").on("click",function(){ delRec("lavoro", "id", lavoro, "lavori.php"); });
         });
 
     </script>

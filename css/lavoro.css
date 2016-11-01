@@ -24,13 +24,31 @@
 .foto header{background: #FFA101 !important;color:#fff !important;}
 #noGeom{ position: absolute; top: 200px; left: 25%; width: 50%; padding: 20px; text-align: center; z-index: 1002; border-radius: 4px; display:none;}
 div#tag{margin-top:10px;}
-span.tag{display:inline-block;margin:0px 1px;padding:0px 5px;border-radius:3px;background:#494177;color:#fff;font-size:.8rem;}
+span.tag{display:inline-block;margin:1px;padding:0px 5px;border-radius:3px;background:#494177;color:#fff;font-size:.8rem;}
 span.tag i{margin-left:7px;}
-#attList{margin-top:10px;}
+#attList{margin-top:10px;height: 190px; overflow: auto;}
 #attList li{ padding: 0px 10px; font-size: .9rem;}
 #attList li span{display:inline-block; vertical-align:top;}
 .modAtt, .fattura{width:20px;cursor:pointer;}
 
-.cat{width:190px;}
+.cat{width:170px;}
 .inizio, .fine{width:85px;}
 .link:hover{color:#66bbdd !important;}
+
+/* mobile */
+@media only screen and (min-width:319px) and (max-width:480px) {
+
+}
+/* Tablets */
+@media only screen and (min-width:481px) and (max-width:1023px) {
+    body:before { content: 'tablet'; display: none; }
+}
+
+/* pc */
+@media screen and (min-width: 1024px) and (max-width:1919px) {
+
+}
+
+@media screen and (min-width: 1920px){
+
+}

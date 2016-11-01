@@ -48,5 +48,3 @@
 #formDiv{ position: absolute; top: 180px; left: 25%; width: 300px; background: #fff; padding: 20px; z-index: 1001; border-radius: 4px; border: 1px solid rgba(0,0,0,0.3); box-shadow: 0px 0px 10px rgba(0,0,0,0.7);}
 #formDiv header{font-size:1.5rem; padding:0px; margin:0px;}
 #formDiv label{display:inline-block;width:90px;}
-
-#delRec{ position: absolute; top: 200px; left: 25%; width: 25%; background: #fff; padding: 20px; z-index: 2; border-radius: 4px;display:none;}

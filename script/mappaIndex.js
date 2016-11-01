@@ -27,15 +27,15 @@ function init() {
      }),
      symbolizer: {
       fillColor: colors.low,
-      fillOpacity: 0.9,
       strokeColor: colors.low,
+      fillOpacity: 0.9,
       strokeOpacity: 0.5,
       strokeWidth: 12,
       pointRadius: 12,
       label: "${count}",
       labelOutlineWidth: 1,
       fontColor: "#eee",
-      //fontOpacity: 0.8,
+      cursor:"hand",
       fontSize: "12px"
      }
     });
@@ -48,15 +48,15 @@ function init() {
      }),
      symbolizer: {
       fillColor: colors.middle,
-      fillOpacity: 0.9,
       strokeColor: colors.middle,
+      fillOpacity: 0.9,
       strokeOpacity: 0.5,
       strokeWidth: 12,
       pointRadius: 15,
       label: "${count}",
       labelOutlineWidth: 1,
       fontColor: "#eee",
-      //fontOpacity: 0.8,
+      cursor:"hand",
       fontSize: "12px"
      }
     });
@@ -68,13 +68,13 @@ function init() {
      }),
      symbolizer: {
       fillColor: colors.high,
-      fillOpacity: 0.9,
       strokeColor: colors.high,
+      fillOpacity: 0.9,
       strokeOpacity: 0.5,
       strokeWidth: 12,
       pointRadius: 20,
       label: "${count}",
-      //labelOutlineWidth: 1,
+      cursor:"hand",
       fontColor: "#eee",
       fontOpacity: 0.8,
       fontSize: "12px"
@@ -143,7 +143,7 @@ function init() {
                     if(anno_inizio == anno_fine){anno = anno_inizio;}
                     else if(!attributes.data_fine){anno = anno_inizio+"-in corso";}
                     else{ anno = anno_inizio+"-"+anno_fine;}
-                    $("#infoJob").html("<header class='sub'><i class='fa "+attributes.ico_lavoro+"'></i> "+attributes.nome+"</header><div class='infoJobContent'><span>"+anno+" | attività svolta: <i class='fa "+attributes.ico_attivita+"'></i> "+attributes.sottocategoria+"</span><div class='descrAttiv'>"+attributes.descrizione+"</div></div>");
+                    $("#infoJob").html("<header class='sub'><i class='fa "+attributes.ico_lavoro+"'></i> "+attributes.nome+"</header><div class='infoJobContent'><span>"+anno+" | attività svolta: <i class='fa "+attributes.ico_attivita+"'></i> "+attributes.sottocategoria+"</span><div class='descrAttiv'>"+attributes.descrizione+"</div><div class='linkSchede'><a href='lavoro.php?l="+attributes.id+"' class='prevent viewlavoro'>scheda lavoro</a><a href='attivita_scheda.php?a="+attributes.gid+"&l="+attributes.id+"' class='prevent viewAttivita'>scheda attivita</a></div></div>");
                 }
             },
             beforegetfeatureinfo: function(event){
@@ -173,7 +173,13 @@ function init() {
       previousMapScale = this.getScale();
     });
 
-
+    selectCtrl = new OpenLayers.Control.SelectFeature( cluster, {
+        clickout: true,
+        eventListeners: { featurehighlighted: zoomtocluster }
+    });
+    map.addControl(selectCtrl);
+    selectCtrl.activate();
+    
     extent = new OpenLayers.Bounds(coo[0], coo[1], coo[2], coo[3]);
     map.zoomToExtent(extent);
     $('.olControlZoom').append('<a href="#" id="max" title="torna allo zoom iniziale"><i class="fa fa-globe"></i></a>');

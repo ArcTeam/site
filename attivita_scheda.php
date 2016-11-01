@@ -1,6 +1,7 @@
 <?php
 session_start();
 require("inc/db.php");
+require("inc/delRecDiv.php");
 //dati generali attività
 $a ="select a.gid, a.tipo_lavoro as tipo, t.def as cat, l.id, l.nome, a.data_inizio as inizio, a.data_fine as fine, c.ico, st_x(a.geom) as lon, st_y(a.geom) as lat from main.attivita a, liste.subcat t, main.lavoro l, liste.cat c where a.tipo_lavoro = t.id and a.lavoro = l.id and t.cat = c.id and a.gid = ".$_GET['a'].";";
 $b = pg_query($connection, $a);
@@ -115,14 +116,6 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
             <div class="rowButton" id="msg"></div>
         </form>
     </section>
-    <section id="delRec">
-        <div class="warning" id="deleteMsg"><span></span></div>
-        <div class="rowButton" id="deleteButton">
-            <button type="button" name="confermaDel" class="button error ">conferma</button>
-            <button type="button" name="chiudiDel" class="button base ">annulla</button>
-        </div>
-    </section>
-
     <input type="hidden" id="extent" value="<?php echo $extent; ?>">
     <input type="hidden" id="lavoro" value="<?php echo $_GET['l']; ?>">
     <input type="hidden" id="attivita" value="<?php echo $_GET['a']; ?>">
@@ -175,17 +168,9 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
           });
           $("button[name=annulla]").click(function(){ $('#formDiv').fadeOut('fast'); $("#msg").text(''); });
 
-          var msgDel = "Stai per eliminare un'attività e le geometrie associate.\nL'azione non può essere annullata, confermi l'eliminazione?";
           $(".delRecord").on("click",function(){
-              $("#deleteMsg").text(msgDel);
-              $('#delRec').fadeIn('fast');
-              $("button[name='chiudiDel']").on("click", function(){ $('#delRec').fadeOut('fast'); $("#deleteMsg").text(data); });
-              $("button[name='confermaDel']").on("click",function(){
-                  $.post("inc/attivitaDel.php", { gid:attivita }, function(data){
-                      $("#deleteMsg").text(data);
-                      $('#delRec').delay(2000).fadeOut('fast', function(){  window.location.href = "lavoro.php?l="+lavoro; });
-                  });
-              });
+              var page = "lavoro.php?l="+lavoro;
+              delRec("attivita", "gid", attivita, page);
           });
         });
 
