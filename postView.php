@@ -2,6 +2,7 @@
 session_start();
 require("inc/db.php");
 require("class/funzioni.php");
+require("inc/delRecDiv.php");
 $a = "SELECT p.id, p.titolo, p.testo, l.data, r.utente FROM main.log l, main.usr u, main.post p, main.rubrica r WHERE l.record = p.id AND l.utente = u.id AND u.rubrica = r.id AND l.tabella = 'post' AND l.operazione = 'I' AND p.id =".$_GET['p'];
 $b = pg_query($connection,$a);
 $p = pg_fetch_array($b);
@@ -19,14 +20,16 @@ $data = explode(" ",$p['data']);
         <div id="mainWrap">
             <section class="form ckform post">
                 <header id="titolo"><?php echo $p['titolo']; ?></header>
+                <nav class="toolbar">
+                    <ul>
+                        <li><a href="post.php" title="Torna all'archivio lavori"><i class="fa fa-list" aria-hidden="true"></i> post</a></li>
+                        <?php if(isset($_SESSION['id'])){?>
+                        <li><a href="postForm.php?t=1&p=<?php echo $_GET['p'];?>" id="mod"><i class="fa fa-pencil" aria-hidden="true"></i> modifica post</a></li>
+                        <li><a href="#" id="del" class="delRecord prevent"><i class="fa fa-times" aria-hidden="true"></i> elimina post</a></li>
+                        <?php } ?>
+                    </ul>
+                </nav>
                 <article><?php echo $p['testo']; ?></article>
-                <footer id="toolbar">
-                    <a href="post.php" id="list"><i class="fa fa-th-list"></i> archivio post</a>
-                    <?php if(isset($_SESSION['id'])){?>
-                    <a href="postForm.php?t=1&p=<?php echo $_GET['p'];?>" id="mod"><i class="fa fa-wrench"></i> modifica post</a>
-                    <a href="#" id="del" class="delRecord prevent"><i class="fa fa-times"></i> elimina post</a>
-                    <?php } ?>
-                </footer>
             </section>
             <section class="form ckform metadata">
                 <header>INFO POST</header>
@@ -100,19 +103,7 @@ $data = explode(" ",$p['data']);
                     });
                 }
             });
-
-            var msgDel = "Stai per eliminare un post.\nL'azione non può essere annullata, confermi l'eliminazione?";
-            $(".delRecord").on("click",function(){
-                $("#deleteMsg").text(msgDel);
-                $('#delRec').fadeIn('fast');
-                $("button[name='chiudiDel']").on("click", function(){ $('#delRec').fadeOut('fast'); $("#deleteMsg span").text(msgDel); });
-                $("button[name='confermaDel']").on("click",function(){
-                    $.post("inc/postDel.php", { id:post }, function(data){
-                        $("#deleteMsg").text(data);
-                        $('#delRec').delay(2000).fadeOut('fast', function(){  window.location.href = "post.php"; });
-                    });
-                });
-            });
+            $(".delRecord").on("click",function(){ delRec("post", "id", post, "post.php"); });
         });
         </script>
     </body>

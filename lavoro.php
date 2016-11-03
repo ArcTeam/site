@@ -49,6 +49,7 @@ while($att = pg_fetch_array($b)){
             <nav class="toolbar">
                 <ul>
                     <li><a href="lavori.php" title="Torna all'archivio lavori"><i class="fa fa-list" aria-hidden="true"></i> lavori</a></li>
+                    <?php if(isset($_SESSION['id'])){?>
                     <li class="viewSub"><a href="#" class='prevent' title="Modifica"><i class="fa fa-pencil" aria-hidden="true"></i> modifca</a>
                         <ul class="subList">
                             <li><a href="lavoroIns.php?p=<?php echo $_GET['l']; ?>" title="Modifica dati principali lavoro">modifica dati</a></li>
@@ -63,6 +64,7 @@ while($att = pg_fetch_array($b)){
                             <li><a href="#" class='prevent' title="Aggiungi foto">foto</a></li>
                         </ul>
                     </li>
+                    <?php } ?>
                 </ul>
             </nav>
             <div id="colSx">

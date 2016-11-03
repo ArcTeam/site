@@ -11,7 +11,7 @@
 .main, .mappa, .attivita{height:450px;}
 .main{width:35%;}
 .main header{background: #494177 !important;color:#fff !important;}
-.main article span{display: inline-block;font-size:1.2rem;}
+.main article span{display: inline-block;font-size:1.2rem;vertical-align: top;}
 .main article span:first-child{min-width:100px;width:auto;max-width:30%;}
 .main article span:last-child{min-width:185px;width:auto;max-width:65%;}
 .main #mainData{margin:0px 10px;}

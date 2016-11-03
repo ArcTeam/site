@@ -47,11 +47,16 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
         <header><?php echo $c['nome']; ?> - scheda attività</header>
           <nav class="toolbar">
             <ul>
-              <li><a href="lavori.php" title="Torna all'archivio lavori">lavori</a></li>
-              <li><a href="attivita.php" title="Torna all'elenco attività">attività</a></li>
-              <li><a href="lavoro.php?l=<?php echo $_GET['l'];?>" title="Torna alla scheda progetto">scheda progetto</a></li>
-              <li><a href="#" class='prevent modMainData' title="modifca dati principali">modifica dati</a></li>
-              <li class="viewSub"><a href="#" class='prevent' title="Aggiungi ore">aggiungi</a>
+              <li><a href="lavori.php" title="Torna all'archivio lavori"><i class="fa fa-list" aria-hidden="true"></i> lavori</a></li>
+              <li><a href="attivita.php" title="Torna all'elenco attività"><i class="fa fa-briefcase" aria-hidden="true"></i> attività</a></li>
+              <li><a href="lavoro.php?l=<?php echo $_GET['l'];?>" title="Torna alla scheda progetto"><i class="fa fa-file-text" aria-hidden="true"></i> scheda progetto</a></li>
+              <li class="viewSub"><a href="#" class='prevent' title="Modifica"><i class="fa fa-pencil" aria-hidden="true"></i> modifca</a>
+                  <ul class="subList">
+                      <li><a href="#" class='prevent modMainData' title="modifca dati principali">modifica dati</a></li>
+                      <li><a href="#" class='prevent delRecord' title="elimina attivita">elimina attività</a></li>
+                  </ul>
+              </li>
+              <li class="viewSub"><a href="#" class='prevent' title="Aggiungi ore"><i class="fa fa-plus" aria-hidden="true"></i> aggiungi</a>
                 <ul class="subList">
                   <li><a href="#" class='prevent' title="Aggiungi ore">ore lavoro</a></li>
                   <li><a href="#" class='prevent' title="Aggiungi ore">fattura</a></li>
@@ -59,7 +64,6 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
                   <li><a href="#" class='prevent' title="Aggiungi ore">foto</a></li>
                 </ul>
               </li>
-              <li><a href="#" class='prevent delRecord' title="elimina attivita">elimina attività</a></li>
             </ul>
           </nav>
           <section class="sezione inline main">
@@ -142,11 +146,15 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
             $("select[name=tipo] option[value=" +tipoVal+ "]").prop("selected", true);
             $("input[name=inizio]").val(inizioVal).on("change",function(){ var initDate = $(this).val(); $("input[name=fine]").attr("min",initDate); });
             $("input[name=fine]").attr("min",inizioVal).val(fineVal);
+            $("input[name=fine]").on("change",function(){
+                if(!this.value||this.value==''){ this.defaultValue;}
+            });
             $("#formDiv").fadeIn('fast');
             $("button[name=salva]").on("click", function(){
               var newTipo = $("select[name=tipo]").val();
               var newInizio = $("input[name=inizio]").val();
               var newFine = $("input[name=fine]").val();
+              if(!newFine){newFine=='';}
               if(tipoVal==newTipo&&inizioVal==newInizio&&fineVal==newFine){
                 $("#msg").text('I dati sono rimasti invariati, se non vuoi modificare il record clicca su "annulla inserimento"');
               }else{
@@ -155,7 +163,7 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
                   url: "inc/attivitaUpdate.php",
                   data: {id:attivita, tipo:newTipo, inizio:newInizio, fine:newFine},
                   success: function(data){
-                    $("#msg").text('Dati modificati correttamente');
+                    $("#msg").text(data);
                   },
                   error: function(xhr, status, error) {
                     var err = JSON.parse(xhr.responseText);

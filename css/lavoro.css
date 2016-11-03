@@ -28,7 +28,7 @@ span.tag{display:inline-block;margin:1px;padding:0px 5px;border-radius:3px;backg
 span.tag i{margin-left:7px;}
 #attList{margin-top:10px;height: 190px; overflow: auto;}
 #attList li{ padding: 0px 10px; font-size: .9rem;}
-#attList li span{display:inline-block; vertical-align:top;}
+#attList li span{display:inline-block;}
 .modAtt, .fattura{width:20px;cursor:pointer;}
 
 .cat{width:170px;}

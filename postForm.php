@@ -45,6 +45,11 @@ $tagList = json_encode($tag);
     <div id="mainWrap">
         <section class="form ckform">
             <header><?php echo $header; ?></header>
+            <nav class="toolbar">
+                <ul>
+                    <li><a href="post.php" title="Torna all'archivio lavori"><i class="fa fa-list" aria-hidden="true"></i> post</a></li>
+                </ul>
+            </nav>
             <form name="postForm" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
                 <input type="hidden" name="get" value="<?php echo $id; ?>" >
                 <input type="hidden" name="s" value="<?php echo $post['pubblica']; ?>" >
@@ -61,7 +66,10 @@ $tagList = json_encode($tag);
                         <input type="radio" name="stato" value="1" id="pubblica" checked >
                     </div>
                 </div>
-                <div class="rowButton"><input type="submit" name="submit" value="salva post"></div>
+                <div class="rowButton">
+                    <input type="submit" name="submit" value="salva post">
+                    <input type="button" name="annulla" value="annulla operazione">
+                </div>
                 <div class="rowButton" id="msg">
                     <span></span>
                     <div class="hide">
@@ -84,9 +92,10 @@ $tagList = json_encode($tag);
         $(document).ready(function(){
             $('#testo').ckeditor();
             var dataList = <?php echo $tagList; ?>;
-            var prefilled,script, p, t;
+            var prefilled,script, p, t, annulla;
             p = $("input[name=get]").val();
             t = $("input[name=cat]").val();
+            annulla = $("input[name=annulla]");
             if(p > 0){
                 var stato = $('input[name=s]').val();
                 $("input[name=stato]").attr("checked",false);
@@ -108,9 +117,11 @@ $tagList = json_encode($tag);
                     prefilled=tags;
                 }
                 script = 'postMod.php';
+                annulla.on("click", function(){window.location.href='postView.php?p='+p;});
             }else{
                 prefilled='';
                 script = 'postAdd.php';
+                annulla.on("click", function(){window.location.href='post.php';});
             }
             $(".tm-input").tagsManager({
                 prefilled: prefilled,

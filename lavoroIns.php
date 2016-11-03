@@ -58,8 +58,8 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['cate
         <section class="form ckform">
             <header><?php echo $header; ?></header>
             <nav class="toolbar">
-                <a href="lavori.php" title="Torna all'archivio lavori">archivio lavori</a>
-                <?php if(isset($_GET['p'])){?><a href="lavoro.php?l=<?php echo $_GET['p']; ?>" title="Torna alla scheda lavoro">scheda lavoro</a><?php } ?>
+                <li><a href="lavori.php" title="Torna all'archivio lavori"><i class="fa fa-list" aria-hidden="true"></i> lavori</a></li>
+                <?php if(isset($_GET['p'])){?><li><a href="lavoro.php?l=<?php echo $_GET['p'];?>" title="Torna alla scheda progetto"><i class="fa fa-file-text" aria-hidden="true"></i> scheda progetto</a></li><?php } ?>
             </nav>
             <div>
                 <form name="postForm" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
