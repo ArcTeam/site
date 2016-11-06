@@ -88,10 +88,12 @@ $odRes = pg_query($connection, $odQuery);
                     echo            "</div>";
                     echo "</div>";
                     echo        "</article>";
-                    echo        "<div class='oddToolbar'>";
-                    echo            "<a href='oddForm.php?odd=".$doc['id']."' class='button modOdd' title='modifica il documento ".$doc['titolo']."'>modifica</a>";
-                    echo            "<a href='#' class='button prevent delOdd' title='Elimina il documento ".$doc['titolo']."' data-id='".$doc['id']."'>elimina</a>";
-                    echo        "</div>";
+                    if($_SESSION['id']){
+                        echo        "<div class='oddToolbar'>";
+                        echo            "<a href='oddForm.php?odd=".$doc['id']."' class='button modOdd' title='modifica il documento ".$doc['titolo']."'>modifica</a>";
+                        echo            "<a href='#' class='button prevent delOdd' title='Elimina il documento ".$doc['titolo']."' data-id='".$doc['id']."'>elimina</a>";
+                        echo        "</div>";
+                    }
                     echo    "</td>";
                     echo "</tr>";
                 }

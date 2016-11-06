@@ -55,8 +55,10 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
         <section class="form ckform">
             <header><?php echo $header; ?></header>
             <nav class="toolbar">
-                <a href="lavori.php" title="Torna all'archivio lavori">archivio lavori</a>
-                <a href="lavoro.php?l=<?php echo $_GET['lavoro']; ?>" title="Torna alla scheda lavoro di cui fa parte l'attività">scheda lavoro</a>
+                <ul>
+                    <li><a href="lavori.php" title="Torna all'archivio lavori">archivio lavori</a></li>
+                    <li><a href="lavoro.php?l=<?php echo $_GET['lavoro']; ?>" title="Torna alla scheda lavoro di cui fa parte l'attività">scheda lavoro</a></li>
+                </ul>
             </nav>
             <section id="mappa">
                 <div id="panel" class="customEditingToolbar"></div>

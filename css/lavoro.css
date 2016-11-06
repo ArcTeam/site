@@ -6,7 +6,7 @@
 .sezione:last-child{margin-bottom:0px !important;}
 .sezione header{border: none !important; font-size: 1.2rem !important; border-radius:4px 4px 0px 0px;}
 .sezione header span, .sezione article{padding:0px 10px;}
-.main{height:450px;}
+.main{width:99.5%;height:450px;}
 .main header{background: #494177 !important;color:#fff !important;}
 .main article span, #colSx{display: inline-block;}
 #colSx{width:40%;height:700px}
