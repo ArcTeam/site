@@ -6,8 +6,8 @@ var maxExt = new OpenLayers.Bounds (-20037508.34,-20037508.34,20037508.34,200375
 var units = 'm';
 var mapOpt = {projection:prj3857,displayProjection:prj4326,resolutions:res,units:units,controls:[]};
 var format = 'image/png';
-var wmsHost = "http://localhost:8080/geoserver/arcteam/wms";
-var wfsHost = "http://localhost:8080/geoserver/arcteam/wfs";
+var wmsHost = "http://91.121.82.80:8080/geoserver/arcteam/wms";
+var wfsHost = "http://91.121.82.80:8080/geoserver/arcteam/wfs";
 var featureNS= "http://www.geoserver.org/arcteam";
 var proxy = "/cgi-bin/proxy.cgi?url=";
 var jsonFormat ='application/json';
