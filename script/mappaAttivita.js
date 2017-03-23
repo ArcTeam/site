@@ -47,7 +47,7 @@ function init() {
     map.addControl(new OpenLayers.Control.Zoom());
     map.addControl(new OpenLayers.Control.TouchNavigation({dragPanOptions: {enableKinetic: true}}));
 
-    osm = new OpenLayers.Layer.OSM.CycleMap("CycleMap");
+    osm = new OpenLayers.Layer.OSM();
     map.addLayer(osm);
 
     newpoi = new OpenLayers.Layer.Vector("wfs", {
