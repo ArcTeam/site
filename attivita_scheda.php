@@ -50,6 +50,7 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
               <li><a href="lavori.php" title="Torna all'archivio lavori"><i class="fa fa-list" aria-hidden="true"></i> lavori</a></li>
               <li><a href="attivita.php" title="Torna all'elenco attività"><i class="fa fa-briefcase" aria-hidden="true"></i> attività</a></li>
               <li><a href="lavoro.php?l=<?php echo $_GET['l'];?>" title="Torna alla scheda progetto"><i class="fa fa-file-text" aria-hidden="true"></i> scheda progetto</a></li>
+              <?php if(isset($_SESSION["id"])){ ?>
               <li class="viewSub"><a href="#" class='prevent' title="Modifica"><i class="fa fa-pencil" aria-hidden="true"></i> modifca</a>
                   <ul class="subList">
                       <li><a href="#" class='prevent modMainData' title="modifca dati principali">modifica dati</a></li>
@@ -64,6 +65,7 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
                   <li><a href="#" class='prevent' title="Aggiungi ore">foto</a></li>
                 </ul>
               </li>
+            <?php } ?>
             </ul>
           </nav>
           <section class="sezione inline main">
@@ -120,6 +122,7 @@ while($t=pg_fetch_array($lq)){ $tipo .= "<option value='".$t['id']."'>".$t['def'
             <div class="rowButton" id="msg"></div>
         </form>
     </section>
+    <input type="hidden" id="sess" value="<?php echo $_SESSION['id']; ?>">
     <input type="hidden" id="extent" value="<?php echo $extent; ?>">
     <input type="hidden" id="lavoro" value="<?php echo $_GET['l']; ?>">
     <input type="hidden" id="attivita" value="<?php echo $_GET['a']; ?>">

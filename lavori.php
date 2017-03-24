@@ -4,6 +4,7 @@ require("inc/db.php");
 require("class/cut.php");
 $a ="select l.id, l.anno, c.categoria, l.nome, l.descrizione from main.lavoro l, liste.cat c where l.tipo = c.id order by l.anno desc, l.nome asc;";
 $b = pg_query($connection, $a);
+$rows = pg_num_rows($b);
 while($c = pg_fetch_array($b)){
     $descrizione = nl2br($c['descrizione']);
     $post .= "<tr>";
@@ -32,11 +33,12 @@ while($c = pg_fetch_array($b)){
     <header id="main"><?php require("inc/header.php"); ?></header>
     <div id="mainWrap">
       <section class="content">
-        <header>Archivio lavori</header>
+        <header>Archivio lavori (<?php echo $rows; ?>)</header>
         <section class="toolbar">
             <div class="listTool">
                 <?php if(isset($_SESSION["id"])){ ?>
                 <a href="lavoroIns.php" title="inserisci un nuovo lavoro"><i class="fa fa-plus"></i>nuovo lavoro</a>
+                <a href="#" class="export" id="csv" title="esporta dati tabella in formato csv">CSV</a>
                 <?php } ?>
             </div>
             <div class="tableTool">
@@ -51,7 +53,7 @@ while($c = pg_fetch_array($b)){
                 <i class="fa fa-undo clear-filter" title="Pulisci filtro"></i>
             </div>
         </section>
-        <table class="tableList footable toggle-arrow-tiny" data-page-size="20" data-filter="#filtro" data-filter-text-only="true">
+        <table id="catalogoTable" class="tableList footable toggle-arrow-tiny" data-page-size="20" data-filter="#filtro" data-filter-text-only="true">
             <thead>
                 <tr>
                     <th data-sort-ignore="true"></th>
@@ -94,6 +96,7 @@ while($c = pg_fetch_array($b)){
       				$('.footable').trigger('footable_initialized');
       			});
             $('.clear-filter').click(function () { clearFilter(); });
+            $("#csv").click(function (event) {exportTableToCSV.apply(this, [$('#catalogoTable'), 'catalogo.csv']);});
         });
     </script>
   </body>

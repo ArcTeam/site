@@ -58,6 +58,9 @@ function init() {
     $("#max").click(function(e){e.preventDefault();map.zoomToExtent(extent);});
     $('.olControlZoom').append( $('#panel') );
     $('#panel div').addClass('transition');
+    
+    var sess = $("#sess").val();
+    if(!sess){$("#panel>div:last").remove();}
 
     extent = new OpenLayers.Bounds(coo[0], coo[1], coo[2], coo[3]);
     map.zoomToExtent(extent);
