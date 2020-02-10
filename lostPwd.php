@@ -1,6 +1,9 @@
 <?php
 session_start();
-require ('class/mailer/PHPMailerAutoload.php');
+//require ('class/mailer/PHPMailerAutoload.php');
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'class/vendor/autoload.php';
 require('inc/db.php');
 if(!empty($_POST)){
     $checkQuery = "SELECT usr.id, rubrica.utente, rubrica.email, usr.salt FROM main.usr, main.rubrica WHERE usr.rubrica = rubrica.id and usr.attivo = 1 and rubrica.email = '".$_POST['email']."'; ";
@@ -30,22 +33,23 @@ if(!empty($_POST)){
                 $utente = $dati['utente'];
                 $email = $_POST['email'];
                 $altBody = "Ciao $utente,\nè stata fatta una richiesta per una nuova password sul sito www.arc-team.com, ed è stata indicata questa come mail di recupero, se non sei stato tu ad inviare la richiesta ignora questa mail e contatta l'amministratore del sistema all'indirizzo info@arc-team.com per segnalare una possibile violazione della tua mail.\nLa nuova password è : $pwd \nTi consigliamo di cambiare la password temporanea.\n \nUn saluto dallo staff.";
-                $mail = new PHPMailer;
                 $body = file_get_contents('mail/rescuePwd.html');
                 $body = str_replace('%utente%', $utente, $body);
                 $body = str_replace('%password%', $pwd, $body);
+                
+                $mail = new PHPMailer;
                 $mail->isSMTP();
-                //$mail->SMTPDebug = 2;
-                //$mail->Debugoutput = 'html';
+                $mail->SMTPDebug = 2;
+                $mail->Debugoutput = 'html';
                 $mail->Host = "smtps.aruba.it";
-                $mail->Mailer = "smtp";
                 $mail->Port = 465;
                 $mail->SMTPSecure = 'ssl';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'info@arc-team.com';
-                $mail->Password = 'Arc-T3amV3';
-                $mail->setFrom('info@arc-team.com', 'Arc-Team');
-                $mail->addReplyTo('info@arc-team.com', 'Arc-Team');
+                $mail->Username = 'beppenapo@arc-team.com';
+                $mail->Password = 'Strat0Caster';                              
+                //$mail->Mailer = "smtp";
+                $mail->setFrom('arcteam.archaeology@gmail.com', 'Arc-Team');
+                $mail->addReplyTo('arcteam.archaeology@gmail.com', 'Arc-Team');
                 $mail->addAddress($email, $utente);
                 $mail->Subject = 'Recupero password per il tuo account su arc-team.com';
                 $mail->isHTML(true);

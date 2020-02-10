@@ -17,7 +17,7 @@ function init() {
        "active": new OpenLayers.Style({fillColor: "#7578F5", fillOpacity:0.6, graphicZIndex: 2})
     });
 
-    var colors = {low: "rgb(0, 125, 0)", middle: "rgb(255, 190, 0)", high: "rgb(255, 255, 0)"};
+    var colors = {low: "rgb(0, 125, 0)", middle: "rgb(255, 190, 0)", high: "rgb(190, 0, 0)"};
     // Define three rules to style the cluster features.
     var lowRule = new OpenLayers.Rule({
      filter: new OpenLayers.Filter.Comparison({
@@ -33,8 +33,8 @@ function init() {
       strokeWidth: 12,
       pointRadius: 12,
       label: "${count}",
-      labelOutlineWidth: 1,
-      fontColor: "#eee",
+      //labelOutlineWidth: 2,
+      fontColor: "#5a5a5a",
       cursor:"hand",
       fontSize: "12px"
      }
@@ -54,8 +54,8 @@ function init() {
       strokeWidth: 12,
       pointRadius: 15,
       label: "${count}",
-      labelOutlineWidth: 1,
-      fontColor: "#eee",
+      //labelOutlineWidth: 2,
+      fontColor: "#5a5a5a",
       cursor:"hand",
       fontSize: "12px"
      }
@@ -75,8 +75,8 @@ function init() {
       pointRadius: 20,
       label: "${count}",
       cursor:"hand",
-      fontColor: "#eee",
-      fontOpacity: 0.8,
+      fontColor: "#5a5a5a",
+      //fontOpacity: 0.8,
       fontSize: "12px"
      }
     });

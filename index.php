@@ -77,7 +77,7 @@ while($t=pg_fetch_array($tagres)){
         <div id="mainWrap">
             <section id="mappa">
                 <div id ="mappaTool">
-                    <header class="cursor main">Naviga tra i nostri lavori <br/><i class="fa fa-map-marker"></i> <span id="coo"></span></header>
+                    <header class="cursor main">Naviga tra i nostri lavori. <br/><i class="fa fa-map-marker"></i> <span id="coo"></span></header>
                     <article id="legend">
                         <ul>
                             <li><span>Legenda dei lavori suddivisi per categorie</span></li>
