@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>impress.js | presentation tool based on the power of CSS3 transforms and transitions in modern browsers | by Bartek Szopka @bartaz</title>
+
+    <meta name="description" content="impress.js is a presentation tool based on the power of CSS3 transforms and transitions in modern browsers and inspired by the idea behind prezi.com." />
+    <meta name="author" content="Bartek Szopka" />
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+    <link href="css/impress-demo.css" rel="stylesheet" />
+
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <style media="screen">
+      .emptyDiv{background-position: center;background-repeat: no-repeat;background-size: contain;}
+      .colDiv{margin:0;padding:0;display: inline-block;vertical-align: top;}
+      .w100{width:100vw;height:100vh;}
+      .w75{width:74%;}
+      .w50{width:49%;}
+      .w33{width:32%;}
+      .w25{width:24%;}
+      h1{font-family: 'Open Sans', sans-serif;font-size:200%; text-align: center;}
+    </style>
+</head>
+<body class="impress-not-supported">
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+<div id="impress">
+  <div id="webManager" class="step" data-x="0" data-y="0">
+    <h1>Web Manager</h1>
+    <img src="../media/img/codeLogoTot.png" alt="">
+  </div>
+  <div id="serviceWorker" class="step" data-x="0" data-y="-1000" data-z="-100" data-rotate-x="85">
+    <h1>Deeper inside</h1>
+    <div class="colDiv w33"><img src="../media/img/laravel.png" alt="" width="100%"></div>
+    <div class="colDiv w33"><img src="../media/img/bootstrap.png" alt="" width="100%"></div>
+    <div class="colDiv w33"><img src="../media/img/jQuery.png" alt="" width="100%"></div>
+    <div class=""><img src="../media/img/serviceWorker.png" alt="" width="100%"></div>
+  </div>
+  <div id="pwa" class="step" data-x="0" data-y="1000" data-z="0" data-rotate-x="0">
+    <img src="../media/img/pwa.png" alt="" width="100%">
+  </div>
+  <div id="gui" class="step w100" data-x="2000" data-y="1000">
+    <div class="colDiv" style="width:10%;height:100vh;"></div>
+    <div class="colDiv w50">
+      <img src="../media/img/guiDesktop.jpg" alt="" width="100%">
+    </div>
+    <div class="colDiv w25">
+      <video muted controls width="100%">
+        <source src="../media/video/guiMobile.mp4" type="video/mp4"></source>
+      </video>
+    </div>
+
+  </div>
+</div>
+<div id="impress-toolbar"></div>
+<script>
+if ("ontouchstart" in document.documentElement) {
+    document.querySelector(".hint").innerHTML = "<p>Swipe left or right to navigate</p>";
+}
+</script>
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+</body>
+</html>

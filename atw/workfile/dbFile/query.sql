@@ -1,0 +1,1 @@
+SELECT s.id, s.us,s.inventario, s.numero, s.descrizione reperto, m.value materiale, t.value tipologia FROM sacchetto s JOIN reperto r ON r.sacchetto = s.id JOIN list.materiale m ON r.materiale = m.id JOIN list.tipologia t ON r.tipologia = t.id JOIN us ON s.us = us.id JOIN scavo ON us.scavo = scavo.id WHERE scavo.id = 45 ORDER BY reperto ASC;

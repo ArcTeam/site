@@ -1,0 +1,51 @@
+html,body{ position:relative; padding:0; margin:0; width:100%; height: 100%; font-family: 'Roboto', sans-serif; overflow-x: hidden;}
+ul{padding:0;}
+li{list-style-type: none;}
+legend{font-size: 14px;}
+a:hover{text-decoration: none;}
+details{padding:.75rem 1.25rem;border-bottom:1px solid rgba(0,0,0,.125);}
+summary{font-weight: bold;}
+summary:focus{outline: none !important;}
+details > div{padding-left: 1.25rem}
+details > div:nth-child(odd){background-color: #e4eff9;}
+details > div > span{display: inline-block;}
+.animation{-webkit-transition: all .5s ease; -moz-transition: all .5s ease; -ms-transition: all .5s ease; -o-transition: all .5s ease; transition: all .5s ease;}
+.btn-disabled{cursor: default;}
+.pointer{cursor: pointer;}
+body>header{position: fixed; top: 0; left: 0; display: flex; width:100%; height:50px; padding:5px 15px; flex-direction: row; align-items: center; justify-content: space-between; z-index:10;}
+body>nav{position:fixed; top:50px; right:0; bottom:0; width:200px; z-index:10; -webkit-transition: .5s ease-in-out; -moz-transition: .5s ease-in-out; -ms-transition: .5s ease-in-out; -o-transition: .5s ease-in-out; transition: .5s ease-in-out; overflow-y: auto;}
+body>nav a>span{margin-left: 10px;}
+body>nav.open{transform: translate(0,0);}
+body>nav.open .linkSection{display:block !important;}
+body>nav.open a>span{opacity: 1;}
+body>nav.closed{transform: translate(250px,0);}
+body>nav.closed .linkSection{display:none !important;}
+body>nav.closed a>span{opacity: 0;}
+body>nav>.mainNav>a.active{ background: #962c36; color:#fff; cursor: default; pointer-events: none; border:none; }
+body>nav>.mainNav{position: absolute; top: 0; right: 0; width: 100%; bottom: 50px; overflow: auto;}
+body>nav>.logoutSec{ position:absolute; bottom:0; left:0; width:100%;}
+main{ position: relative; width: 100vw; min-height: calc(100% - 60px); margin:0; z-index:1;}
+.toast{position: fixed; top:60px; left:0; right:0; margin-left: auto; margin-right: auto; z-index: 8;}
+
+.table-fixed thead {width: 100%;}
+.table-fixed tbody {height: 70vh; overflow-y: auto; width: 100%;}
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th { display: block;}
+.table-fixed tbody td, .table-fixed thead > tr> th { float: left; border-bottom-width:0;}
+
+@media (max-width: 575px) {
+  .toast{width: 80vw;}
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .toast{width: 80vw;}
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .toast{width: 60vw;}
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .toast{width: 50vw;}
+}
+@media (min-width: 1200px) {
+  body>nav.closed{transform: translate(140px,0);}
+  body>main.container-fluid{padding-right: 75px;}
+  .toast{width: 40vw;}
+}
