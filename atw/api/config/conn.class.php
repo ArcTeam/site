@@ -4,7 +4,7 @@ class Conn{
   private $dbuser = "arcteam";
   private $dbpwd =  "dbAdminUser";
   private $dbname = "atworks";
-  private $dbport = "5439";
+  private $dbport = "5437";
   private $dsn;
   public $conn;
 
